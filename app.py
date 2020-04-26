@@ -1,7 +1,6 @@
 import os,json
 from flask_login import LoginManager, current_user, login_user, login_required, logout_user
 from flask import Flask, request, render_template, redirect, flash, url_for
-#from flask_jwt import JWT, jwt_required, current_identity
 from sqlalchemy.exc import IntegrityError
 from datetime import timedelta 
 
@@ -21,7 +20,6 @@ def create_app():
   app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://hxzhttja:6A7fF17bjLUaeditu817xyU7x0AOzZTh@drona.db.elephantsql.com:5432/hxzhttja'
   app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
   app.config['SECRET_KEY'] = "c3a93f55-2015-4042-9ef7-77de85976f78"
-  #app.config['JWT_EXPIRATION_DELTA'] = timedelta(days = 7) 
   login_manager.init_app(app)
   db.init_app(app)
   return app
@@ -40,12 +38,17 @@ def register():
   form = Register()
   if form.validate_on_submit():
     data = request.form
-    newuser = User(username=data['username']) # , email=data['email']
-    newuser.set_password(data['password']) 
-    db.session.add(newuser) 
-    db.session.commit()
-    flash('Account Created!')
-    return redirect(url_for('login'))
+    x = User.query.filter_by(username = data['username']).count()
+    if(x>0):
+      flash('That username is already taken, please choose another')
+      return render_template('register.html', form=form) 
+    else:
+      newuser = User(username=data['username']) # , email=data['email']
+      newuser.set_password(data['password']) 
+      db.session.add(newuser) 
+      db.session.commit()
+      flash('Account Created!')
+      return redirect(url_for('login'))
   return render_template('register.html', form=form) 
 
 @app.route('/login', methods=['GET', 'POST'])

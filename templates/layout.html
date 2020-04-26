@@ -1,70 +1,8 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Register</title>
-</head>
-<body>
-    <form id="myForm" name="myForm">
-        <label for="username">Username:</label><br>
-        <input type="text" name="username" placeholder="Enter Username"><br>
-        <label for="password">Password:</label><br>
-        <input type="text" name="password" placeholder="Enter Password"><br><br>
-        <input type="submit" value="Submit">
-    </form>
-
-    <script>
-        server = 'http://localhost:5000'
-
-        function drawResult(result){
-            let resultForm = document.querySelector('#myForm')
-            resultForm.innerHTML = `<p>${result}</p>`;
-            //alert(result);
-        }
-        async function postData(url, data){
-            try{
-                let response = await fetch(
-                    url,
-                    {
-                        method: 'POST',
-                        body: JSON.stringify(data), // convert data to JSON string
-                        headers: { 'Content-Type':'application/json'} // JSON data
-                    }
-                );
-
-                let result = await response.text();
-                drawResult(result)
-            }catch(error){
-                console.log(error);
-            }
-        }
-
-
-        function submit(event){
-        event.preventDefault();
-        
-        let myform = event.target.elements;
-        
-        let data = {
-            username:myform['username'].value,
-            password: myform['password'].value
-        }
-        postData(`${server}/register`, data);
-        
-        myForm.reset();
-        }
-
-        document.forms['myForm'].addEventListener('submit', submit);
-    </script>
-</body>
-</html> -->
 <!doctype html>
 <html>
   <head>
   
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
      <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->
@@ -79,6 +17,7 @@
             text-align: center;
             margin: 0;
             background-color: rgb(14, 17, 31);
+            /*background-color:white;*/
         }
 
         .input-field input{
