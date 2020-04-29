@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block title %}Register{% endblock %}
+{% block page %}Register{% endblock %}
+
+{{ super() }}
+
+{% block content %}
+ <div class="row">
+      <div class="row">
+        <form id="myForm" class="col s12 m8 offset-m2" method="POST" action="/register">
+            {{ form.csrf_token }}
+
+            <div class="input-field col s12 m8 offset-m2"> 
+              {{ form.username(size=20, class="validate") }}
+              {{ form.username.label }}
+            </div>
+
+            
+
+            <div class="input-field col s12 m8 offset-m2">
+              {{ form.password(size=20, class="validate") }}
+              {{ form.password.label }}
+            </div>
+
+            <div class="input-field col s12 m8 offset-m2">
+              {{ form.confirm(size=20, class="validate") }}
+              {{ form.confirm.label }}
+            </div>
+            
+            <div>
+              <label>
+                {{ form.accept_tos }}
+                <span>{{ form.accept_tos.label.text|safe }}</span>
+                <!-- <label>I accept the <a href="/tos">Terms of Service</a> and the <a href="/privacy"> Privacy Policy</a></label> -->
+              </label>
+            </div>
+
+            <div class="input-field col s12 m8 offset-m2">
+                {{form.submit}} 
+            </div> 
+        </form>
+      </div>
+  </div>
+
+  {% for field, errors in form.errors.items() %}
+    <div style="color:orangered">
+      {{ ', '.join(errors) }}
+    </div>
+  {% endfor %}
+
+{% endblock %}
