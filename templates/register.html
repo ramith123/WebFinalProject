@@ -30,17 +30,22 @@
             <div>
               <label>
                 {{ form.accept_tos }}
-                <span>{{ form.accept_tos.label|safe }}</span>
+                <span>{{ form.accept_tos.label.text|safe }}</span>
+                <!-- <label>I accept the <a href="/tos">Terms of Service</a> and the <a href="/privacy"> Privacy Policy</a></label> -->
               </label>
             </div>
-            
+
             <div class="input-field col s12 m8 offset-m2">
-              {{form.submit}}
+                {{form.submit}} 
             </div> 
         </form>
-        {% if error in form.password.errors %}
-          <p class="error"><strong>Error:</strong>{{error}}</p>
-        {% endif %}
       </div>
   </div>
+
+  {% for field, errors in form.errors.items() %}
+    <div style="color:orangered">
+      {{ ', '.join(errors) }}
+    </div>
+  {% endfor %}
+
 {% endblock %}
