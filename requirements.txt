@@ -25,3 +25,4 @@ typed-ast==1.4.1
 Werkzeug==1.0.1
 wrapt==1.11.2
 zipp==3.1.0
+WTForms==2.3.1
