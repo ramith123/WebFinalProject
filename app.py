@@ -102,7 +102,7 @@ def login():
 def logout():
     logout_user()
     flash("You have successfully logged out.")
-    #return redirect(url_for("hello"))
+    # return redirect(url_for("hello"))
     return render_template("logout.html")
 
 

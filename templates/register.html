@@ -15,8 +15,6 @@
         {{ form.username.label }}
       </div>
 
-
-
       <div class="input-field col s12">
         {{ form.password(size=20, class="validate black-text") }}
         {{ form.password.label }}
@@ -27,25 +25,29 @@
         {{ form.confirm.label }}
       </div>
 
+      <div class="col s12">
+        <ul>
+          {% for error in form.password.errors %}
+          <div style="color:orangered">
+            <li>{{error}}</li>
+          </div>
+          {% endfor %}
+        </ul>
+      </div>
       <div>
         <label>
           {{ form.accept_tos }}
           <span>{{ form.accept_tos.label.text|safe }}</span>
         </label>
       </div>
-
-      <div class="input-field col s12 m8 offset-m2">
+      <div class="input-field col s12">
         {{form.submit}}
-        {% for error in form.password.errors %}
-        <div style="color:orangered">
-          {{error}}
+        <div>
+          <p style="color: #9E9e9e;">or</p>
+          <a href="/login" style="color: #ffa040">Login</a>
         </div>
-        {% endfor %}
       </div>
 
-      <div>
-        <a href="/login" class="left-align" style="color: pink">Login</a>
-      </div>
     </form>
   </div>
 </div>
