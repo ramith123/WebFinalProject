@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "logAndRegLayout.html" %}
 {% block title %}Testing Login{% endblock %}
 {% block page %}Testing Login{% endblock %}
 
@@ -6,6 +6,6 @@
 
 {% block content %}
 <!-- {% if current_user.is_authenticated %} -->
-<h3 style="color:white"> Hi {{ current_user.username }}! </h3>
+<h3 style="color:black"> Hi {{ current_user.username }}! </h3>
 <!-- {% endif %} -->
 {% endblock %}
