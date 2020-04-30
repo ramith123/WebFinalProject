@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>{% block title %}{% endblock %}</title>
 
   <style>
@@ -59,7 +58,7 @@
               <div class="nav-wrapper ">
                 <ul>
                   {% for message in messages %}
-                  <li>{{ message }}</li>
+                  <li class="black-text">{{ message }}</li>
                   {% endfor %}
                 </ul>
               </div>
@@ -67,7 +66,7 @@
             {% endif %}
             {% endwith %}
 
-            <div id="content black-text">{% block content %}{% endblock %}</div>
+            <div id="content black">{% block content %}{% endblock %}</div>
 
             <script src="https://code.iconify.design/1/1.0.4/iconify.min.js"></script>
             <!-- Compiled and minified JavaScript -->
