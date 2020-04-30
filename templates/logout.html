@@ -1,0 +1,13 @@
+{% extends "logAndRegLayout.html" %}
+{% block title %}Logging Out...{% endblock %}
+{% block page %}Logging Out...{% endblock %}
+
+{{ super() }}
+
+{% block content %}
+<script>
+    setTimeout(function () {
+    window.location.href = "/";
+    }, 2000);
+</script>
+{% endblock %}

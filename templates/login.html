@@ -1,0 +1,29 @@
+{% extends "logAndRegLayout.html" %}
+{% block title %}Sign in{% endblock %}
+{% block page %}Sign in{% endblock %}
+
+{{ super() }}
+
+{% block content %}
+<div class="row">
+
+    <form class="col s12 m8 offset-m2" method="POST" action="/login">
+        {{ form.csrf_token }}
+
+        <div class="input-field col s12  ">
+            {{ form.username(size=20, class="validate black-text") }}
+            {{ form.username.label }}
+        </div>
+
+        <div class="input-field col s12 ">
+            {{ form.password(size=20, class="validate black-text") }}
+            {{ form.password.label }}
+        </div>
+
+        <div class="input-field col s12 m8 offset-m2">
+            {{form.submit}}
+        </div>
+    </form>
+
+</div>
+{% endblock %}
