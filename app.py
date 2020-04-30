@@ -57,7 +57,7 @@ def register():
             flash("That username is already taken, please choose another")
             return render_template("register.html", form=form)
         else:
-            newuser = User(username=data["username"])  # , email=data['email']
+            newuser = User(username=data["username"])
             newuser.set_password(data["password"])
             db.session.add(newuser)
             db.session.commit()
@@ -91,6 +91,7 @@ def logout():
 
 
 @app.route("/loginTest", methods=["GET"])
+@login_required
 def loginTest():
     return render_template("testlogin.html")
 
@@ -98,4 +99,4 @@ def loginTest():
 if __name__ == "__main__":
     # Bind to PORT if defined, otherwise default to 5000.
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port, debug=True)
+    app.run(host="0.0.0.0", port=port, debug=True)  # Remember to remove Debug

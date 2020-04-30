@@ -5,7 +5,7 @@
 {{ super() }}
 
 {% block content %}
-  {% if current_user.is_authenticated %}
-   <h3 style="color:white"> Hi {{ current_user.username }}! </h3>
-  {% endif %}
+<!-- {% if current_user.is_authenticated %} -->
+<h3 style="color:white"> Hi {{ current_user.username }}! </h3>
+<!-- {% endif %} -->
 {% endblock %}
