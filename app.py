@@ -25,7 +25,6 @@ def load_user(user_id):
 """ Begin boilerplate code """
 
 
-
 def create_app():
     app = Flask(__name__, static_url_path="")
     app.config[
@@ -34,20 +33,18 @@ def create_app():
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
     app.config["SECRET_KEY"] = "c3a93f55-2015-4042-9ef7-77de85976f78"
     login_manager.init_app(app)
-# =======
-# """ Begin boilerplate code """
+    # =======
+    # """ Begin boilerplate code """
 
-# persistenceUrl = "postgres://hxzhttja:6A7fF17bjLUaeditu817xyU7x0AOzZTh@drona.db.elephantsql.com:5432/hxzhttja"
-
-
-# def create_app():
-#     app = Flask(__name__, static_url_path="")
-#     app.config["SQLALCHEMY_DATABASE_URI"] = persistenceUrl
-#     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
-#     # app.config['SECRET_KEY'] = "c3a93f55-2015-4042-9ef7-77de85976f78"
-#     # app.config['JWT_EXPIRATION_DELTA'] = timedelta(days = 7)
-# >>>>>>> Ramith-working
-#     db.init_app(app)
+    # persistenceUrl = "postgres://hxzhttja:6A7fF17bjLUaeditu817xyU7x0AOzZTh@drona.db.elephantsql.com:5432/hxzhttja"
+    # def create_app():
+    #     app = Flask(__name__, static_url_path="")
+    #     app.config["SQLALCHEMY_DATABASE_URI"] = persistenceUrl
+    #     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
+    #     # app.config['SECRET_KEY'] = "c3a93f55-2015-4042-9ef7-77de85976f78"
+    #     # app.config['JWT_EXPIRATION_DELTA'] = timedelta(days = 7)
+    # >>>>>>> Ramith-working
+    db.init_app(app)
     return app
 
 
@@ -59,7 +56,6 @@ app.app_context().push()
 @app.route("/")
 def hello():
     return app.send_static_file("page.html")
-
 
 
 @app.route("/register", methods=["GET", "POST"])
