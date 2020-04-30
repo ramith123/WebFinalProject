@@ -16,19 +16,19 @@ class Register(FlaskForm):
             EqualTo("confirm", message="Passwords must match."),
             Regexp(
                 "^(?=.{8,})(?=.*[a-z])(?=.*[A-Z]).*$",
-                message="Must contain at least 1 UpperCase, 1 lowerCase."
-            )
-        ]
+                message="Must contain at least 1 UpperCase, 1 lowerCase.",
+            ),
+        ],
     )
     confirm = PasswordField("Repeat password", validators=[InputRequired()])
     accept_tos = BooleanField(
         'I accept the <a href="#tos">Terms of Service</a> and the <a href="#priv"> Privacy Policy</a>',
         validators=[InputRequired()],
-        render_kw={"class": "filled-in"}
+        render_kw={"class": "filled-in"},
     )
     submit = SubmitField(
         "Register",
-        render_kw={"class": "btn waves-effect waves-light amber darken-4 white-text"}
+        render_kw={"class": "btn waves-effect waves-light amber darken-3 white-text"},
     )
 
 
@@ -37,5 +37,5 @@ class Login(FlaskForm):
     password = PasswordField("Password", validators=[InputRequired()])
     submit = SubmitField(
         "Next",
-        render_kw={"class": "btn waves-effect waves-light white-text amber darken-4"}
+        render_kw={"class": "btn waves-effect waves-light white-text amber darken-3"},
     )
