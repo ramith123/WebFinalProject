@@ -3,6 +3,7 @@ from flask_login import (
     login_user,
     login_required,
     logout_user,
+    current_user,
 )
 from flask import Flask, request, render_template, redirect, flash, url_for
 import os
@@ -73,12 +74,15 @@ def register():
             db.session.add(newuser)
             db.session.commit()
             flash("Account Created!")
+            print("User added")
             return redirect(url_for("login"))
     return render_template("register.html", form=form)
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for("loginTest"))
     form = Login()
     if form.validate_on_submit():
         data = request.form

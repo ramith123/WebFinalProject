@@ -1,50 +1,50 @@
-{% extends "layout.html" %}
+{% extends "logAndRegLayout.html" %}
 {% block title %}Register{% endblock %}
 {% block page %}Register{% endblock %}
 
 {{ super() }}
 
 {% block content %}
- <div class="row">
-      <div class="row">
-        <form id="myForm" class="col s12 m8 offset-m2" method="POST" action="/register">
-            {{ form.csrf_token }}
+<div class="row">
+  <div class="row">
+    <form id="myForm" class="col s12 m8 offset-m2" method="POST" action="">
+      {{ form.csrf_token }}
 
-            <div class="input-field col s12 m8 offset-m2"> 
-              {{ form.username(size=20, class="validate") }}
-              {{ form.username.label }}
-            </div>
-
-            
-
-            <div class="input-field col s12 m8 offset-m2">
-              {{ form.password(size=20, class="validate") }}
-              {{ form.password.label }}
-            </div>
-
-            <div class="input-field col s12 m8 offset-m2">
-              {{ form.confirm(size=20, class="validate") }}
-              {{ form.confirm.label }}
-            </div>
-            
-            <div>
-              <label>
-                {{ form.accept_tos }}
-                <span>{{ form.accept_tos.label.text|safe }}</span>
-              </label>
-            </div>
-
-            <div class="input-field col s12 m8 offset-m2">
-                {{form.submit}} 
-            </div> 
-        </form>
+      <div class="input-field col s12">
+        {{ form.username(size=20, class="validate black-text") }}
+        {{ form.username.label }}
       </div>
-  </div>
 
-  {% for field, errors in form.errors.items() %}
-    <div style="color:orangered">
-      {{ ', '.join(errors) }}
-    </div>
-  {% endfor %}
+
+
+      <div class="input-field col s12">
+        {{ form.password(size=20, class="validate black-text") }}
+        {{ form.password.label }}
+      </div>
+
+      <div class="input-field col s12">
+        {{ form.confirm(size=20, class="validate black-text") }}
+        {{ form.confirm.label }}
+      </div>
+
+      <div>
+        <label>
+          {{ form.accept_tos }}
+          <span>{{ form.accept_tos.label.text|safe }}</span>
+        </label>
+      </div>
+
+      <div class="input-field col s12 m8 offset-m2">
+        {{form.submit}}
+        {% for error in form.password.errors %}
+        <div style="color:orangered">
+          {{error}}
+        </div>
+        {% endfor %}
+      </div>
+    </form>
+  </div>
+</div>
+
 
 {% endblock %}
