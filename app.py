@@ -13,6 +13,7 @@ import os
 
 from model import db, User
 from forms import Register, Login
+import json
 
 
 login_manager = LoginManager()
@@ -56,7 +57,7 @@ app.app_context().push()
 
 @app.route("/")
 def hello():
-    return app.send_static_file("page.html")
+    return app.send_static_file("page.html"), 200
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -67,7 +68,7 @@ def register():
         x = User.query.filter_by(username=data["username"]).count()
         if x > 0:
             flash("That username is already taken, please choose another")
-            return render_template("register.html", form=form)
+            return render_template("register.html", form=form), 403
         else:
             newuser = User(username=data["username"])
             newuser.set_password(data["password"])
@@ -75,8 +76,8 @@ def register():
             db.session.commit()
             flash("Account Created!")
             print("User added")
-            return redirect(url_for("login"))
-    return render_template("register.html", form=form)
+            return redirect(url_for("login")), 201
+    return render_template("register.html", form=form), 200
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -112,10 +113,17 @@ def loginTest():
     return render_template("testlogin.html")
 
 
+@app.route("/auth")
+@login_required
+def getToken():
+    user = current_user
+    return json.dumps(user.api_key), 200
+
+
 if __name__ == "__main__":
     # Bind to PORT if defined, otherwise default to 5000.
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port, debug=False)  # Remember to remove Debug
+    app.run(host="0.0.0.0", port=port, debug=True)  # Remember to remove Debug
 # =======
 # if __name__ == "__main__":
 #     # Bind to PORT if defined, otherwise default to 5000.
