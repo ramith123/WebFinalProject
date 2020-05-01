@@ -40,7 +40,6 @@ def create_app():
 
     app.config["YOUTUBE_API_KEY"] = "AIzaSyC0VqCv-KW7cRsmYBUUHHqTJeRBTVnP-h0"
 
-
     # =======
     # """ Begin boilerplate code """
 
