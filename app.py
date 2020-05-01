@@ -15,6 +15,7 @@ from isodate import parse_duration
 
 from model import db, User
 from forms import Register, Login
+import json
 
 
 login_manager = LoginManager()
@@ -37,7 +38,7 @@ def create_app():
     app.config["SECRET_KEY"] = "c3a93f55-2015-4042-9ef7-77de85976f78"
     login_manager.init_app(app)
 
-    app.config["YOUTUBE_API_KEY"] = "AIzaSyDIk63q5hnaaQTLlPqLRPSrUYIYmLgMMTA"  #NOT SURE IF SETUP CORRECTLY
+    app.config["YOUTUBE_API_KEY"] = "AIzaSyC0VqCv-KW7cRsmYBUUHHqTJeRBTVnP-h0"
 
 
     # =======
@@ -62,7 +63,7 @@ app.app_context().push()
 
 @app.route("/")
 def hello():
-    return app.send_static_file("page.html")
+    return app.send_static_file("page.html"), 200
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -73,7 +74,7 @@ def register():
         x = User.query.filter_by(username=data["username"]).count()
         if x > 0:
             flash("That username is already taken, please choose another")
-            return render_template("register.html", form=form)
+            return render_template("register.html", form=form), 403
         else:
             newuser = User(username=data["username"])
             newuser.set_password(data["password"])
@@ -81,8 +82,8 @@ def register():
             db.session.commit()
             flash("Account Created!")
             print("User added")
-            return redirect(url_for("login"))
-    return render_template("register.html", form=form)
+            return redirect(url_for("login")), 201
+    return render_template("register.html", form=form), 200
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -117,48 +118,59 @@ def logout():
 def loginTest():
     return render_template("testlogin.html")
 
-@app.route("/search", methods=['GET', 'POST'])
+
+@app.route("/search", methods=["GET", "POST"])
 def search():
-    search_url = 'https://www.googleapis.com/youtube/v3/search'
-    video_url = 'https://www.googleapis.com/youtube/v3/videos'
+    search_url = "https://www.googleapis.com/youtube/v3/search"
+    video_url = "https://www.googleapis.com/youtube/v3/videos"
 
     videos = []
-    if request.method == 'POST':
+    if request.method == "POST":
         search_params = {
-            'key': app.config['YOUTUBE_API_KEY'],
-            'q' : request.form.get('query'),
-            'part' : 'snippet',
-            'maxResults' : 8,
-            'type' : 'video'
+            "key": app.config["YOUTUBE_API_KEY"],
+            "q": request.form.get("query"),
+            "part": "snippet",
+            "maxResults": 8,
+            "type": "video",
         }
         r = requests.get(search_url, params=search_params)
-        results = r.json()['items']
+        results = r.json()["items"]
 
         video_ids = []
         for result in results:
-            video_ids.append(result['id']['videoId'])
+            video_ids.append(result["id"]["videoId"])
 
         video_params = {
-            'key': app.config['YOUTUBE_API_KEY'],
-            'id' : ','.join(video_ids),
-            'part' : 'snippet,contentDetails',
-            'maxResults' : 8
+            "key": app.config["YOUTUBE_API_KEY"],
+            "id": ",".join(video_ids),
+            "part": "snippet,contentDetails",
+            "maxResults": 8,
         }
 
         r = requests.get(video_url, params=video_params)
-        results = r.json()['items']
-        
+        results = r.json()["items"]
+
         for result in results:
             video_data = {
-                'id' : result['id'],
-                'url' : f"https://www.youtube.com/watch?v={ result['id'] }",
-                'thumbnail' : result['snippet']['thumbnails']['high']['url'],
-                'duration' : int(parse_duration(result['contentDetails']['duration']).total_seconds()//60),
-                'title' : result['snippet']['title']
+                "id": result["id"],
+                "url": f"https://www.youtube.com/watch?v={ result['id'] }",
+                "thumbnail": result["snippet"]["thumbnails"]["high"]["url"],
+                "duration": int(
+                    parse_duration(result["contentDetails"]["duration"]).total_seconds()
+                    // 60
+                ),
+                "title": result["snippet"]["title"],
             }
             videos.append(video_data)
-    
+
     return render_template("search.html", videos=videos)
+
+
+@app.route("/auth")
+@login_required
+def getToken():
+    user = current_user
+    return json.dumps(user.api_key), 200
 
 
 if __name__ == "__main__":

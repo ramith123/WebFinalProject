@@ -1,79 +1,47 @@
-<!DOCTYPE html>
-<html>
+{% extends "appLayout.html" %}
+{% block title %}search{% endblock %}
+{% block page %}search{% endblock %}
 
-<head>
+{{ super() }}
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif" type="image/gif">
-  <style>
-    body,
-    html {
-      height: 100%;
-      text-align: center;
-      margin: 0;
-      background-color: rgb(14, 17, 31);
-    }
-
-    .bg {
-      /* The image used */
-      background-image: url("https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif");
-      /* Full height */
-      height: 50%;
-      width: 50%;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      position: absolute;
+{% block content %}
 
 
-      /* Center and scale the image nicely */
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
 
-    }
-  </style>
-  <title>Web Project WIP</title>
-</head>
-
-<body>
-
-  <!-- <div class="bg"></div> -->
-    <div class="valign-wrapper">
-      <form method="POST">
-        <div class="input-field col s12">
-            <input class="center-align white-text" name="query" type="text" class="validate"> <!-- doesnt align center-->
-            <label class="center-align" for="search">Enter Search</label>
-        </div>
-        <div>
+<div class="valign-wrapper">
+  <div class="row">
+    <form method="POST">
+      <div class="input-field col s12 ">
+        <input class="black-text" name="query" type="text" class="validate"> <!-- doesnt align center-->
+        <label class="" for="search">Enter Search</label>
         <button type="submit" name="submit" value="search" class="waves-effect waves-light btn">Search</a>
-        </div>
-      </form>
-    </div>
+      </div>
 
-    <div class="container">
-        <div class="row">
-            {% for video in videos %}
-            <div class="col m3">
-              <div class="card">
-                <div class="card-image">
-                  <img  src="{{ video.thumbnail }}">
-                  <span class="card-title"><img style="width:20%; height:10%"  src="youtubeLogo.png"></span>
-                </div>
-                <div class="card-content">
-                  <p>{{ video.title }}</p>
-                </div>
-                <div class="card-action left-align">
-                  <a href="{{ video.url }}">View</a>
-                  <small class="right-align text-black">{{ video.duration }} mins</small> <!--need this to align right and the same line as the view -->
-                </div>
-              </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</body>
+    </form>
+  </div>
+</div>
 
-</html>
+<div class="container">
+  <div class="row">
+    {% for video in videos %}
+    <div class="col m3">
+      <div class="card">
+        <div class="card-image">
+          <img src="{{ video.thumbnail }}">
+          <span class="card-title"><img style="width:20%; height:10%"
+              src="https://i0.wp.com/livelikejohnbernecker.com/wp-content/uploads/2018/01/youtube-logo-designer-youtube-logo-png-transparent-background-download-diy-logo-designs.png?fit=1000%2C566&ssl=1"></span>
+        </div>
+        <div class="card-content">
+          <p>{{ video.title }}</p>
+        </div>
+        <div class="card-action left-align">
+          <a href="{{ video.url }}" target="_blank">View</a>
+          <small class="right-align text-black">{{ video.duration }} mins</small>
+          <!--need this to align right and the same line as the view -->
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
