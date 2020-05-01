@@ -15,7 +15,8 @@ from isodate import parse_duration
 
 from model import db, User
 from forms import Register, Login
-import json
+
+# import json
 
 
 login_manager = LoginManager()
@@ -163,13 +164,6 @@ def search():
             videos.append(video_data)
 
     return render_template("search.html", videos=videos)
-
-
-@app.route("/auth")
-@login_required
-def getToken():
-    user = current_user
-    return json.dumps(user.api_key), 200
 
 
 if __name__ == "__main__":
