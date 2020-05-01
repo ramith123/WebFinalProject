@@ -7,6 +7,8 @@ from flask_login import (
 )
 from flask import Flask, request, render_template, redirect, flash, url_for
 import os
+import requests
+from isodate import parse_duration
 
 # from sqlalchemy.exc import IntegrityError
 # from datetime import timedelta
@@ -35,6 +37,10 @@ def create_app():
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
     app.config["SECRET_KEY"] = "c3a93f55-2015-4042-9ef7-77de85976f78"
     login_manager.init_app(app)
+
+    app.config["YOUTUBE_API_KEY"] = "AIzaSyC0VqCv-KW7cRsmYBUUHHqTJeRBTVnP-h0"
+
+
     # =======
     # """ Begin boilerplate code """
 
@@ -111,6 +117,53 @@ def logout():
 @login_required
 def loginTest():
     return render_template("testlogin.html")
+
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    search_url = "https://www.googleapis.com/youtube/v3/search"
+    video_url = "https://www.googleapis.com/youtube/v3/videos"
+
+    videos = []
+    if request.method == "POST":
+        search_params = {
+            "key": app.config["YOUTUBE_API_KEY"],
+            "q": request.form.get("query"),
+            "part": "snippet",
+            "maxResults": 8,
+            "type": "video",
+        }
+        r = requests.get(search_url, params=search_params)
+        results = r.json()["items"]
+
+        video_ids = []
+        for result in results:
+            video_ids.append(result["id"]["videoId"])
+
+        video_params = {
+            "key": app.config["YOUTUBE_API_KEY"],
+            "id": ",".join(video_ids),
+            "part": "snippet,contentDetails",
+            "maxResults": 8,
+        }
+
+        r = requests.get(video_url, params=video_params)
+        results = r.json()["items"]
+
+        for result in results:
+            video_data = {
+                "id": result["id"],
+                "url": f"https://www.youtube.com/watch?v={ result['id'] }",
+                "thumbnail": result["snippet"]["thumbnails"]["high"]["url"],
+                "duration": int(
+                    parse_duration(result["contentDetails"]["duration"]).total_seconds()
+                    // 60
+                ),
+                "title": result["snippet"]["title"],
+            }
+            videos.append(video_data)
+
+    return render_template("search.html", videos=videos)
 
 
 @app.route("/auth")
