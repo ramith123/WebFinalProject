@@ -57,7 +57,7 @@ app.app_context().push()
 
 @app.route("/")
 def hello():
-    return app.send_static_file("page.html"), 200
+    return app.send_static_file("page.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -68,7 +68,7 @@ def register():
         x = User.query.filter_by(username=data["username"]).count()
         if x > 0:
             flash("That username is already taken, please choose another")
-            return render_template("register.html", form=form), 403
+            return render_template("register.html", form=form)
         else:
             newuser = User(username=data["username"])
             newuser.set_password(data["password"])
@@ -76,8 +76,8 @@ def register():
             db.session.commit()
             flash("Account Created!")
             print("User added")
-            return redirect(url_for("login")), 201
-    return render_template("register.html", form=form), 200
+            return redirect(url_for("login"))
+    return render_template("register.html", form=form)
 
 
 @app.route("/login", methods=["GET", "POST"])
