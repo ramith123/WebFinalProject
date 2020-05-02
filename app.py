@@ -15,8 +15,7 @@ from isodate import parse_duration
 
 from model import db, User
 from forms import Register, Login
-
-# import json
+import json
 
 
 login_manager = LoginManager()
@@ -41,6 +40,7 @@ def create_app():
 
     app.config["YOUTUBE_API_KEY"] = "AIzaSyC0VqCv-KW7cRsmYBUUHHqTJeRBTVnP-h0"
 
+
     # =======
     # """ Begin boilerplate code """
 
@@ -63,7 +63,7 @@ app.app_context().push()
 
 @app.route("/")
 def hello():
-    return app.send_static_file("page.html")
+    return app.send_static_file("page.html"), 200
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -74,7 +74,7 @@ def register():
         x = User.query.filter_by(username=data["username"]).count()
         if x > 0:
             flash("That username is already taken, please choose another")
-            return render_template("register.html", form=form)
+            return render_template("register.html", form=form), 403
         else:
             newuser = User(username=data["username"])
             newuser.set_password(data["password"])
@@ -82,8 +82,8 @@ def register():
             db.session.commit()
             flash("Account Created!")
             print("User added")
-            return redirect(url_for("login"))
-    return render_template("register.html", form=form)
+            return redirect(url_for("login")), 201
+    return render_template("register.html", form=form), 200
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -164,6 +164,13 @@ def search():
             videos.append(video_data)
 
     return render_template("search.html", videos=videos)
+
+
+@app.route("/auth")
+@login_required
+def getToken():
+    user = current_user
+    return json.dumps(user.api_key), 200
 
 
 if __name__ == "__main__":
