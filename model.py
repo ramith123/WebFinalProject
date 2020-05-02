@@ -36,16 +36,25 @@ songs = db.Table(
 
 class Playlist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    description = db.Column(db.String(512), nullable=True)
+    name = db.Column(db.String(256), nullable=False)
+    description = db.Column(db.String(1024), nullable=True)
     userid = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     songs = db.relationship(
         "Song",
         secondary=songs,
         lazy="subquery",
-        backref=db.backref("songPlaylists", lazy=True),
+        backref=db.backref("songPlaylists", lazy="dynamic"),
     )
+
+    def toDict(self):
+        return {
+            "id": self.id,
+        }
 
 
 class Song(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String(512), nullable=False, unique=True)
+
+    def toDict(self):
+        return {"id": self.id, "url": self.url}
