@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
 from wtforms.validators import InputRequired, EqualTo, Length, Regexp
 
 
@@ -39,3 +39,10 @@ class Login(FlaskForm):
         "Next",
         render_kw={"class": "btn waves-effect waves-light white-text amber darken-3"},
     )
+
+
+class Playlist(FlaskForm):
+    name = StringField(
+        "Playlist Name", validators=[InputRequired("A name must be specified")]
+    )
+    description = TextAreaField("Description")
