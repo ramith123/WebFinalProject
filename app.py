@@ -17,6 +17,7 @@ from isodate import parse_duration
 
 from model import db, User
 from forms import Register, Login
+
 # from top100 import nextPageToken, prevPageToken, playlist_params
 # import json
 
@@ -62,75 +63,76 @@ app = create_app()
 
 app.app_context().push()
 
-global nextPageToken = ""
-global prevPageToken = ""
-
-
 
 @app.route("/")
 def hello():
-    text = request.args.get('query')
+    text = request.args.get("query")
     playlist_url = "https://www.googleapis.com/youtube/v3/playlistItems"
     video_url = "https://www.googleapis.com/youtube/v3/videos"
     videos = []
 
     playlist_params = {
-                "key": app.config["YOUTUBE_API_KEY"],
-                "playlistId" : "PL4fGSI1pDJn69On1f-8NAvX_CYlx7QyZc", #Top 100 Music Videos United States(Playlist) on YouTube Music Global Charts channel",
-                "part": "snippet,contentDetails",
-                "maxResults": 6,
-            }
+        "key": app.config["YOUTUBE_API_KEY"],
+        "playlistId": "PL4fGSI1pDJn69On1f-8NAvX_CYlx7QyZc",  # Top 100 Music Videos United States(Playlist) on YouTube Music Global Charts channel",
+        "part": "snippet,contentDetails",
+        "maxResults": 6,
+    }
 
-    if text == None:
-        r = requests.get(playlist_url, params=playlist_params)
-        nextPageToken = r.json()["nextPageToken"]
-        results = r.json()["items"]
-        if(r.json()["prevPageToken"]):
-            prevPageToken = r.json()["prevPageToken"]
-        
-    else:
+    # if text == None:
+    #     r = requests.get(playlist_url, params=playlist_params)
+    #     nextPageToken = r.json()["nextPageToken"]
+    #     results = r.json()["items"]
+    #     if(r.json()["prevPageToken"]):
+    #         prevPageToken = r.json()["prevPageToken"]
+
+    if text:
         playlist_params["pageToken"] = text
         r = requests.get(playlist_url, params=playlist_params)
         prevPageToken = r.json()["prevPageToken"]
         print(r.json()[0]["prevPageToken"])
         results = r.json()["items"]
         print(results)
-    
-    PageTokens = {
-        "nextPageToken": results["nextPageToken"]
-        "prevPageToken"
-    }
-    
+
+    r = requests.get(playlist_url, params=playlist_params)
+    results = r.json()["items"]
     video_ids = []
+
+    PageTokens = {
+        "nextPageToken": results["nextPageToken"],
+        "prevPageToken": results["prevPageToken"],
+    }
+
     for result in results:
         print(result["contentDetails"]["videoId"])
         video_ids.append(result["contentDetails"]["videoId"])
-    
-    #Get Specific video data
+
+    # Get Specific video data
     video_params = {
-            "key": app.config["YOUTUBE_API_KEY"],
-            "id": ",".join(video_ids),
-            "part": "snippet,contentDetails",
-            "maxResults": 6,
-        }
+        "key": app.config["YOUTUBE_API_KEY"],
+        "id": ",".join(video_ids),
+        "part": "snippet,contentDetails",
+        "maxResults": 6,
+    }
 
     rvid = requests.get(video_url, params=video_params)
-    
+
     results = rvid.json()["items"]
 
-    
     for result in results:
         video_data = {
             "id": result["id"],
             "url": f"https://www.youtube.com/watch?v={ result['id'] }",
             "thumbnail": result["snippet"]["thumbnails"]["high"]["url"],
             "duration": int(
-                parse_duration(result["contentDetails"]["duration"]).total_seconds() #not used currently 
+                parse_duration(
+                    result["contentDetails"]["duration"]
+                ).total_seconds()  # not used currently
                 // 60
             ),
             "title": result["snippet"]["title"],
         }
         videos.append(video_data)
+    videos.append(PageTokens)
     return render_template("home.html", videos=videos)
 
 
@@ -193,7 +195,7 @@ def search():
     video_url = "https://www.googleapis.com/youtube/v3/videos"
     videos = []
 
-    #Search Requests from user        
+    # Search Requests from user
     if request.method == "POST":
         search_params = {
             "key": app.config["YOUTUBE_API_KEY"],
@@ -231,8 +233,6 @@ def search():
                 "title": result["snippet"]["title"],
             }
             videos.append(video_data)
-
-        
 
     return render_template("search.html", videos=videos)
 
