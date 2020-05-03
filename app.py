@@ -62,15 +62,9 @@ app = create_app()
 
 app.app_context().push()
 
-nextPageToken = ""
-prevPageToken = ""
+global nextPageToken = ""
+global prevPageToken = ""
 
-playlist_params = {
-                "key": app.config["YOUTUBE_API_KEY"],
-                "playlistId" : "PL4fGSI1pDJn69On1f-8NAvX_CYlx7QyZc", #Top 100 Music Videos United States(Playlist) on YouTube Music Global Charts channel",
-                "part": "snippet,contentDetails",
-                "maxResults": 6,
-            }
 
 
 @app.route("/")
@@ -80,27 +74,32 @@ def hello():
     video_url = "https://www.googleapis.com/youtube/v3/videos"
     videos = []
 
-    # r = Mock(spec=Response)
-    results = []
+    playlist_params = {
+                "key": app.config["YOUTUBE_API_KEY"],
+                "playlistId" : "PL4fGSI1pDJn69On1f-8NAvX_CYlx7QyZc", #Top 100 Music Videos United States(Playlist) on YouTube Music Global Charts channel",
+                "part": "snippet,contentDetails",
+                "maxResults": 6,
+            }
+
     if text == None:
         r = requests.get(playlist_url, params=playlist_params)
         nextPageToken = r.json()["nextPageToken"]
         results = r.json()["items"]
+        if(r.json()["prevPageToken"]):
+            prevPageToken = r.json()["prevPageToken"]
         
-    elif text == "next":
-        print(nextPageToken)
-        playlist_params["pageToken"] = nextPageToken
-        print(playlist_params)
+    else:
+        playlist_params["pageToken"] = text
         r = requests.get(playlist_url, params=playlist_params)
         prevPageToken = r.json()["prevPageToken"]
         print(r.json()[0]["prevPageToken"])
         results = r.json()["items"]
         print(results)
-
-    elif text == "prev":
-        playlist_params["pageToken"] = prevPageToken
-        r = requests.get(playlist_url, params=playlist_params)
-        results = r.json()["items"]
+    
+    PageTokens = {
+        "nextPageToken": results["nextPageToken"]
+        "prevPageToken"
+    }
     
     video_ids = []
     for result in results:
@@ -119,6 +118,7 @@ def hello():
     
     results = rvid.json()["items"]
 
+    
     for result in results:
         video_data = {
             "id": result["id"],

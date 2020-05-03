@@ -94,7 +94,7 @@ $('.next').click(function(){
     $.ajax({
         url: "/",
         type: "get",
-        data: {query: "next"},
+        data: {query: "{{ videos.pageToken }}"},
         error: function(xhr){
             console.log(error)
         }
