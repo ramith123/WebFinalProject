@@ -137,7 +137,6 @@ def hello():
             "title": result["snippet"]["title"],
         }
         videos.append(video_data)
-    videos.append(PageTokens)
     return render_template("home.html", videos=videos, PageTokens=PageTokens)
 
 
