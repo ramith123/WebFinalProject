@@ -17,7 +17,7 @@ from isodate import parse_duration
 
 from model import db, User
 from forms import Register, Login
-
+# from top100 import nextPageToken, prevPageToken, playlist_params
 # import json
 
 
@@ -62,6 +62,16 @@ app = create_app()
 
 app.app_context().push()
 
+nextPageToken = ""
+prevPageToken = ""
+
+playlist_params = {
+                "key": app.config["YOUTUBE_API_KEY"],
+                "playlistId" : "PL4fGSI1pDJn69On1f-8NAvX_CYlx7QyZc", #Top 100 Music Videos United States(Playlist) on YouTube Music Global Charts channel",
+                "part": "snippet,contentDetails",
+                "maxResults": 6,
+            }
+
 
 @app.route("/")
 def hello():
@@ -70,24 +80,15 @@ def hello():
     video_url = "https://www.googleapis.com/youtube/v3/videos"
     videos = []
 
-    playlist_params = {}
     # r = Mock(spec=Response)
-    nextPageToken = ""
-    prevPageToken = ""
     results = []
     if text == None:
-        playlist_params = {
-                "key": app.config["YOUTUBE_API_KEY"],
-                "playlistId" : "PL4fGSI1pDJn69On1f-8NAvX_CYlx7QyZc", #Top 100 Music Videos United States(Playlist) on YouTube Music Global Charts channel",
-                "part": "snippet,contentDetails",
-                "maxResults": 6,
-            }
-
         r = requests.get(playlist_url, params=playlist_params)
         nextPageToken = r.json()["nextPageToken"]
         results = r.json()["items"]
         
     elif text == "next":
+        print(nextPageToken)
         playlist_params["pageToken"] = nextPageToken
         print(playlist_params)
         r = requests.get(playlist_url, params=playlist_params)
