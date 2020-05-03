@@ -8,6 +8,8 @@ from flask_login import (
 from flask import Flask, request, render_template, redirect, flash, url_for
 import os
 import requests
+from requests.models import Response
+from unittest.mock import Mock
 from isodate import parse_duration
 
 # from sqlalchemy.exc import IntegrityError
@@ -63,35 +65,58 @@ app.app_context().push()
 
 @app.route("/")
 def hello():
+    text = request.args.get('query')
     playlist_url = "https://www.googleapis.com/youtube/v3/playlistItems"
     video_url = "https://www.googleapis.com/youtube/v3/videos"
     videos = []
 
-    playlist_params = {
-            "key": app.config["YOUTUBE_API_KEY"],
-            "playlistId" : "PL4fGSI1pDJn69On1f-8NAvX_CYlx7QyZc", #Top 100 Music Videos United States(Playlist) on YouTube Music Global Charts channel",
-            "part": "snippet,contentDetails",
-            "maxResults": 6,
-        }
+    playlist_params = {}
+    # r = Mock(spec=Response)
+    nextPageToken = ""
+    prevPageToken = ""
+    results = []
+    if text == None:
+        playlist_params = {
+                "key": app.config["YOUTUBE_API_KEY"],
+                "playlistId" : "PL4fGSI1pDJn69On1f-8NAvX_CYlx7QyZc", #Top 100 Music Videos United States(Playlist) on YouTube Music Global Charts channel",
+                "part": "snippet,contentDetails",
+                "maxResults": 6,
+            }
 
-    r = requests.get(playlist_url, params=playlist_params)
-    results = r.json()["items"]
+        r = requests.get(playlist_url, params=playlist_params)
+        nextPageToken = r.json()["nextPageToken"]
+        results = r.json()["items"]
+        
+    elif text == "next":
+        playlist_params["pageToken"] = nextPageToken
+        print(playlist_params)
+        r = requests.get(playlist_url, params=playlist_params)
+        prevPageToken = r.json()["prevPageToken"]
+        print(r.json()[0]["prevPageToken"])
+        results = r.json()["items"]
+        print(results)
+
+    elif text == "prev":
+        playlist_params["pageToken"] = prevPageToken
+        r = requests.get(playlist_url, params=playlist_params)
+        results = r.json()["items"]
+    
     video_ids = []
     for result in results:
+        print(result["contentDetails"]["videoId"])
         video_ids.append(result["contentDetails"]["videoId"])
     
+    #Get Specific video data
     video_params = {
             "key": app.config["YOUTUBE_API_KEY"],
             "id": ",".join(video_ids),
             "part": "snippet,contentDetails",
-            # "nextPageToken": result['nextPageToken'], #Do something
-            # "prevPageToken": result['prevPageToken'], #Do something
             "maxResults": 6,
         }
 
-    r = requests.get(video_url, params=video_params)
+    rvid = requests.get(video_url, params=video_params)
     
-    results = r.json()["items"]
+    results = rvid.json()["items"]
 
     for result in results:
         video_data = {

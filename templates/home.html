@@ -8,7 +8,7 @@
 <h3>Hot 100</h3>
 <div class="slider">
     <ul class="slides grey lighten-3 center-align">
-        <!-- {% for i in range(0,20) %} -->
+       
         <li>
             <div class="row">
                 {% for video in videos %}
@@ -27,7 +27,6 @@
                 {% endfor %}
             </div>
         </li>
-        <!-- {% endfor %} -->
         <li>
             <div class="row">
                 <div class="col m2 s5">
@@ -76,7 +75,6 @@
     </ul>
 </div>
 <div class="carousel-fixed-item right">
-    <!-- Figure out how to create actual Arrow Buttons-->
     <button class="prev z-depth-0 btn grey btn-flat center"><i class="large material-icons">chevron_left</i></button>
     <button class="next z-depth-0 btn grey btn-flat center"><i class="large material-icons">chevron_right</i></button>
 </div>
@@ -93,11 +91,26 @@ $(document).ready(function(){
 
 $('.next').click(function(){
     $('.slider').slider('next');
-    $.get('/',)
+    $.ajax({
+        url: "/",
+        type: "get",
+        data: {query: "next"},
+        error: function(xhr){
+            console.log(error)
+        }
+    });
 });
 
 $('.prev').click(function() {
     $('.slider').slider('prev');
+    $.ajax({
+        url: "/",
+        type: "get",
+        data: {query: "prev"},
+        error: function(xhr){
+            console.log(error)
+        }
+    });
 });
 
 </script>
