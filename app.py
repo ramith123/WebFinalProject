@@ -63,7 +63,49 @@ app.app_context().push()
 
 @app.route("/")
 def hello():
-    return render_template("home.html")
+    playlist_url = "https://www.googleapis.com/youtube/v3/playlistItems"
+    video_url = "https://www.googleapis.com/youtube/v3/videos"
+    videos = []
+
+    playlist_params = {
+            "key": app.config["YOUTUBE_API_KEY"],
+            "playlistId" : "PL4fGSI1pDJn69On1f-8NAvX_CYlx7QyZc", #Top 100 Music Videos United States(Playlist) on YouTube Music Global Charts channel",
+            "part": "snippet,contentDetails",
+            "maxResults": 6,
+        }
+
+    r = requests.get(playlist_url, params=playlist_params)
+    results = r.json()["items"]
+    video_ids = []
+    for result in results:
+        video_ids.append(result["contentDetails"]["videoId"])
+    
+    video_params = {
+            "key": app.config["YOUTUBE_API_KEY"],
+            "id": ",".join(video_ids),
+            "part": "snippet,contentDetails",
+            # "nextPageToken": result['nextPageToken'], #Do something
+            # "prevPageToken": result['prevPageToken'], #Do something
+            "maxResults": 6,
+        }
+
+    r = requests.get(video_url, params=video_params)
+    
+    results = r.json()["items"]
+
+    for result in results:
+        video_data = {
+            "id": result["id"],
+            "url": f"https://www.youtube.com/watch?v={ result['id'] }",
+            "thumbnail": result["snippet"]["thumbnails"]["high"]["url"],
+            "duration": int(
+                parse_duration(result["contentDetails"]["duration"]).total_seconds() #not used currently 
+                // 60
+            ),
+            "title": result["snippet"]["title"],
+        }
+        videos.append(video_data)
+    return render_template("home.html", videos=videos)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -123,8 +165,9 @@ def loginTest():
 def search():
     search_url = "https://www.googleapis.com/youtube/v3/search"
     video_url = "https://www.googleapis.com/youtube/v3/videos"
-
     videos = []
+
+    #Search Requests from user        
     if request.method == "POST":
         search_params = {
             "key": app.config["YOUTUBE_API_KEY"],
@@ -162,6 +205,8 @@ def search():
                 "title": result["snippet"]["title"],
             }
             videos.append(video_data)
+
+        
 
     return render_template("search.html", videos=videos)
 

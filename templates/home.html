@@ -8,36 +8,26 @@
 <h3>Hot 100</h3>
 <div class="slider">
     <ul class="slides grey lighten-3 center-align">
+        <!-- {% for i in range(0,20) %} -->
         <li>
             <div class="row">
+                {% for video in videos %}
                 <div class="col m2 s5">
                     <div class="card">
                         <div class="card-image">
-                        <a href="#" target="_blank"><img src="https://via.placeholder.com/480x360" class="responsive-img"></a>
+                        <a href="{{ video.url }}" target="_blank"><img src="{{ video.thumbnail }}" class="responsive-img"></a>
+                        <span class="card-title"><img style="width:20%; height:10%"
+                            src="https://i0.wp.com/livelikejohnbernecker.com/wp-content/uploads/2018/01/youtube-logo-designer-youtube-logo-png-transparent-background-download-diy-logo-designs.png?fit=1000%2C566&ssl=1"></span>    
                         </div>
                         <div class="card-content">
-                            Eminem - Lose Yourself(Music Video) sxfdsafsadfvajfbjdgbfjgsdonfpijgoriehroihfgdjusfhfgiudgsh
+                            <p>{{ video.title}}</p>
                         </div>
                     </div>
                 </div>
-                <div class="col m2 s5">
-                    <img src="https://via.placeholder.com/480x360" class="responsive-img">
-                </div>
-                <div class="col m2 s5">
-                    <img src="https://via.placeholder.com/480x360" class="responsive-img">
-                </div>
-                <div class="col m2 s5">
-                    <img src="https://via.placeholder.com/480x360" class="responsive-img">
-                </div>
-                <div class="col m2 s5">
-                    <img src="https://via.placeholder.com/480x360" class="responsive-img">
-                </div>
-                <div class="col m2 s5">
-                    <img src="https://via.placeholder.com/480x360" class="responsive-img">
-                </div>
+                {% endfor %}
             </div>
         </li>
-        
+        <!-- {% endfor %} -->
         <li>
             <div class="row">
                 <div class="col m2 s5">
@@ -103,6 +93,7 @@ $(document).ready(function(){
 
 $('.next').click(function(){
     $('.slider').slider('next');
+    $.get('/',)
 });
 
 $('.prev').click(function() {
