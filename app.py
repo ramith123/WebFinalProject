@@ -87,11 +87,11 @@ def hello():
 
     if text:
         playlist_params["pageToken"] = text
-        r = requests.get(playlist_url, params=playlist_params)
-        prevPageToken = r.json()["prevPageToken"]
-        print(r.json()[0]["prevPageToken"])
-        results = r.json()["items"]
-        print(results)
+        # r = requests.get(playlist_url, params=playlist_params)
+        # prevPageToken = r.json()["prevPageToken"]
+        # print(r.json()[0]["prevPageToken"])
+        # results = r.json()["items"]
+        # print(results)
 
     r = requests.get(playlist_url, params=playlist_params)
     results = r.json()["items"]
