@@ -95,13 +95,18 @@ def hello():
 
     r = requests.get(playlist_url, params=playlist_params)
     results = r.json()["items"]
-    video_ids = []
+
+    try:
+        prevPageToken = r.json()["prevPageToken"]
+    except:
+        prevPageToken = None
 
     PageTokens = {
-        "nextPageToken": results["nextPageToken"],
-        "prevPageToken": results["prevPageToken"],
+        "nextPageToken": r.json()["nextPageToken"],
+        "prevPageToken": prevPageToken,
     }
 
+    video_ids = []
     for result in results:
         print(result["contentDetails"]["videoId"])
         video_ids.append(result["contentDetails"]["videoId"])
@@ -133,7 +138,7 @@ def hello():
         }
         videos.append(video_data)
     videos.append(PageTokens)
-    return render_template("home.html", videos=videos)
+    return render_template("home.html", videos=videos, PageTokens=PageTokens)
 
 
 @app.route("/register", methods=["GET", "POST"])
