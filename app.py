@@ -63,7 +63,7 @@ app.app_context().push()
 
 @app.route("/")
 def hello():
-    return app.send_static_file("page.html")
+    return render_template("home.html")
 
 
 @app.route("/register", methods=["GET", "POST"])

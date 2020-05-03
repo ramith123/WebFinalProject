@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif" type="image/gif">
     <title>{% block title %}{% endblock %}</title>
 
     <style>
@@ -38,12 +39,53 @@
     </style>
 </head>
 
-<body class="">
+<body>
+    <!--Change colours and add icons-->
+    <nav class="nav-wrapper indigo"> 
+        <div class="container">
+            <div class="left">
+                <!-- <img width="63" height="63" src="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif">   Messes up stuff-->
+                <a href="/" class="brand-logo">RDCJ Music</a>
+            </div>
+            <a href="#" class="sidenav-trigger" data-target="mobile-links">
+                <i class="material-icons">menu</i>
+            </a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="/" class="waves-effect waves-light">Home</a></li>
+                <li><a href="#" class="waves-effect waves-light">Your Playlists</a></li> <!--Ensure Loggin is neccessary for access, change route to /playlists-->
+                <li><a href="#" class="waves-effect waves-light"></a>Create Playlist</a></li> <!--Ensure Loggin is neccessary for access-->
+                <li><a href="/search" class="waves-effect waves-light">Search</a></li>
+                <li><a href="/register" class="waves-effect waves-light">Register</a></li>
+                <li><a href="/login" class="waves-effect waves-light">Login</a></li>
+                
+            </ul>
+        </div>
+    </nav>
+
+    <ul class="sidenav left-align" id="mobile-links">
+        <li><a href="/" class="waves-effect waves-dark">Home</a></li>
+        <li><a href="#" class="waves-effect waves-dark">Your Playlists</a></li> <!--Ensure Loggin is neccessary for access, change route to /playlists-->
+        <li><a href="#" class="waves-effect waves-dark">Create Playlist</a></li> <!--Ensure Loggin is neccessary for access-->
+        <li><a href="/search" class="waves-effect waves-dark">Search</a></li>
+        <li><a href="/register" class="waves-effect waves-dark">Register</a></li>
+        <li><a href="/login" class="waves-effect waves-dark">Login</a></li>
+    </ul>
     <a href="" class="brand-logo center ">{% block page %}{% endblock %}</a>
-    <div>{% block content %}{% endblock %}</div>
-
-
+    
+    
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
     <script src="https://code.iconify.design/1/1.0.4/iconify.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
+    <script>
+        $(document).ready(function(){
+            $('.sidenav').sidenav();
+        })
+    </script>
+
+    <!--I Know its weird to have stuff after scripts but this is the only way i can call jquery and materialize js stuff from subpages without repeatedly declaring them
+    or putting the scripts at the top of body-->
+    <div>{% block content %}{% endblock %}</div>
 </body>
+</html>
