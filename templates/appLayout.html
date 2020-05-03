@@ -72,7 +72,6 @@
     </ul>
     <a href="" class="brand-logo center ">{% block page %}{% endblock %}</a>
     
-    
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
     <script src="https://code.iconify.design/1/1.0.4/iconify.min.js"></script>
     <!-- Compiled and minified JavaScript -->
@@ -84,8 +83,6 @@
         })
     </script>
 
-    <!--I Know its weird to have stuff after scripts but this is the only way i can call jquery and materialize js stuff from subpages without repeatedly declaring them
-    or putting the scripts at the top of body-->
     <div>{% block content %}{% endblock %}</div>
 </body>
 </html>
