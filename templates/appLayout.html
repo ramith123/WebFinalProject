@@ -42,22 +42,24 @@
 <body>
     <!--Change colours and add icons-->
     <nav class="nav-wrapper indigo"> 
-        <div class="container">
-            <div class="left">
+        <div>
+            <div>
                 <!-- <img width="63" height="63" src="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif">   Messes up stuff-->
-                <a href="/" class="brand-logo">RCDJ Music</a>
+                <a href="/" class="brand-logo center">RCDJ Music</a>
             </div>
             <a href="#" class="sidenav-trigger" data-target="mobile-links">
                 <i class="material-icons">menu</i>
             </a>
-            <ul class="right hide-on-med-and-down">
+            
+            <ul class="hide-on-med-and-down">
                 <li><a href="/" class="waves-effect waves-light">Home</a></li>
                 <li><a href="#" class="waves-effect waves-light">Your Playlists</a></li> <!--Ensure Loggin is neccessary for access, change route to /playlists-->
                 <li><a href="#" class="waves-effect waves-light">Create Playlist</a></li> <!--Ensure Loggin is neccessary for access-->
                 <li><a href="/search" class="waves-effect waves-light">Search</a></li>
-                <li><a href="/register" class="waves-effect waves-light">Register</a></li>
-                <li><a href="/login" class="waves-effect waves-light">Login</a></li>
-                
+                <div class="right">
+                    <li><a href="/register" class="waves-effect waves-light">Register</a></li>
+                    <li><a href="/login" class="waves-effect waves-light">Login</a></li>
+                </div>
             </ul>
         </div>
     </nav>
