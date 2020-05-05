@@ -31,8 +31,8 @@
           <span class="card-title"><img style="width:20%; height:10%"
               src="https://i0.wp.com/livelikejohnbernecker.com/wp-content/uploads/2018/01/youtube-logo-designer-youtube-logo-png-transparent-background-download-diy-logo-designs.png?fit=1000%2C566&ssl=1"></span>
         </div>
-        <div class="card-content">
-          <p>{{ video.title }}</p>
+        <div class="card-content tooltipped" data-position="top" data-tooltip="{{ video.title }}">
+          <a href="{{ video.url }}" target="_blank"><p class="p-title">{{ video.title}}</p></a>
         </div>
         <div class="card-action left-align">
           <a href="{{ video.url }}" target="_blank">View</a>
@@ -43,4 +43,10 @@
     {% endfor %}
   </div>
 </div>
+
+<script>
+  $(document).ready(function () {
+      $('.tooltipped').tooltip();
+  });
+</script>
 {% endblock %}
