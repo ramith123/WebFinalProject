@@ -10,6 +10,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(256), unique=True, nullable=False)
     # email = db.Column(db.String(256), unique=True, nullable=False)
     password = db.Column(db.String(256), nullable=False)
+    playlists = db.relationship("Playlist", backref="user", lazy="subquery")
 
     def set_password(self, password):
         self.password = generate_password_hash(password, "sha256")
@@ -24,3 +25,36 @@ class User(UserMixin, db.Model):
             # "email": self.email,
             "password": self.password,
         }
+
+
+songs = db.Table(
+    "songs",
+    db.Column("playlistId", db.Integer, db.ForeignKey("playlist.id"), primary_key=True),
+    db.Column("songId", db.Integer, db.ForeignKey("song.id"), primary_key=True),
+)
+
+
+class Playlist(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(256), nullable=False)
+    description = db.Column(db.String(1024), nullable=True)
+    userid = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    songs = db.relationship(
+        "Song",
+        secondary=songs,
+        lazy="subquery",
+        backref=db.backref("songPlaylists", lazy="dynamic"),
+    )
+
+    def toDict(self):
+        return {
+            "id": self.id,
+        }
+
+
+class Song(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    url = db.Column(db.String(512), nullable=False, unique=True)
+
+    def toDict(self):
+        return {"id": self.id, "url": self.url}
