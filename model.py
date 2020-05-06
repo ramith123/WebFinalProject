@@ -58,6 +58,7 @@ class Song(db.Model):
     artist = db.Column(db.String(128), nullable=False)
     album = db.Column(db.String(128), nullable=False)
     albumImgUrl = db.Column(db.String(512), nullable=False, unique=True)
+    url = db.Column(db.String(512), nullable=False, unique=True)
 
     def toDict(self):
         return {"id": self.id, "url": self.url}

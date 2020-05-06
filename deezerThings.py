@@ -22,12 +22,27 @@ def getSongsList(query):  # get SongList with required information
             "artist": song["artist"]["name"],
             "album": song["album"]["title"],
             "albumImgUrl": song["album"]["cover_big"],
+            "url": song["link"],
         }
         songList.append(track)
     return songList
 
 
+def getSongModel(song):
+
+    ele = Song(
+        id=song["id"],
+        title=song["title"],
+        artist=song["artist"],
+        album=song["album"],
+        albumImgUrl=song["albumImgUrl"],
+        url=song["url"],
+    )
+    return ele
+
+
 # pip install termcolor before executing this file
 if __name__ == "__main__":
 
-    print(getSongsList("Go"))
+    l = getSongsList("James bay")
+    l1 = getSongModel(l[0])
