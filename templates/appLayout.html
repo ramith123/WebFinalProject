@@ -35,6 +35,52 @@
             border: 2px solid #ff6f00;
             background-color: #ff6f00;
             z-index: 0;
+        }        
+
+        .user-profile{
+            position: relative;
+        }
+
+        .user-profile li{
+            width: 100%;
+            height: 0px;
+            background-color: #3f51b5;           
+            transition: height 0.2s ease;
+            position: absolute;
+        }
+
+        .user-profile a{
+            width: 100%;           
+        }
+
+        .play-list{
+            display: flex;
+            flex-direction: column;
+            height: 200px;
+            overflow: auto;
+            align-items: center;
+        }
+
+        .play-list-item{
+            border: 1px solid gainsboro;
+            padding: 8px;
+            display: flex;            
+            align-items: center;
+            margin-bottom: 10px;
+            width: 700px;
+        }
+
+        .play-list-item img{
+            width: 30px;
+            margin-right: 20px;
+        }
+
+        .play-list-item button:nth-of-type(1){
+            margin-left: auto;
+        }
+
+        .play-list-item button{
+            margin-left: 40px;           
         }
     </style>
 </head>
@@ -57,8 +103,8 @@
                 <li><a href="/search" class="waves-effect waves-light">Search</a></li>
                 <li><a href="/register" class="waves-effect waves-light">Register</a></li>
                 <li><a href="/login" class="waves-effect waves-light">Login</a></li>
-                
-            </ul>
+                <li><div class="user-profile"><a href="#" class="user-logged-in"></a></div></li>
+            </ul>    
         </div>
     </nav>
 
