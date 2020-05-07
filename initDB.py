@@ -10,9 +10,9 @@ db.create_all(app=app)
 # from model import User, Playlist
 
 
-li = dez.getSongsList("let it go")
-for song in li:
-    print(song["youtubeUrl"])
+# li = dez.getSongsList("let it go")
+# for song in li:
+#     print(song["youtubeUrl"])
 
 # song = deezerThings.getSongModel(li[0])
 # print(song)
