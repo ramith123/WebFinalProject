@@ -61,7 +61,7 @@ def getYoutubeLink(song, artist, quota=False):
         "q": query,
         "part": "snippet",
         "maxResults": 1,
-        # "type": "video",
+        "type": "video",
     }
     defaultLink = "https://www.youtube.com/results?search_query=" + query.replace(
         " ", "+"
