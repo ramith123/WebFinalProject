@@ -48,7 +48,7 @@ def getSongModel(song):  # returns sqlalchemy Song model for a song
         album=song["album"],
         albumImgUrl=song["albumImgUrl"],
         url=song["url"],
-        # youtubeUrl=getYoutubeLink(song["title"], song["artist"]),
+        # youtubeUrl=getYoutubeLink(song["title"], song["artist"])
         youtubeUrl=song["youtubeUrl"],
     )
     return ele
