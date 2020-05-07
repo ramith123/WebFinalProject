@@ -147,13 +147,12 @@ def loginTest():
 
 
 @app.route("/search", methods=["GET", "POST"])
-def search():
+def anyPageSearch():
     search_url = "https://www.googleapis.com/youtube/v3/search"
     video_url = "https://www.googleapis.com/youtube/v3/videos"
     videos = []
-
-    query = request.form.get("query")
-    if(query == ""):
+    query = request.form.get('queryBox')
+    if(query is None):
         query = "New Music"
     # Search Requests from user
     if request.method == "POST":
@@ -161,7 +160,7 @@ def search():
             "key": app.config["YOUTUBE_API_KEY"],
             "q": query,
             "part": "snippet",
-            "maxResults": 8,
+            "maxResults": 16,
             "type": "video",
         }
         r = requests.get(search_url, params=search_params)
@@ -175,7 +174,7 @@ def search():
             "key": app.config["YOUTUBE_API_KEY"],
             "id": ",".join(video_ids),
             "part": "snippet,contentDetails",
-            "maxResults": 8,
+            "maxResults": 16,
         }
 
         r = requests.get(video_url, params=video_params)
@@ -195,7 +194,6 @@ def search():
             videos.append(video_data)
 
     return render_template("search.html", videos=videos)
-
 
 if __name__ == "__main__":
     # Bind to PORT if defined, otherwise default to 5000.

@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<h3>Hot 100</h3>
+<h4 class="left-align">Hot 100</h4>
 <div class="slider sliderone hide-on-med-and-down">
     <ul class="slides grey lighten-3 center-align">
         {% for row in videos|slice(17) %}  <!-- right now the last 2 slides only have 5 songs: maybe use a container of 90% with then slice by 20 so you can get 5 images per slide, i had issues with the container -->
@@ -15,8 +15,7 @@
                 <div class="col m2 s5">
                     <div class="card">
                         <div class="card-image">
-                            <a href="{{ video.url }}" target="_blank"><img src="{{ video.thumbnail }}"
-                                    class="responsive-img"></a>
+                            <a href="{{ video.url }}" target="_blank"><img src="{{ video.thumbnail }}" class="responsive-img"></a>
                         </div>
                         <div class="card-content tooltipped" data-position="top" data-tooltip="{{ video.title }}">
                             <a href="{{ video.url }}" target="_blank"><p class="p-title">{{ video.title}}</p></a>
