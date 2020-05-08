@@ -152,8 +152,6 @@ def anyPageSearch():
     video_url = "https://www.googleapis.com/youtube/v3/videos"
     videos = []
     query = request.form.get('queryBox')
-    if(query is None):
-        query = "New Music"
     # Search Requests from user
     if request.method == "POST":
         search_params = {
