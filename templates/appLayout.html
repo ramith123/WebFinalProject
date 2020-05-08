@@ -82,57 +82,36 @@
         .play-list-item button {
             margin-left: 40px;
         }
-
-        .p-title {
-            width: 250px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            color: black;
-        }
     </style>
 </head>
 
 <body>
     <!--Change colours and add icons-->
-    <div class="navbar-fixed">
-        <nav class="nav-wrapper indigo">
-            <div>
-                <div>
-                    <!-- <img width="63" height="63" src="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif">   Messes up stuff-->
-                    <a href="/" class="brand-logo center">RCDJ Music</a>
-                </div>
-                <a href="#" class="sidenav-trigger" data-target="mobile-links">
-                    <i class="material-icons">menu</i>
-                </a>
-
-                <ul class="hide-on-med-and-down">
-                    <div class="left">
-                        <li><a href="/" class="waves-effect waves-light">Home</a></li>
-                        <li><a href="#" class="waves-effect waves-light">Your Playlists</a></li>
-                        <!--Ensure Loggin is neccessary for access, change route to /playlists-->
-                        <li><a href="#" class="waves-effect waves-light"></a>Create Playlist</a></li>
-                        <!--Ensure Loggin is neccessary for access-->
-                        <li><a href="/search" class="waves-effect waves-light">Search</a></li>
-                        <li><a href="/register" class="waves-effect waves-light">Register</a></li>
-                        <li><a href="/login" class="waves-effect waves-light">Login</a></li>
-                        <li>
-                            <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
-                        </li>
-                </ul>
+    <nav class="nav-wrapper indigo">
+        <div class="container">
+            <div class="left">
+                <!-- <img width="63" height="63" src="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif">   Messes up stuff-->
+                <a href="/" class="brand-logo">RDCJ Music</a>
             </div>
-            <form class="left hide-on-med-and-down" method="POST" action="/search">
-                <div class="input-field" style="width: 400pt;">
-                    <input class="autocomplete black-text" id="search" type="search" name="queryBox" autocomplete="off"
-                        required>
-                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                    <!-- Icon isnt vertically centered properly, and doesnt show up when u open the bar-->
-                    <i class="material-icons">close</i>
-                    <!-- <a href="/search" class="waves-effect waves-light">Search</a> -->
-                </div>
-            </form>
-        </nav>
-    </div>
+            <a href="#" class="sidenav-trigger" data-target="mobile-links">
+                <i class="material-icons">menu</i>
+            </a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="/" class="waves-effect waves-light">Home</a></li>
+                <li><a href="#" class="waves-effect waves-light">Your Playlists</a></li>
+                <!--Ensure Loggin is neccessary for access, change route to /playlists-->
+                <li><a href="#" class="waves-effect waves-light"></a>Create Playlist</a></li>
+                <!--Ensure Loggin is neccessary for access-->
+                <li><a href="/search" class="waves-effect waves-light">Search</a></li>
+                <li><a href="/register" class="waves-effect waves-light">Register</a></li>
+                <li><a href="/login" class="waves-effect waves-light">Login</a></li>
+                <li>
+                    <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <ul class="sidenav left-align" id="mobile-links">
         <li><a href="/" class="waves-effect waves-dark">Home</a></li>
         <li><a href="#" class="waves-effect waves-dark">Your Playlists</a></li>
@@ -153,15 +132,7 @@
     <script>
         $(document).ready(function () {
             $('.sidenav').sidenav();
-            $('input.autocomplete').autocomplete({
-                data: {
-                    "Drake": null,
-                    "Travis Scott": null,
-                    "Eminem": null,
-                    "Taylor Swift": null
-                }
-            });
-        });
+        })
     </script>
 
     <div>{% block content %}{% endblock %}</div>
