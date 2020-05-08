@@ -8,8 +8,6 @@ from flask_login import (
 from flask import Flask, request, render_template, redirect, flash, url_for
 import os
 import requests
-from requests.models import Response
-from unittest.mock import Mock
 from isodate import parse_duration
 
 # from sqlalchemy.exc import IntegrityError
@@ -17,6 +15,8 @@ from isodate import parse_duration
 
 from model import db, User
 from forms import Register, Login
+
+# import json
 
 
 login_manager = LoginManager()
@@ -34,7 +34,7 @@ def create_app():
     app = Flask(__name__, static_url_path="")
     app.config[
         "SQLALCHEMY_DATABASE_URI"
-    ] = "postgres://hxzhttja:6A7fF17bjLUaeditu817xyU7x0AOzZTh@drona.db.elephantsql.com:5432/hxzhttja"
+    ] = "mysql://ramithwk_webUser:q(9[JkBn}wnY@johnny.heliohost.org/ramithwk_web_project"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
     app.config["SECRET_KEY"] = "c3a93f55-2015-4042-9ef7-77de85976f78"
     login_manager.init_app(app)
@@ -61,36 +61,9 @@ app = create_app()
 app.app_context().push()
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def hello():
-    playlist_url = "https://www.googleapis.com/youtube/v3/playlistItems"
-    videos = []
-
-    playlist_params = {
-        "key": app.config["YOUTUBE_API_KEY"],
-        "playlistId": "PL4fGSI1pDJn69On1f-8NAvX_CYlx7QyZc",  # Top 100 Music Videos United States(Playlist) on YouTube Music Global Charts channel",
-        "part": "snippet,contentDetails",
-        "maxResults": 50,
-    }
-
-    r = requests.get(playlist_url, params=playlist_params)
-    results = r.json()["items"]
-    try:
-        playlist_params["pageToken"] = r.json()["nextPageToken"]
-        r = requests.get(playlist_url, params=playlist_params)
-        results.extend(r.json()["items"])
-    except:
-        print("nextPageToken not found")
-    
-    for result in results:
-        video_data = {
-            "videoId": result["contentDetails"]["videoId"],
-            "url": f"https://www.youtube.com/watch?v={ result['contentDetails']['videoId'] }",
-            "thumbnail": result["snippet"]["thumbnails"]["high"]["url"],
-            "title": result["snippet"]["title"]
-        }
-        videos.append(video_data)
-    return render_template("home.html", videos=videos)
+    return render_template("home.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -147,18 +120,17 @@ def loginTest():
 
 
 @app.route("/search", methods=["GET", "POST"])
-def anyPageSearch():
+def search():
     search_url = "https://www.googleapis.com/youtube/v3/search"
     video_url = "https://www.googleapis.com/youtube/v3/videos"
+
     videos = []
-    query = request.form.get('queryBox')
-    # Search Requests from user
     if request.method == "POST":
         search_params = {
             "key": app.config["YOUTUBE_API_KEY"],
-            "q": query,
+            "q": request.form.get("query"),
             "part": "snippet",
-            "maxResults": 16,
+            "maxResults": 8,
             "type": "video",
         }
         r = requests.get(search_url, params=search_params)
@@ -172,7 +144,7 @@ def anyPageSearch():
             "key": app.config["YOUTUBE_API_KEY"],
             "id": ",".join(video_ids),
             "part": "snippet,contentDetails",
-            "maxResults": 16,
+            "maxResults": 8,
         }
 
         r = requests.get(video_url, params=video_params)
@@ -192,6 +164,7 @@ def anyPageSearch():
             videos.append(video_data)
 
     return render_template("search.html", videos=videos)
+
 
 if __name__ == "__main__":
     # Bind to PORT if defined, otherwise default to 5000.
