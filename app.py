@@ -87,7 +87,8 @@ def hello():
             "videoId": result["contentDetails"]["videoId"],
             "url": f"https://www.youtube.com/watch?v={ result['contentDetails']['videoId'] }",
             "thumbnail": result["snippet"]["thumbnails"]["high"]["url"],
-            "title": result["snippet"]["title"]
+            "title": result["snippet"]["title"],
+            "position": result["snippet"]["position"] 
         }
         videos.append(video_data)
     return render_template("home.html", videos=videos)
