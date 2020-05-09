@@ -82,46 +82,78 @@
         .play-list-item button {
             margin-left: 40px;
         }
+
+        .p-title {
+            width: 250px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: black;
+        }
+
+        .p-title-mobile {
+            width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: black;
+        }
     </style>
 </head>
 
 <body>
     <!--Change colours and add icons-->
-    <nav class="nav-wrapper indigo">
-        <div class="container">
-            <div class="left">
+    <nav>
+        <div class="nav-wrapper indigo darken-3">
+            <div>
                 <!-- <img width="63" height="63" src="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif">   Messes up stuff-->
-                <a href="/" class="brand-logo">RDCJ Music</a>
+                <a href="/" class="brand-logo">RCDJ Music</a>
             </div>
-            <a href="#" class="sidenav-trigger" data-target="mobile-links">
+
+            <a href="#" class="sidenav-trigger right" data-target="mobile-links">
                 <i class="material-icons">menu</i>
             </a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="/" class="waves-effect waves-light">Home</a></li>
-                <li><a href="#" class="waves-effect waves-light">Your Playlists</a></li>
-                <!--Ensure Loggin is neccessary for access, change route to /playlists-->
-                <li><a href="#" class="waves-effect waves-light"></a>Create Playlist</a></li>
-                <!--Ensure Loggin is neccessary for access-->
-                <li><a href="/search" class="waves-effect waves-light">Search</a></li>
-                <li><a href="/register" class="waves-effect waves-light">Register</a></li>
-                <li><a href="/login" class="waves-effect waves-light">Login</a></li>
-                <li>
-                    <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
-                </li>
-            </ul>
+
+            <div class="left">
+                <ul class="hide-on-med-and-down">
+                    <li><a href="/" class="waves-effect waves-light">Home</a></li>
+                    <li><a href="#" class="waves-effect waves-light">Your Playlists</a></li>
+                    <!--Ensure Loggin is neccessary for access, change route to /playlists-->
+                    <li><a href="#" class="waves-effect waves-light">Create Playlist</a></li>
+                    
+                </ul>
+            </div>
+
+            <div class="right">
+                <ul>
+                    <li class="hide-on-med-and-down"><a href="/register" class="waves-effect waves-light">Register</a></li>
+                    <li class="hide-on-med-and-down"><a href="/login" class="waves-effect waves-light">Login</a></li>
+                    <li>
+                        <div class="user-profile"><a href="#" class="user-logged-in"></a></div> <!-- maybe hide-on-med-and-down -->
+                    </li>
+                </ul>
+            </div>
+                
+            <form class="left" method="POST" action="/search">
+                <div class="input-field">
+                <input id="search" type="search" name="queryBox" autocomplete="off"
+                style="width:20rem !important; position:relative;" required>
+                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
+                </div>
+            </form>
         </div>
     </nav>
+            <ul class="sidenav left-align" id="mobile-links">
+                <li><a href="/" class="waves-effect waves-dark">Home</a></li>
+                <li><a href="#" class="waves-effect waves-dark">Your Playlists</a></li>
+                <!--Ensure Loggin is neccessary for access, change route to /playlists-->
+                <li><a href="#" class="waves-effect waves-dark">Create Playlist</a></li>
+                <!--Ensure Loggin is neccessary for access-->
+                <li><a href="/register" class="waves-effect waves-dark">Register</a></li>
+                <li><a href="/login" class="waves-effect waves-dark">Login</a></li>
+            </ul>
 
-    <ul class="sidenav left-align" id="mobile-links">
-        <li><a href="/" class="waves-effect waves-dark">Home</a></li>
-        <li><a href="#" class="waves-effect waves-dark">Your Playlists</a></li>
-        <!--Ensure Loggin is neccessary for access, change route to /playlists-->
-        <li><a href="#" class="waves-effect waves-dark">Create Playlist</a></li>
-        <!--Ensure Loggin is neccessary for access-->
-        <li><a href="/search" class="waves-effect waves-dark">Search</a></li>
-        <li><a href="/register" class="waves-effect waves-dark">Register</a></li>
-        <li><a href="/login" class="waves-effect waves-dark">Login</a></li>
-    </ul>
     <a href="" class="brand-logo center ">{% block page %}{% endblock %}</a>
 
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
@@ -132,6 +164,14 @@
     <script>
         $(document).ready(function () {
             $('.sidenav').sidenav();
+            // $('input.autocomplete').autocomplete({ //Calling autocomplete messes up the alignment(even more) for some unknown reason
+            //     data: {
+            //         "Drake": null,
+            //         "Travis Scott": null,
+            //         "Eminem": null,
+            //         "Taylor Swift": null
+            //     }
+            // });
         })
     </script>
 

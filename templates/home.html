@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<h4 class="left-align">Hot 100</h4>
+<h4 class="left-align hide-on-med-and-down">Hot 100</h4>
 <div class="slider sliderone hide-on-med-and-down">
     <ul class="slides grey lighten-3 center-align">
         {% for row in videos|slice(17) %}  <!-- right now the last 2 slides only have 5 songs: maybe use a container of 90% with then slice by 20 so you can get 5 images per slide, i had issues with the container -->
@@ -28,9 +28,20 @@
         {% endfor %}
     </ul>
 </div>
-<div class="right">
+<div class="right hide-on-med-and-down">
     <button class="prev z-depth-0 btn grey btn-flat center"><i class="large material-icons">chevron_left</i></button>
     <button class="next z-depth-0 btn grey btn-flat center"><i class="large material-icons">chevron_right</i></button>
+</div>
+
+<div class="carousel home-carousel hide-on-med-and-up">
+    <h4 class="left-align">Hot 100</h4>
+    {% for video in videos %}
+    <div class="carousel-item">
+        <a href="{{ video.url }}" target="_blank"><p class="indigo-text">#{{ video.position+1 }}</p></a>
+        <img src="{{ video.thumbnail }}">
+        <a href="{{ video.url }}" target="_blank"><p class="p-title-mobile">{{ video.title}}</p></a>
+    </div>
+    {% endfor %}
 </div>
 
 <!-- implement Jevon's carousels for mobile hot 100 -->
@@ -43,6 +54,8 @@
         });
         $('.sliderone').slider('pause');
         $('.tooltipped').tooltip();
+        $('.home-carousel').carousel({
+        });
     });
 
     $('.next').click(function () {
