@@ -180,32 +180,39 @@
         //
 
 
+        function hideLogAndRegAndShowUser() {
+            let registerBtn = document.querySelector("#desktop-register-button");
+            let loginBtn = document.querySelector("#desktop-login-button");
+            registerBtn.style.visibility = "hidden";
+            loginBtn.style.visibility = "hidden";
 
-        let registerBtn = document.querySelector("#desktop-register-button");
-        let loginBtn = document.querySelector("#desktop-login-button");
-        registerBtn.style.visibility = "hidden";
-        loginBtn.style.visibility = "hidden";
+            let userProfile = document.querySelector(".user-profile");
+            //console.log(userProfile.innerHTML);
 
-        let userProfile = document.querySelector(".user-profile");
-        //console.log(userProfile.innerHTML);
-
-        let userProfileHTML = `
+            let userProfileHTML = `
         <a href="#" class = "user-logged-in">{{current_user.username}}</a>
         <li style="height: 0px;">
             <a href="/logout" class="waves-effect waves-light" style="height: 0px;">logout</a>
         </li>`;
-        console.log(userProfileHTML);
-        userProfile.innerHTML = userProfileHTML;
-        userProfile.addEventListener("mouseleave", e => {
-            userProfile.querySelector("li").style.height = "0px";
-            userProfile.querySelectorAll("a")[1].style.height = "0px";
-        })
+            console.log(userProfileHTML);
+            userProfile.innerHTML = userProfileHTML;
+            userProfile.addEventListener("mouseleave", e => {
+                userProfile.querySelector("li").style.height = "0px";
+                userProfile.querySelectorAll("a")[1].style.height = "0px";
+            })
 
-        userProfile.addEventListener("mouseover", e => {
-            userProfile.querySelector("li").style.height = "64px";
-            userProfile.querySelectorAll("a")[1].style.height = "64px";
+            userProfile.addEventListener("mouseover", e => {
+                userProfile.querySelector("li").style.height = "64px";
+                userProfile.querySelectorAll("a")[1].style.height = "64px";
 
-        })
+            })
+
+
+
+        }
+        {% if current_user.is_authenticated %}
+        hideLogAndRegAndShowUser();
+        {% endif %}
 
 
     </script>
