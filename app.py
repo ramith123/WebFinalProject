@@ -81,14 +81,14 @@ def hello():
         results.extend(r.json()["items"])
     except:
         print("nextPageToken not found")
-    
+
     for result in results:
         video_data = {
             "videoId": result["contentDetails"]["videoId"],
             "url": f"https://www.youtube.com/watch?v={ result['contentDetails']['videoId'] }",
             "thumbnail": result["snippet"]["thumbnails"]["high"]["url"],
             "title": result["snippet"]["title"],
-            "position": result["snippet"]["position"] 
+            "position": result["snippet"]["position"],
         }
         videos.append(video_data)
     return render_template("home.html", videos=videos)
@@ -152,7 +152,7 @@ def anyPageSearch():
     search_url = "https://www.googleapis.com/youtube/v3/search"
     video_url = "https://www.googleapis.com/youtube/v3/videos"
     videos = []
-    query = request.form.get('queryBox')
+    query = request.form.get("queryBox")
     # Search Requests from user
     if request.method == "POST":
         search_params = {
@@ -193,6 +193,7 @@ def anyPageSearch():
             videos.append(video_data)
 
     return render_template("search.html", videos=videos)
+
 
 if __name__ == "__main__":
     # Bind to PORT if defined, otherwise default to 5000.
