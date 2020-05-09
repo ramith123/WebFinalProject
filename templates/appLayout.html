@@ -83,7 +83,7 @@
             margin-left: 40px;
         }
 
-        .p-title {
+        /* .p-title {
             width: 250px;
             white-space: nowrap;
             overflow: hidden;
@@ -97,14 +97,19 @@
             overflow: hidden;
             text-overflow: ellipsis;
             color: black;
-        }
+        } */
     </style>
 </head>
 
 <body>
+    <div class="fixed-action-btn">
+    <a href="#" class="btn-floating bth-large indigo darken-3" id="scroll" style="display: none;">
+        <i class="large material-icons">arrow_drop_up</i>
+    </a>
+    </div>
     <!--Change colours and add icons-->
     <nav>
-        <div class="nav-wrapper indigo darken-3">
+        <div class="navbar-fixed nav-wrapper indigo darken-3">
             <div>
                 <!-- <img width="63" height="63" src="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif">   Messes up stuff-->
                 <a href="/" class="brand-logo">RCDJ Music</a>
@@ -139,26 +144,27 @@
             </div>
 
             <form class="left" method="POST" action="/search">
-                <div class="input-field">
-                    <input id="search" type="search" name="queryBox" autocomplete="off"
-                        style="width:20rem !important; position:relative;" required>
+                <div class="input-field"> <!-- Needs a lot of work -->
+                    <input class="autocomplete" id="search" type="search" name="queryBox" autocomplete="off"
+                        style="width:15rem" required> 
                     <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                     <i class="material-icons">close</i>
                 </div>
             </form>
         </div>
     </nav>
+
     <ul class="sidenav left-align" id="mobile-links">
         <li><a href="/" class="waves-effect waves-dark">Home</a></li>
         <li><a href="#" class="waves-effect waves-dark">Your Playlists</a></li>
         <!--Ensure Loggin is neccessary for access, change route to /playlists-->
         <li><a href="#" class="waves-effect waves-dark">Create Playlist</a></li>
         <!--Ensure Loggin is neccessary for access-->
-        <li><a href="/register" class="waves-effect waves-dark">Register</a></li>
-        <li><a href="/login" class="waves-effect waves-dark">Login</a></li>
+        <li id="mobile-register-button"><a href="/register" class="waves-effect waves-dark">Register</a></li>
+        <li id="mobile-login-button"><a href="/login" class="waves-effect waves-dark">Login</a></li>
     </ul>
 
-    <a href="" class="brand-logo center ">{% block page %}{% endblock %}</a>
+    <a href="" class="center">{% block page %}{% endblock %}</a>
 
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
     <script src="https://code.iconify.design/1/1.0.4/iconify.min.js"></script>
@@ -166,25 +172,41 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <script>
-        //$(document).ready(function () {
-        // $('.sidenav').sidenav();
-        // $('input.autocomplete').autocomplete({ //Calling autocomplete messes up the alignment(even more) for some unknown reason
-        //     data: {
-        //         "Drake": null,
-        //         "Travis Scott": null,
-        //         "Eminem": null,
-        //         "Taylor Swift": null
-        //     }
-        // });
-        //})
-        //
+        $(document).ready(function () {
+            $('.sidenav').sidenav();
+            // $('input.autocomplete').autocomplete({ //Calling autocomplete messes up the alignment(even more) for some unknown reason
+            //     data: {
+            //         "Drake": null,
+            //         "Travis Scott": null,
+            //         "Eminem": null,
+            //         "Taylor Swift": null
+            //     }
+            // });
+            $('.fixed-action-btn').floatingActionButton();
+            $(window).scroll(function(){
+                if($(this).scrollTop() > 100){
+                    $('#scroll').fadeIn();
+                } else {
+                    $('#scroll').fadeOut();
+                }
+            });
+            $('#scroll').click(function(){
+                $("html, body").animate({ scrollTop: 0}, 400);
+                return false;
+            });
+        });
+        
 
 
         function hideLogAndRegAndShowUser() {
             let registerBtn = document.querySelector("#desktop-register-button");
             let loginBtn = document.querySelector("#desktop-login-button");
+            let mobileRegisterBtn = document.querySelector("#mobile-register-button");
+            let mobileLoginBtn = document.querySelector("#mobile-login-button");
             registerBtn.style.visibility = "hidden";
             loginBtn.style.visibility = "hidden";
+            mobileRegisterBtn.style.visibility = "hidden";
+            mobileLoginBtn.style.visibility = "hidden";
 
             let userProfile = document.querySelector(".user-profile");
             //console.log(userProfile.innerHTML);
