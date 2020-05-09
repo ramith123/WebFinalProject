@@ -26,38 +26,40 @@
 
 
 <script>
-    let navMenu = document.getElementsByClassName("right")[1];
-    console.log(navMenu.innerHTML);
+    //let navMenu = document.getElementsByClassName("right")[1];
 
-    let registerBtn = navMenu.querySelectorAll("li")[0];
 
-    let loginBtn = navMenu.querySelectorAll("li")[1];
+    //let registerBtn = navMenu.querySelectorAll("li")[0];
 
-    let playlistPlaceholder = document.querySelector(".play-list");
+    //let loginBtn = navMenu.querySelectorAll("li")[1];
 
-    let userLoggedInBtn = document.querySelector(".user-logged-in");
+    //let playlistPlaceholder = document.querySelector(".play-list");
 
-    let userLoggedInUsername = document.querySelector(".user-login-username");
+    // let userLoggedInBtn = document.querySelector(".user-logged-in");
 
-    let topNavigationMenu = document.querySelector("ul.right");
+    //userLoggedInBtn.innerHTML = "Ramith";
 
-    let userProfile = document.querySelector(".user-profile");
+    //let userLoggedInUsername = document.querySelector(".user-login-username");
 
-    let logoutButton = document.createElement("li");
+    //let topNavigationMenu = document.querySelector("ul.right");
 
-    let logoutLink = document.createElement("a");
+    //let userProfile = document.querySelector(".user-profile");
 
-    logoutLink.href = "/logout";
+    //let logoutButton = document.createElement("li");
 
-    logoutLink.classList.add("waves-effect");
+    //let logoutLink = document.createElement("a");
 
-    logoutLink.classList.add("waves-light");
+    //logoutLink.href = "/logout";
 
-    logoutLink.style.height = "0px";
+    //logoutLink.classList.add("waves-effect");
 
-    logoutLink.innerText = "logout";
+    //logoutLink.classList.add("waves-light");
 
-    userLoggedInBtn.addEventListener("mouseover", e => {
+    //logoutLink.style.height = "0px";
+
+    // logoutLink.innerText = "logout";
+
+    /* userLoggedInBtn.addEventListener("mouseover", e => {
         logoutLink.style.height = "64px";
         logoutButton.style.height = "64px";
 
@@ -66,13 +68,13 @@
     userProfile.addEventListener("mouseleave", e => {
         logoutLink.style.height = "0px";
         logoutButton.style.height = "0px";
-    })
+    })*/
 
-    logoutButton.appendChild(logoutLink);
+    //logoutButton.appendChild(logoutLink);
 
-    userProfile.appendChild(logoutButton);
+    //userProfile.appendChild(logoutButton);
+    //console.log(userProfile);
 
-    userLoggedInBtn.innerText = userLoggedInUsername.innerHTML;
 
     //display default playlist
     addPlayList(1);
