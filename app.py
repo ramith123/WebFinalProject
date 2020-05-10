@@ -229,6 +229,11 @@ def anyPageSearch():
     return render_template("search.html", videos=videos)
 
 
+@app.route("/test")
+def testPage():
+    return render_template("test.html")
+
+
 if __name__ == "__main__":
     # Bind to PORT if defined, otherwise default to 5000.
     port = int(os.environ.get("PORT", 5000))
