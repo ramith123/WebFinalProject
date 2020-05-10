@@ -39,7 +39,8 @@ def create_app():
     app.config["SECRET_KEY"] = "c3a93f55-2015-4042-9ef7-77de85976f78"
     login_manager.init_app(app)
 
-    app.config["YOUTUBE_API_KEY"] = "AIzaSyC0VqCv-KW7cRsmYBUUHHqTJeRBTVnP-h0"
+    #app.config["YOUTUBE_API_KEY"] = "AIzaSyC0VqCv-KW7cRsmYBUUHHqTJeRBTVnP-h0"
+    app.config["YOUTUBE_API_KEY"] = "AIzaSyDIk63q5hnaaQTLlPqLRPSrUYIYmLgMMTA"
 
     # =======
     # """ Begin boilerplate code """
@@ -141,10 +142,10 @@ def logout():
     return render_template("logout.html")
 
 
-@app.route("/loginTest", methods=["GET"])
+@app.route("/playlist", methods=["GET"])
 @login_required
 def loginTest():
-    return render_template("testlogin.html")
+    return render_template("playlist.html")
 
 
 @app.route("/search", methods=["GET", "POST"])
