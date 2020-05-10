@@ -16,9 +16,10 @@
                     <div class="card">
                         <div class="card-image">
                             <a href="{{ video.url }}" target="_blank"><img src="{{ video.thumbnail }}" class="responsive-img"></a>
+                            <span class="card-title"><p class="orange-text">#{{ video.position+1 }}</p></span>
                         </div>
                         <div class="card-content tooltipped" data-position="top" data-tooltip="{{ video.title }}">
-                            <a href="{{ video.url }}" target="_blank"><p class="p-title">{{ video.title}}</p></a>
+                            <a href="{{ video.url }}" target="_blank"><p class="truncate black-text">{{ video.title}}</p></a>
                         </div>
                     </div>
                 </div>
@@ -33,18 +34,16 @@
     <button class="next z-depth-0 btn grey btn-flat center"><i class="large material-icons">chevron_right</i></button>
 </div>
 
-<div class="carousel home-carousel hide-on-med-and-up">
+<div class="carousel home-carousel hide-on-large-only">
     <h4 class="left-align">Hot 100</h4>
     {% for video in videos %}
     <div class="carousel-item">
         <a href="{{ video.url }}" target="_blank"><p class="indigo-text">#{{ video.position+1 }}</p></a>
         <img src="{{ video.thumbnail }}">
-        <a href="{{ video.url }}" target="_blank"><p class="p-title-mobile">{{ video.title}}</p></a>
+        <a href="{{ video.url }}" target="_blank"><p class="truncate black-text">{{ video.title}}</p></a>
     </div>
     {% endfor %}
 </div>
-
-<!-- implement Jevon's carousels for mobile hot 100 -->
 
 <script>
     $(document).ready(function () {

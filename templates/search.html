@@ -6,21 +6,6 @@
 
 {% block content %}
 
-
-
-<!-- <div class="valign-wrapper">
-  <div class="row">
-    <form method="POST">
-      <div class="input-field col s12 ">
-        <input class="black-text" name="query" type="text" class="validate">
-        <label for="search">Enter Search</label>
-        <button type="submit" name="submit" value="search" class="waves-effect waves-light btn">Search</a>
-      </div>
-
-    </form>
-  </div>
-</div> -->
-
 <div class="container">
   <div class="row">
     {% for video in videos %}
@@ -38,7 +23,7 @@
         </div>
         <div class="card-action left-align">
           <a href="{{ video.url }}" target="_blank">View</a>
-          <small class="right-align text-black">{{ video.duration }} mins</small> <!--need this to align right-->
+          <small class="right-align text-black">{{ video.duration }} mins</small>
         </div>
       </div>
     </div>

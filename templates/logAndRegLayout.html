@@ -1,45 +1,6 @@
-<!doctype html>
-<html>
-
-<head>
-
-
-  <!--Import Google Icon Font-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <!--Let browser know website is optimized for mobile-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif" type="image/gif">
-  <title>{% block title %}{% endblock %}</title>
-
-  <style>
-    body,
-    html {
-      height: 100%;
-      text-align: center;
-      margin: 0;
-      background-color: rgb(255, 255, 255);
-      /*background-color: rgb(14, 17, 31);*/
-
-    }
-
-    .input-field input {
-      color: white;
-    }
-
-    [type="checkbox"].filled-in:checked+span:not(.lever):after {
-      top: 0;
-      width: 20px;
-      height: 20px;
-      border: 2px solid #ff6f00;
-      background-color: #ff6f00;
-      z-index: 0;
-    }
-  </style>
-</head>
-
-<body class="valign-wrapper ">
+{% include "appLayout.html" %}
+<!-- <title>{% block title %}{% endblock %}</title> Not actually showing in title..... -->
+<div class="valign-wrapper ">
   <div class="container">
     <div class="row">
       <!-- <div class="col s4 offset-s4"> -->
@@ -50,7 +11,7 @@
           <div>
             <nav class="amber darken-3">
               <div class="nav-wrapper">
-                <a href="" class="brand-logo center ">{% block page %}{% endblock %}</a>
+                <a href="" class="center">{% block page %}{% endblock %}</a>
               </div>
             </nav>
             {% with messages = get_flashed_messages() %}
@@ -77,7 +38,4 @@
       </div>
     </div>
   </div>
-</body>
-
-
-</html>
+</div>
