@@ -5,109 +5,68 @@
 
 {% block content %}
 
-<h3>Hot 100</h3>
-<div class="slider">
+<h4 class="left-align hide-on-med-and-down">Hot 100</h4>
+<div class="slider sliderone hide-on-med-and-down">
     <ul class="slides grey lighten-3 center-align">
+        {% for row in videos|slice(17) %}  <!-- right now the last 2 slides only have 5 songs: maybe use a container of 90% with then slice by 20 so you can get 5 images per slide, i had issues with the container -->
         <li>
             <div class="row">
+                {% for video in row %}
                 <div class="col m2 s5">
                     <div class="card">
                         <div class="card-image">
-                        <a href="#" target="_blank"><img src="https://via.placeholder.com/480x360" class="responsive-img"></a>
+                            <a href="{{ video.url }}" target="_blank"><img src="{{ video.thumbnail }}" class="responsive-img"></a>
+                            <span class="card-title"><p class="orange-text">#{{ video.position+1 }}</p></span>
                         </div>
-                    <div class="card-content">
-                        <p>Eminem - Lose Yourself(Music Video)</p>
-                      </div>
+                        <div class="card-content tooltipped" data-position="top" data-tooltip="{{ video.title }}">
+                            <a href="{{ video.url }}" target="_blank"><p class="truncate black-text">{{ video.title}}</p></a>
+                        </div>
                     </div>
                 </div>
-                <div class="col m2 s5">
-                    <img src="https://via.placeholder.com/480x360" class="responsive-img">
-                </div>
-                <div class="col m2 s5">
-                    <img src="https://via.placeholder.com/480x360" class="responsive-img">
-                </div>
-                <div class="col m2 s5">
-                    <img src="https://via.placeholder.com/480x360" class="responsive-img">
-                </div>
-                <div class="col m2 s5">
-                    <img src="https://via.placeholder.com/480x360" class="responsive-img">
-                </div>
-                <div class="col m2 s5">
-                    <img src="https://via.placeholder.com/480x360" class="responsive-img">
-                </div>
+                {% endfor %}
             </div>
         </li>
-        
-        <li>
-            <div class="row">
-                <div class="col m2 s5">
-                    <img src="https://via.placeholder.com/480x360" class="responsive-img">
-                </div>
-                <div class="col m2 s5">
-                    <img src="https://via.placeholder.com/480x360" class="responsive-img">
-                </div>
-                <div class="col m2 s5">
-                    <img src="https://via.placeholder.com/480x360" class="responsive-img">
-                </div>
-                <div class="col m2 s5">
-                    <img src="https://via.placeholder.com/480x360" class="responsive-img">
-                </div>
-                <div class="col m2 s5">
-                    <img src="https://via.placeholder.com/480x360" class="responsive-img">
-                </div>
-                <div class="col m2 s5">
-                    <img src="https://via.placeholder.com/480x360" class="responsive-img">
-                </div>
-            </div>
-        </li>
-
-        <li>
-            <div class="row">
-                <div class="col m2 s5">
-                    <img src="https://via.placeholder.com/480x360" class="responsive-img">
-                </div>
-                <div class="col m2 s5">
-                    <img src="https://via.placeholder.com/480x360" class="responsive-img">
-                </div>
-                <div class="col m2 s5">
-                    <img src="https://via.placeholder.com/480x360" class="responsive-img">
-                </div>
-                <div class="col m2 s5">
-                    <img src="https://via.placeholder.com/480x360" class="responsive-img">
-                </div>
-                <div class="col m2 s5">
-                    <img src="https://via.placeholder.com/480x360" class="responsive-img">
-                </div>
-                <div class="col m2 s5">
-                    <img src="https://via.placeholder.com/480x360" class="responsive-img">
-                </div>
-            </div>
-        </li>
+        {% endfor %}
     </ul>
 </div>
-<div class="carousel-fixed-item right">
-    <!-- Figure out how to create actual Arrow Buttons-->
+<div class="right hide-on-med-and-down">
     <button class="prev z-depth-0 btn grey btn-flat center"><i class="large material-icons">chevron_left</i></button>
     <button class="next z-depth-0 btn grey btn-flat center"><i class="large material-icons">chevron_right</i></button>
 </div>
 
-  
+<div class="carousel home-carousel hide-on-large-only">
+    <h4 class="left-align">Hot 100</h4>
+    {% for video in videos %}
+    <div class="carousel-item">
+        <a href="{{ video.url }}" target="_blank"><p class="indigo-text">#{{ video.position+1 }}</p></a>
+        <img src="{{ video.thumbnail }}">
+        <a href="{{ video.url }}" target="_blank"><p class="truncate black-text">{{ video.title}}</p></a>
+    </div>
+    {% endfor %}
+</div>
+
 <script>
-$(document).ready(function(){
-    $('.slider').slider({
-        height:400,
-        indicators:false,
-        interval: 100000000
+    $(document).ready(function () {
+        $('.sliderone').slider({
+            height: 400,
+            indicators: false    
+        });
+        $('.sliderone').slider('pause');
+        $('.tooltipped').tooltip();
+        $('.home-carousel').carousel({
+        });
     });
-});
 
-$('.next').click(function(){
-    $('.slider').slider('next');
-});
+    $('.next').click(function () {
+        $('.sliderone').slider('next');
+        $('.sliderone').slider('pause');
+    });
 
-$('.prev').click(function() {
-    $('.slider').slider('prev');
-});
+    $('.prev').click(function () {
+        $('.sliderone').slider('prev');
+        $('.sliderone').slider('pause');
+    });
 
+    
 </script>
 {% endblock %}

@@ -35,25 +35,25 @@
             border: 2px solid #ff6f00;
             background-color: #ff6f00;
             z-index: 0;
-        }        
+        }
 
-        .user-profile{
+        .user-profile {
             position: relative;
         }
 
-        .user-profile li{
+        .user-profile li {
             width: 100%;
             height: 0px;
-            background-color: #3f51b5;           
+            background-color: #3f51b5;
             transition: height 0.2s ease;
             position: absolute;
         }
 
-        .user-profile a{
-            width: 100%;           
+        .user-profile a {
+            width: 100%;
         }
 
-        .play-list{
+        .play-list {
             display: flex;
             flex-direction: column;
             height: 200px;
@@ -61,74 +61,185 @@
             align-items: center;
         }
 
-        .play-list-item{
+        .play-list-item {
             border: 1px solid gainsboro;
             padding: 8px;
-            display: flex;            
+            display: flex;
             align-items: center;
             margin-bottom: 10px;
             width: 700px;
         }
 
-        .play-list-item img{
+        .play-list-item img {
             width: 30px;
             margin-right: 20px;
         }
 
-        .play-list-item button:nth-of-type(1){
+        .play-list-item button:nth-of-type(1) {
             margin-left: auto;
         }
 
-        .play-list-item button{
-            margin-left: 40px;           
+        .play-list-item button {
+            margin-left: 40px;
         }
+
+        /* .p-title {
+            width: 250px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: black;
+        }
+
+        .p-title-mobile {
+            width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: black;
+        } */
     </style>
 </head>
 
 <body>
+    <div class="fixed-action-btn">
+    <a href="#" class="btn-floating bth-large indigo darken-3" id="scroll" style="display: none;">
+        <i class="large material-icons">arrow_drop_up</i>
+    </a>
+    </div>
     <!--Change colours and add icons-->
-    <nav class="nav-wrapper indigo"> 
-        <div class="container">
-            <div class="left">
+    <nav>
+        <div class="navbar-fixed nav-wrapper indigo darken-3">
+            <div>
                 <!-- <img width="63" height="63" src="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif">   Messes up stuff-->
-                <a href="/" class="brand-logo">RDCJ Music</a>
+                <a href="/" class="brand-logo">RCDJ Music</a>
             </div>
-            <a href="#" class="sidenav-trigger" data-target="mobile-links">
+
+            <a href="#" class="sidenav-trigger right" data-target="mobile-links">
                 <i class="material-icons">menu</i>
             </a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="/" class="waves-effect waves-light">Home</a></li>
-                <li><a href="#" class="waves-effect waves-light">Your Playlists</a></li> <!--Ensure Loggin is neccessary for access, change route to /playlists-->
-                <li><a href="#" class="waves-effect waves-light"></a>Create Playlist</a></li> <!--Ensure Loggin is neccessary for access-->
-                <li><a href="/search" class="waves-effect waves-light">Search</a></li>
-                <li><a href="/register" class="waves-effect waves-light">Register</a></li>
-                <li><a href="/login" class="waves-effect waves-light">Login</a></li>
-                <li><div class="user-profile"><a href="#" class="user-logged-in"></a></div></li>
-            </ul>    
+
+            <div class="left">
+                <ul class="hide-on-med-and-down">
+                    <li><a href="/" class="waves-effect waves-light">Home</a></li>
+                    <li><a href="#" class="waves-effect waves-light">Your Playlists</a></li>
+                    <!--Ensure Loggin is neccessary for access, change route to /playlists-->
+                    <li><a href="#" class="waves-effect waves-light">Create Playlist</a></li>
+
+                </ul>
+            </div>
+
+            <div class="right" id="right-nav">
+                <ul>
+                    <li class="hide-on-med-and-down" id="desktop-register-button"><a href="/register"
+                            class="waves-effect waves-light">Register</a>
+                    </li>
+                    <li class="hide-on-med-and-down" id="desktop-login-button"><a href="/login"
+                            class="waves-effect waves-light">Login</a></li>
+                    <li>
+                        <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
+                        <!-- maybe hide-on-med-and-down -->
+                    </li>
+                </ul>
+            </div>
+
+            <form class="left" method="POST" action="/search">
+                <div class="input-field"> <!-- Needs a lot of work -->
+                    <input class="autocomplete" id="search" type="search" name="queryBox" autocomplete="off"
+                        style="width:15rem" required> 
+                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                    <i class="material-icons">close</i>
+                </div>
+            </form>
         </div>
     </nav>
 
     <ul class="sidenav left-align" id="mobile-links">
         <li><a href="/" class="waves-effect waves-dark">Home</a></li>
-        <li><a href="#" class="waves-effect waves-dark">Your Playlists</a></li> <!--Ensure Loggin is neccessary for access, change route to /playlists-->
-        <li><a href="#" class="waves-effect waves-dark">Create Playlist</a></li> <!--Ensure Loggin is neccessary for access-->
-        <li><a href="/search" class="waves-effect waves-dark">Search</a></li>
-        <li><a href="/register" class="waves-effect waves-dark">Register</a></li>
-        <li><a href="/login" class="waves-effect waves-dark">Login</a></li>
+        <li><a href="#" class="waves-effect waves-dark">Your Playlists</a></li>
+        <!--Ensure Loggin is neccessary for access, change route to /playlists-->
+        <li><a href="#" class="waves-effect waves-dark">Create Playlist</a></li>
+        <!--Ensure Loggin is neccessary for access-->
+        <li id="mobile-register-button"><a href="/register" class="waves-effect waves-dark">Register</a></li>
+        <li id="mobile-login-button"><a href="/login" class="waves-effect waves-dark">Login</a></li>
     </ul>
-    <a href="" class="brand-logo center ">{% block page %}{% endblock %}</a>
-    
+
+    <a href="" class="center">{% block page %}{% endblock %}</a>
+
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
     <script src="https://code.iconify.design/1/1.0.4/iconify.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    
+
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('.sidenav').sidenav();
-        })
+            // $('input.autocomplete').autocomplete({ //Calling autocomplete messes up the alignment(even more) for some unknown reason
+            //     data: {
+            //         "Drake": null,
+            //         "Travis Scott": null,
+            //         "Eminem": null,
+            //         "Taylor Swift": null
+            //     }
+            // });
+            $('.fixed-action-btn').floatingActionButton();
+            $(window).scroll(function(){
+                if($(this).scrollTop() > 100){
+                    $('#scroll').fadeIn();
+                } else {
+                    $('#scroll').fadeOut();
+                }
+            });
+            $('#scroll').click(function(){
+                $("html, body").animate({ scrollTop: 0}, 400);
+                return false;
+            });
+        });
+        
+
+
+        function hideLogAndRegAndShowUser() {
+            let registerBtn = document.querySelector("#desktop-register-button");
+            let loginBtn = document.querySelector("#desktop-login-button");
+            let mobileRegisterBtn = document.querySelector("#mobile-register-button");
+            let mobileLoginBtn = document.querySelector("#mobile-login-button");
+            registerBtn.style.visibility = "hidden";
+            loginBtn.style.visibility = "hidden";
+            mobileRegisterBtn.style.visibility = "hidden";
+            mobileLoginBtn.style.visibility = "hidden";
+
+            let userProfile = document.querySelector(".user-profile");
+            //console.log(userProfile.innerHTML);
+
+            let userProfileHTML = `
+        <a href="#" class = "user-logged-in">{{current_user.username}}</a>
+        <li style="height: 0px;">
+            <a href="/logout" class="waves-effect waves-light" style="height: 0px;">logout</a>
+        </li>`;
+            console.log(userProfileHTML);
+            userProfile.innerHTML = userProfileHTML;
+            userProfile.addEventListener("mouseleave", e => {
+                userProfile.querySelector("li").style.height = "0px";
+                userProfile.querySelectorAll("a")[1].style.height = "0px";
+            })
+
+            userProfile.addEventListener("mouseover", e => {
+                userProfile.querySelector("li").style.height = "64px";
+                userProfile.querySelectorAll("a")[1].style.height = "64px";
+
+            })
+
+
+
+        }
+        {% if current_user.is_authenticated %}
+        hideLogAndRegAndShowUser();
+        {% endif %}
+
+
     </script>
 
     <div>{% block content %}{% endblock %}</div>
 </body>
+
 </html>
