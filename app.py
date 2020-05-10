@@ -15,7 +15,7 @@ from isodate import parse_duration
 # from sqlalchemy.exc import IntegrityError
 # from datetime import timedelta
 
-from model import db, User
+from model import db, User, Playlist, Song
 from forms import Register, Login
 
 
@@ -39,7 +39,7 @@ def create_app():
     app.config["SECRET_KEY"] = "c3a93f55-2015-4042-9ef7-77de85976f78"
     login_manager.init_app(app)
 
-    #app.config["YOUTUBE_API_KEY"] = "AIzaSyC0VqCv-KW7cRsmYBUUHHqTJeRBTVnP-h0"
+    # app.config["YOUTUBE_API_KEY"] = "AIzaSyC0VqCv-KW7cRsmYBUUHHqTJeRBTVnP-h0"
     app.config["YOUTUBE_API_KEY"] = "AIzaSyDIk63q5hnaaQTLlPqLRPSrUYIYmLgMMTA"
 
     # =======
@@ -118,7 +118,7 @@ def register():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for("loginTest"))
+        return redirect(url_for("playlist"))
     form = Login()
     if form.validate_on_submit():
         data = request.form
@@ -126,7 +126,7 @@ def login():
         if user and user.check_password(data["password"]):
             flash("Logged in successfully.")
             login_user(user)
-            return redirect(url_for("loginTest"))
+            return redirect(url_for("playlist"))
         else:
             flash("Invalid username or password")
             return redirect(url_for("login"))
@@ -142,10 +142,25 @@ def logout():
     return render_template("logout.html")
 
 
-@app.route("/playlist", methods=["GET"])
+@app.route("/playlist", methods=["GET", "POST"])
 @login_required
-def loginTest():
+def playlist():
+    print(current_user.playlists)
     return render_template("playlist.html")
+
+
+@app.route("/createPlaylist", methods=["POST"])
+@login_required
+def createPLaylist():
+    if request.method == "POST":
+        data = request.form
+        newPlaylist = Playlist(
+            name=data["title"], description=data["description"], userid=current_user.id
+        )
+        db.session.add(newPlaylist)
+        db.session.commit()
+
+    return redirect(url_for("playlist"))
 
 
 @app.route("/search", methods=["GET", "POST"])
