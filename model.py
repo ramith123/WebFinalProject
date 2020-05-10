@@ -47,9 +47,7 @@ class Playlist(db.Model):
     )
 
     def toDict(self):
-        return {
-            "id": self.id,
-        }
+        return {"id": self.id, "name": self.name, "description": self.description}
 
 
 class Song(db.Model):

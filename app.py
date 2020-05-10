@@ -8,6 +8,7 @@ from flask_login import (
 from flask import Flask, request, render_template, redirect, flash, url_for
 import os
 import requests
+import json
 from requests.models import Response
 from unittest.mock import Mock
 from isodate import parse_duration
@@ -145,7 +146,6 @@ def logout():
 @app.route("/playlist", methods=["GET", "POST"])
 @login_required
 def playlist():
-    print(current_user.playlists)
     return render_template("playlist.html")
 
 
@@ -161,6 +161,24 @@ def createPLaylist():
         db.session.commit()
 
     return redirect(url_for("playlist"))
+
+
+@app.route("/addToPlaylist", methods=["PUT"])
+@login_required
+def addSongToPlaylist():
+    data = request.get_json()
+    songId, playlistId = [ele for ele in data.values()]
+
+    return "Success", 200
+
+
+@app.route("/getPlaylists", methods=["GET"])
+@login_required
+def getPlaylists():
+    playlists = Playlist.query.filter_by(userid=current_user.id).all()
+
+    data = [playlist.toDict() for playlist in playlists]
+    return json.dumps(data)
 
 
 @app.route("/search", methods=["GET", "POST"])
