@@ -168,12 +168,15 @@ def createPLaylist():
 @login_required
 def addSongToPlaylist():
     data = request.get_json()
-    print(data)
     songId, playlistId = [ele for ele in data]
     song = Song.query.filter_by(id=songId).first()
     playlist = Playlist.query.filter_by(userid=current_user.id, id=playlistId).first()
     if song is None:
         song = getSongModelById(songId)
+        print("New song")
+        # db.session.commit(song)
+    playlist.songs.append(song)
+    db.session.commit()
     return "Success", 200
 
 
