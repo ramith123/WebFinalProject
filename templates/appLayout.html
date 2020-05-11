@@ -85,22 +85,6 @@
             margin-left: 40px;
         }
 
-        /* .p-title {
-            width: 250px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            color: black;
-        }
-
-        .p-title-mobile {
-            width: 200px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            color: black;
-        } */
-
         #modal1.modal {
             background-color: rgba(0, 0, 0, 0.8);
             width: 100%;
@@ -211,71 +195,102 @@
         .mdc-list--avatar-list.mdc-list--dense .mdc-list-item {
             height: 100px;
         }
+
+        /* Home Page CSS */
+        .left-middle-indicator{
+        position: relative;
+        top:35%;
+        width:5%;
+        }
+
+        .right-middle-indicator{
+        position: relative;
+        top:35%;
+        width:5%;
+        }
+
+        .slider{
+            width:95%; 
+            margin-left:5%;
+            margin-right:5%;
+            margin:auto;
+        }
+
+        .slider .slides li {
+        left: 5%;
+        right:5%;
+        width:90%;
+        background-color:#ff6f00;
+        margin-left: auto;
+        margin-right: auto;
+        }
+        
     </style>
 </head>
 
 <body>
-    <div class="fixed-action-btn">
+    <div class="fixed-action-btn hide-on-med-and-down">
         <a href="#" class="btn-floating bth-large indigo darken-3" id="scroll" style="display: none;">
             <i class="large material-icons">arrow_drop_up</i>
         </a>
     </div>
     <!--Change colours and add icons-->
-    <nav>
-        <div class="navbar-fixed nav-wrapper indigo darken-3">
-            <div>
-                <!-- <img width="63" height="63" src="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif">   Messes up stuff-->
-                <a href="/" class="brand-logo">RCDJ Music</a>
-            </div>
-
-            <a href="#" class="sidenav-trigger right" data-target="mobile-links">
-                <i class="material-icons">menu</i>
-            </a>
-
-            <div class="left">
-                <ul class="hide-on-med-and-down">
-                    <li><a href="/" class="waves-effect waves-light">Home</a></li>
-                    <li><a href="#" class="waves-effect waves-light">Your Playlists</a></li>
-                    <!--Ensure Loggin is neccessary for access, change route to /playlists-->
-                    <li><a href="#" class="waves-effect waves-light" onclick="launchModal()">Create Playlist</a></li>
-
-                </ul>
-            </div>
-
-            <div class="right" id="right-nav">
-                <ul>
-                    <li class="hide-on-med-and-down" id="desktop-register-button"><a href="/register"
-                            class="waves-effect waves-light">Register</a>
-                    </li>
-                    <li class="hide-on-med-and-down" id="desktop-login-button"><a href="/login"
-                            class="waves-effect waves-light">Login</a></li>
-                    <li>
-                        <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
-                        <!-- maybe hide-on-med-and-down -->
-                    </li>
-                </ul>
-            </div>
-
-            <form class="left" method="POST" action="/search">
-                <div class="input-field">
-                    <!-- Needs a lot of work -->
-                    <input class="autocomplete" id="search" type="search" name="queryBox" autocomplete="off"
-                        style="width:15rem" required>
-                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                    <i class="material-icons">close</i>
+    <div class="navbar-fixed">
+        <nav class="nav-wrapper indigo darken-3">
+                <div>
+                    <!-- <img width="63" height="63" src="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif">   Messes up stuff-->
+                    <a href="/" class="brand-logo">RCDJ Music</a>
                 </div>
-            </form>
-        </div>
-    </nav>
+
+                <a href="#" class="sidenav-trigger right" data-target="mobile-links">
+                    <i class="material-icons">menu</i>
+                </a>
+
+                <div class="left">
+                    <ul class="hide-on-med-and-down">
+                        <li><a href="/" class="waves-effect waves-light">Home</a></li>
+                        <li><a href="/playlist" class="waves-effect waves-light">Your Playlists</a></li>
+                        <!--Ensure Loggin is neccessary for access, change route to /playlists-->
+                        <li><a href="#" class="waves-effect waves-light" onclick="launchModal()">Create Playlist</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="right" id="right-nav">
+                    <ul>
+                        <li class="hide-on-med-and-down" id="desktop-register-button"><a href="/register"
+                                class="waves-effect waves-light">Register</a>
+                        </li>
+                        <li class="hide-on-med-and-down" id="desktop-login-button"><a href="/login"
+                                class="waves-effect waves-light">Login</a></li>
+                        <li class="hide-on-med-and-down">
+                            <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <form class="left" method="POST" action="/search">
+                    <div class="input-field">
+                        <input class="autocomplete" id="search" type="search" name="queryBox" autocomplete="off" 
+                        style="width:17rem" required>
+                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                        <i class="material-icons">close</i>
+                    </div>
+                </form>
+        </nav>
+    </div>
 
     <ul class="sidenav left-align" id="mobile-links">
         <li><a href="/" class="waves-effect waves-dark">Home</a></li>
-        <li><a href="#" class="waves-effect waves-dark">Your Playlists</a></li>
+        <li><a href="/playlist" class="waves-effect waves-dark">Your Playlists</a></li>
         <!--Ensure Loggin is neccessary for access, change route to /playlists-->
-        <li><a href="#" class="waves-effect waves-dark">Create Playlist</a></li>
+        <li><a href="#" class="waves-effect waves-dark" onclick="launchModal()">Create Playlist</a></li>
         <!--Ensure Loggin is neccessary for access-->
         <li id="mobile-register-button"><a href="/register" class="waves-effect waves-dark">Register</a></li>
         <li id="mobile-login-button"><a href="/login" class="waves-effect waves-dark">Login</a></li>
+        <li>
+            <div class="user-profile2"><a href="#" class="user-logged-in2"></a></div>
+        </li>
     </ul>
 
     <!-- Modal Structure -->
@@ -303,7 +318,7 @@
 
     </div>
 
-    <a href="" class="center">{% block page %}{% endblock %}</a>
+    <a class="center">{% block page %}{% endblock %}</a>
 
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
     <script src="https://code.iconify.design/1/1.0.4/iconify.min.js"></script>
@@ -312,15 +327,37 @@
 
     <script>
         $(document).ready(function () {
+            let inputBox = $("input.autocomplete"); //[name='QueryBox']
+            let submitIcon = $('.label-icon');
+            let isOpen = false;
+            inputBox.hide();
+
+            submitIcon.click(function(){
+                if(isOpen==false){
+                    inputBox.show();
+                    // inputBox.autocomplete({
+                    //     data: {
+                    //     "Drake": null,
+                    //     "Travis Scott": null,
+                    //     "Eminem": null,
+                    //     "Taylor Swift": null
+                    //     }
+                    // });
+                    isOpen = true;
+                } else {
+                    inputBox.hide();
+                    isOpen = false;
+                }
+            });
+
+            $(document).mouseup(function(){
+                if(isOpen == true){
+                    submitIcon.click();
+                }
+            });
+
             $('.sidenav').sidenav();
-            // $('input.autocomplete').autocomplete({ //Calling autocomplete messes up the alignment(even more) for some unknown reason
-            //     data: {
-            //         "Drake": null,
-            //         "Travis Scott": null,
-            //         "Eminem": null,
-            //         "Taylor Swift": null
-            //     }
-            // });
+
             $('.fixed-action-btn').floatingActionButton();
             $(window).scroll(function () {
                 if ($(this).scrollTop() > 100) {
@@ -337,6 +374,7 @@
 
 
 
+
         function hideLogAndRegAndShowUser() {
             let registerBtn = document.querySelector("#desktop-register-button");
             let loginBtn = document.querySelector("#desktop-login-button");
@@ -348,6 +386,7 @@
             mobileLoginBtn.style.visibility = "hidden";
 
             let userProfile = document.querySelector(".user-profile");
+            // let userProfile2 = document.querySelector(".user-profile2");
             //console.log(userProfile.innerHTML);
 
             let userProfileHTML = `
@@ -357,6 +396,8 @@
         </li>`;
             console.log(userProfileHTML);
             userProfile.innerHTML = userProfileHTML;
+            // userProfile2.innerHTML = userProfileHTML;
+
             userProfile.addEventListener("mouseleave", e => {
                 userProfile.querySelector("li").style.height = "0px";
                 userProfile.querySelectorAll("a")[1].style.height = "0px";
@@ -368,6 +409,17 @@
 
             })
 
+            // userProfile2.addEventListener("mouseleave", e => {
+            //     userProfile2.querySelector("li").style.height = "0px";
+            //     userProfile2.querySelectorAll("a")[1].style.height = "0px";
+            // })
+
+            // userProfile2.addEventListener("mouseover", e => {
+            //     userProfile.querySelector("li").style.height = "64px";
+            //     userProfile2.querySelectorAll("a")[1].style.height = "64px";
+
+            // })
+
 
 
         }
@@ -375,9 +427,13 @@
         hideLogAndRegAndShowUser();
         {% else %}
         let profileNameButton = document.querySelector(".user-logged-in");
+        // let profileNameButton2 = document.querySelector(".user-logged-in2");
         let userProfile = document.querySelector(".user-profile");
+        // let userProfile2 = document.querySelector(".user-profile2");
         userProfile.style.width = "0px";
+        // userProfile2.style.width = "0px";
         profileNameButton.style.width = "0px";
+        // profileNameButton2.style.width = "0px";
         /*need to put above in a function */
         {% endif %}
 
