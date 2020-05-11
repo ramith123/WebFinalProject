@@ -6,13 +6,21 @@
 {% block content %}
 
 <h4 class="left-align hide-on-med-and-down">Hot 100</h4>
+
 <div class="slider sliderone hide-on-med-and-down">
-    <ul class="slides grey lighten-3 center-align">
-        {% for row in videos|slice(17) %}  <!-- right now the last 2 slides only have 5 songs: maybe use a container of 90% with then slice by 20 so you can get 5 images per slide, i had issues with the container -->
+    <div class="left">
+     <a href="#" class="prev middle-indicator waves-effect waves-light"><i class="large material-icons">chevron_left</i></a>
+    </div>
+    
+    <div class="right">
+    <a href="#" class="next middle-indicator waves-effect waves-light"><i class="large material-icons">chevron_right</i></a>
+    </div>
+    <ul class="slides grey lighten-3">
+        {% for row in videos|slice(20) %}
         <li>
             <div class="row">
                 {% for video in row %}
-                <div class="col m2 s5">
+                <div class="center-align col m2 s5"> <!-- It can go left, right, but not god damm center, also my arrows messed up, i hate css-->
                     <div class="card">
                         <div class="card-image">
                             <a href="{{ video.url }}" target="_blank"><img src="{{ video.thumbnail }}" class="responsive-img"></a>
@@ -29,10 +37,10 @@
         {% endfor %}
     </ul>
 </div>
-<div class="right hide-on-med-and-down">
-    <button class="prev z-depth-0 btn grey btn-flat center"><i class="large material-icons">chevron_left</i></button>
-    <button class="next z-depth-0 btn grey btn-flat center"><i class="large material-icons">chevron_right</i></button>
-</div>
+<!-- <div class="right hide-on-med-and-down"> -->
+    <!-- <button class="prev left valign-wrapper hide-on-med-and-down z-depth-0 btn grey btn-flat" style="top:50%; margin-top: auto; margin-bottom: auto;"><i class="large material-icons">chevron_left</i></button>
+    <button class="next right valign-wrapper hide-on-med-and-downz-depth-0 btn grey btn-flat"><i class="large material-icons">chevron_right</i></button> -->
+<!-- </div> -->
 
 <div class="carousel home-carousel hide-on-large-only">
     <h4 class="left-align">Hot 100</h4>
