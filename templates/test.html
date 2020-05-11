@@ -6,138 +6,96 @@
 
 {% block content %}
 
+<style>
+    button:focus {
+        outline: none;
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    .mdc-chip {
+        padding: 0 20px;
+    }
+
+    .mdc-list {
+        max-width: 600px;
+        border: 1px solid rgba(0, 0, 0, .1);
+
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .mdc-list-item__graphic {
+
+        width: 50px;
+        height: 50px;
+
+    }
+</style>
 
 
-<div class="stage-transition-container-variant stage-transition-container-variant--show">
-    <!---->
-    <!---->
-    <ul id="listTWO_LINE" class="mdc-list mdc-list--two-line inline-demo-list mdc-list--avatar-list">
-        <!---->
-        <!---->
-        <li class="mdc-list-item mdc-ripple-upgraded" tabindex="0">
-
-            <span class="mdc-list-item__graphic material-icons" aria-hidden="true">
-                <!----><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40">
-                    <g fill="none" fill-rule="evenodd">
-                        <path d="M20 0C8.96 0 0 8.96 0 20s8.96 20 20 20 20-8.96 20-20S31.04 0 20 0z" fill="#9e9e9e"
-                            fill-rule="nonzero"></path>
-                        <path
-                            d="M20 17.727c2.767 0 5-2.233 5-5s-2.233-5-5-5-5 2.233-5 5 2.233 5 5 5zm0 2.954c-6.11 0-10.908 2.954-10.908 5.681A13.018 13.018 0 0 0 20 32.271c4.552 0 8.598-2.354 10.908-5.909 0-2.727-4.798-5.68-10.908-5.68z"
-                            fill="#ececec" fill-rule="nonzero"></path>
-                        <path d="M0 0h40v40H0z"></path>
-                    </g>
-                </svg>
-                <!---->
-            </span>
-
-            <span class="mdc-list-item__text">
-                <span class="mdc-list-item__primary-text">
-                    List item title
-                </span>
-                <span class="mdc-list-item__secondary-text">
-                    Secondary text
-                    <!----></span>
-            </span>
-
-            <span aria-hidden="true" class="mdc-list-item__meta">
-                <!---->
-                <!---->
-                <button data-mdc-ripple-is-unbounded=""
-                    class="mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded" title=""
-                    style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">
-                    more_vert
-                </button>
-                <!---->
-                <!----></span>
-
-        </li>
-        <!---->
-        <!---->
-        <!---->
-        <li class="mdc-list-item mdc-ripple-upgraded" tabindex="-1">
-
-            <span class="mdc-list-item__graphic material-icons" aria-hidden="true">
-                <!----><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40">
-                    <g fill="none" fill-rule="evenodd">
-                        <path d="M20 0C8.96 0 0 8.96 0 20s8.96 20 20 20 20-8.96 20-20S31.04 0 20 0z" fill="#9e9e9e"
-                            fill-rule="nonzero"></path>
-                        <path
-                            d="M20 17.727c2.767 0 5-2.233 5-5s-2.233-5-5-5-5 2.233-5 5 2.233 5 5 5zm0 2.954c-6.11 0-10.908 2.954-10.908 5.681A13.018 13.018 0 0 0 20 32.271c4.552 0 8.598-2.354 10.908-5.909 0-2.727-4.798-5.68-10.908-5.68z"
-                            fill="#ececec" fill-rule="nonzero"></path>
-                        <path d="M0 0h40v40H0z"></path>
-                    </g>
-                </svg>
-                <!---->
-            </span>
-
-            <span class="mdc-list-item__text">
-                <span class="mdc-list-item__primary-text">
-                    List item title
-                </span>
-                <span class="mdc-list-item__secondary-text">
-                    Secondary text
-                    <!----></span>
-            </span>
-
-            <span aria-hidden="true" class="mdc-list-item__meta">
-                <!---->
-                <!---->
-                <button data-mdc-ripple-is-unbounded=""
-                    class="mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded" title=""
-                    style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">
-                    more_vert
-                </button>
-                <!---->
-                <!----></span>
-
-        </li>
-        <!---->
-        <!---->
-        <!---->
-        <li class="mdc-list-item mdc-ripple-upgraded" tabindex="-1">
-
-            <span class="mdc-list-item__graphic material-icons" aria-hidden="true">
-                <!----><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40">
-                    <g fill="none" fill-rule="evenodd">
-                        <path d="M20 0C8.96 0 0 8.96 0 20s8.96 20 20 20 20-8.96 20-20S31.04 0 20 0z" fill="#9e9e9e"
-                            fill-rule="nonzero"></path>
-                        <path
-                            d="M20 17.727c2.767 0 5-2.233 5-5s-2.233-5-5-5-5 2.233-5 5 2.233 5 5 5zm0 2.954c-6.11 0-10.908 2.954-10.908 5.681A13.018 13.018 0 0 0 20 32.271c4.552 0 8.598-2.354 10.908-5.909 0-2.727-4.798-5.68-10.908-5.68z"
-                            fill="#ececec" fill-rule="nonzero"></path>
-                        <path d="M0 0h40v40H0z"></path>
-                    </g>
-                </svg>
-                <!---->
-            </span>
-
-            <span class="mdc-list-item__text">
-                <span class="mdc-list-item__primary-text">
-                    List item title
-                </span>
-                <span class="mdc-list-item__secondary-text">
-                    Secondary text
-                    <!----></span>
-            </span>
-
-            <span aria-hidden="true" class="mdc-list-item__meta">
-                <!---->
-                <!---->
-                <button data-mdc-ripple-is-unbounded=""
-                    class="mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded" title=""
-                    style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">
-                    more_vert
-                </button>
-                <!---->
-                <!----></span>
-
-        </li>
-        <!---->
-        <!---->
-    </ul>
-    <!---->
-    <!---->
-</div>
+<ul class="mdc-list mdc-list--two-line" id="list">
 
 
+    {% for song in songs %}
+    <li class="mdc-list-item mdc-ripple-upgraded" tabindex="-1" id="60967702-d0c0-47cf-96c0-2593267ab40b">
+        <img class="mdc-list-item__graphic" aria-hidden="true" src="{{song.albumImgUrl}}" />
+        <span class="mdc-list-item__text"><span class="mdc-list-item__primary-text">{{song.title}}</span>
+            <span class="mdc-list-item__secondary-text">{{song.artist}} - {{song.album}}</span>
+        </span>
+
+        <div class="mdc-list-item__meta mdc-chip-set">
+            <a href="{{song.url}}" class="mdc-chip mdc-ripple-upgraded" role="row" id="mdc-chip-17">
+                <img class="mdc-chip__icon mdc-chip__icon--leading"
+                    src="https://img.icons8.com/windows/32/000000/deezer.png">
+                <div class="mdc-chip__checkmark">
+                    <svg class="mdc-chip__checkmark-svg" viewBox="-2 -3 30 30">
+                        <path class="mdc-chip__checkmark-path" fill="none" stroke="black"
+                            d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+                    </svg>
+                </div>
+                <span role="button" tabindex="0" class="mdc-chip__text">Deezer</span>
+            </a>
+            <a href="{{song.youtubeUrl}}" class=" mdc-chip mdc-ripple-upgraded" role="row" id="mdc-chip-17">
+                <img class="mdc-chip__icon mdc-chip__icon--leading"
+                    src="https://img.icons8.com/material-sharp/24/000000/youtube-play.png">
+                <div class="mdc-chip__checkmark">
+                    <svg class="mdc-chip__checkmark-svg" viewBox="-2 -3 30 30">
+                        <path class="mdc-chip__checkmark-path" fill="none" stroke="black"
+                            d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+                    </svg>
+                </div>
+                <span role="button" tabindex="0" class="mdc-chip__text">YouTube</span>
+            </a>
+
+        </div>
+
+
+        <button data-mdc-ripple-is-unbounded=""
+            class="mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded" title=""
+            tabindex="-1"
+            style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">
+            more_vert
+        </button>
+    </li>
+    {% endfor %}
+
+</ul>
+
+
+
+<script>
+    const MDCRipple = mdc.ripple.MDCRipple;
+    MDCRipple.attachTo(document.querySelector('.mdc-icon-button'));
+
+    const MDCList = mdc.list.MDCList;
+    const list = new MDCList(document.querySelector('.mdc-list'));
+    const listItemRipples = list.listElements.map((listItemEl) => new MDCRipple(listItemEl));
+
+    const MDCChipSet = mdc.chips.MDCChipSet;
+    const chipSetEl = document.querySelector('.mdc-chip-set');
+    MDCRipple.attachTo(chipSetEl);
+
+</script>
 
 {% endblock %}

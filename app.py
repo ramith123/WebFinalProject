@@ -12,6 +12,7 @@ import json
 from requests.models import Response
 from unittest.mock import Mock
 from isodate import parse_duration
+from deezerAndYoutubeThings import getSongsList, getSongModel
 
 # from sqlalchemy.exc import IntegrityError
 # from datetime import timedelta
@@ -185,48 +186,50 @@ def getPlaylists():
 def anyPageSearch():
     search_url = "https://www.googleapis.com/youtube/v3/search"
     video_url = "https://www.googleapis.com/youtube/v3/videos"
-    videos = []
-    query = request.form.get("queryBox")
+    songs = []
     # Search Requests from user
     if request.method == "POST":
-        search_params = {
-            "key": app.config["YOUTUBE_API_KEY"],
-            "q": query,
-            "part": "snippet",
-            "maxResults": 16,
-            "type": "video",
-        }
-        r = requests.get(search_url, params=search_params)
-        results = r.json()["items"]
+        query = request.form.get("queryBox")
+        songList = getSongsList(query)
 
-        video_ids = []
-        for result in results:
-            video_ids.append(result["id"]["videoId"])
+        # search_params = {
+        #     "key": app.config["YOUTUBE_API_KEY"],
+        #     "q": query,
+        #     "part": "snippet",
+        #     "maxResults": 16,
+        #     "type": "video",
+        # }
+        # r = requests.get(search_url, params=search_params)
+        # results = r.json()["items"]
 
-        video_params = {
-            "key": app.config["YOUTUBE_API_KEY"],
-            "id": ",".join(video_ids),
-            "part": "snippet,contentDetails",
-            "maxResults": 16,
-        }
+        # video_ids = []
+        # for result in results:
+        #     video_ids.append(result["id"]["videoId"])
 
-        r = requests.get(video_url, params=video_params)
-        results = r.json()["items"]
+        # video_params = {
+        #     "key": app.config["YOUTUBE_API_KEY"],
+        #     "id": ",".join(video_ids),
+        #     "part": "snippet,contentDetails",
+        #     "maxResults": 16,
+        # }
 
-        for result in results:
-            video_data = {
-                "id": result["id"],
-                "url": f"https://www.youtube.com/watch?v={ result['id'] }",
-                "thumbnail": result["snippet"]["thumbnails"]["high"]["url"],
-                "duration": int(
-                    parse_duration(result["contentDetails"]["duration"]).total_seconds()
-                    // 60
-                ),
-                "title": result["snippet"]["title"],
-            }
-            videos.append(video_data)
+        # r = requests.get(video_url, params=video_params)
+        # results = r.json()["items"]
 
-    return render_template("search.html", videos=videos)
+        # for result in results:
+        #     video_data = {
+        #         "id": result["id"],
+        #         "url": f"https://www.youtube.com/watch?v={ result['id'] }",
+        #         "thumbnail": result["snippet"]["thumbnails"]["high"]["url"],
+        #         "duration": int(
+        #             parse_duration(result["contentDetails"]["duration"]).total_seconds()
+        #             // 60
+        #         ),
+        #         "title": result["snippet"]["title"],
+        #     }
+        #     videos.append(video_data)
+
+    return render_template("search.html", songs=songList)
 
 
 @app.route("/test")
