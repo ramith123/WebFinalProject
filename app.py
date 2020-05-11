@@ -186,7 +186,6 @@ def getPlaylists():
 def anyPageSearch():
     search_url = "https://www.googleapis.com/youtube/v3/search"
     video_url = "https://www.googleapis.com/youtube/v3/videos"
-    songs = []
     # Search Requests from user
     if request.method == "POST":
         query = request.form.get("queryBox")
