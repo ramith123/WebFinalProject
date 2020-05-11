@@ -5,9 +5,9 @@
 {{ super() }}
 
 {% block content %}
-<div>
-  <ul id="dropdown1" class="dropdown-content" tabindex="0" style="">
-    <li tabindex="0"><a href="#" tabindex="-1">Add to playlist</a></li>
+<div id="Menu">
+  <ul id="dropdown1" class="dropdown-content" style="">
+    <li><a href="#" tabindex="-1">Add to playlist</a></li>
   </ul>
 </div>
 
@@ -104,13 +104,17 @@
   const chipSetEl = document.querySelector('.mdc-chip-set');
   MDCRipple.attachTo(chipSetEl);
 
-  /*$.each($('.dropdown-trigger'), function (index, value) {
-    $(value).dropdown();
-  });*/
-
-  document.addEventListener('DOMContentLoaded', function () {
-    var elems = document.querySelectorAll('.dropdown-trigger');
-    var instances = M.Dropdown.init(elems);
+  $.each($('.dropdown-trigger'), function (index, value) {
+    $(value).dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      container: document.getElementById('Menu'),
+      hover: false, // Activate on hover
+      belowOrigin: true, // Displays dropdown below the button
+      alignment: 'right' // Displays dropdown with edge aligned to the left of button
+    });
   });
+
+
 </script>
 {% endblock %}
