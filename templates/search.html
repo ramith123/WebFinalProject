@@ -38,7 +38,7 @@
   {% for song in songs %}
   <div id="Menu">
     <ul id="{{song.id}}" class="dropdown-content" style="">
-      <li><a href="#" tabindex="-1" onclick="testFunc({{song.id}})">Add to playlist</a></li>
+      <li><a href="#" tabindex="-1" onclick="testFunc({{song.id}})">loading...</a></li>
     </ul>
   </div>
   <li class="mdc-list-item mdc-ripple-upgraded" tabindex="-1">
@@ -110,7 +110,8 @@
   });*/
 
 
-
+  var getUrl = window.location;
+  var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 
   document.addEventListener('DOMContentLoaded', function () {
     var elems = document.querySelectorAll('.dropdown-trigger');
@@ -120,15 +121,64 @@
       container: document.getElementById('Menu'),
       hover: false, // Activate on hover
       belowOrigin: true, // Displays dropdown below the button
-      alignment: 'right' // Displays dropdown with edge aligned to the left of button
-    });
-
-    console.log(instances)
+      alignment: 'right', // Displays dropdown with edge aligned to the left of button
+      onOpenStart: getPlaylistData
+    }
+    );
   });
-  function testFunc(id) {
-    console.log(id);
+  function addSong(songId, playlistId) {
+    postData([songId, playlistId]);
+
   }
 
+  function getPlaylists(data, ele) {
+    var i = M.Dropdown.getInstance(ele);
+    let el = i.dropdownEl;
+    let id = el.id;
+    console.log(id);
+    let html = ""
+    for (ele of data) {
+      html += `<li>
+        <a href="#" tabindex="-1" onclick="addSong(${id},${ele.id})">add to ${ele.name}</a>
+      </li>
+      `
+    }
+    el.innerHTML = html;
+    i.recalculateDimensions();
+
+  }
+
+  async function getPlaylistData(ele) {
+    url = baseUrl + "getPlaylists"
+
+    try {
+      let response = await fetch(url);//1. Send http request and get response
+      let result = await response.json();//2. Get data from response
+      getPlaylists(result, ele);// 3. Do something with the data
+    } catch (e) {
+      console.log(e);//catch and log any errors
+    }
+  }
+  async function postData(data) {
+    let url = baseUrl + "addToPlaylist"
+    try {
+
+      let response = await fetch(
+        url,
+        {
+          method: 'PUT',
+          body: JSON.stringify(data),//convert data to JSON string
+          headers: { 'Content-Type': 'application/json' }// JSON data
+        },
+      );//1. Send http request and get response
+
+      let result = await response.text();//2. Get message from response
+      console.log(result);//3. Do something with the message
+
+    } catch (error) {
+      console.log(error);//catch and log any errors
+    }
+  }
 
 
 </script>

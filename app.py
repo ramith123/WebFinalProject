@@ -12,7 +12,7 @@ import json
 from requests.models import Response
 from unittest.mock import Mock
 from isodate import parse_duration
-from deezerAndYoutubeThings import getSongsList, getSongModel
+from deezerAndYoutubeThings import getSongsList, getSongModelById
 
 # from sqlalchemy.exc import IntegrityError
 # from datetime import timedelta
@@ -168,8 +168,12 @@ def createPLaylist():
 @login_required
 def addSongToPlaylist():
     data = request.get_json()
-    songId, playlistId = [ele for ele in data.values()]
-
+    print(data)
+    songId, playlistId = [ele for ele in data]
+    song = Song.query.filter_by(id=songId).first()
+    playlist = Playlist.query.filter_by(userid=current_user.id, id=playlistId).first()
+    if song is None:
+        song = getSongModelById(songId)
     return "Success", 200
 
 
