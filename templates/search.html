@@ -6,6 +6,10 @@
 
 {% block content %}
 
+<ul id='dropdown1' class='dropdown-content'>
+  <li><a href="#">Add to playlist</a></li>
+</ul>
+
 <!-- <div class="container">
   <div class="row">
     {% for video in videos %}
@@ -65,13 +69,12 @@
         <span role="button" tabindex="0" class="mdc-chip__text">YouTube</span>
       </a>
 
-      <button data-mdc-ripple-is-unbounded=""
-        class="mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded sideButtons" title=""
-        tabindex="-1"
+      <a id="dropdowner" data-target='dropdown1' data-mdc-ripple-is-unbounded=""
+        class="dropdown-trigger mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded sideButtons"
+        title="" tabindex="-1"
         style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">
         more_vert
-      </button>
-
+      </a>
     </div>
 
 
@@ -79,8 +82,8 @@
   </li>
   {% endfor %}
 
-</ul>
 
+</ul>
 
 <script>
   $(document).ready(function () {
@@ -90,9 +93,7 @@
   const MDCRipple = mdc.ripple.MDCRipple;
   MDCRipple.attachTo(document.querySelector('.mdc-icon-button'));
 
-  const MDCIcon = mdc.icon.MDCIcon;
-  const icons = new MDCIcon(document.querySelector('.mdc-icon-button'));
-  icons.listElements.map((listItemEl) => new MDCRipple(listItemEl));
+
 
   const MDCList = mdc.list.MDCList;
   const list = new MDCList(document.querySelector('.mdc-list'));
@@ -101,5 +102,9 @@
   const MDCChipSet = mdc.chips.MDCChipSet;
   const chipSetEl = document.querySelector('.mdc-chip-set');
   MDCRipple.attachTo(chipSetEl);
+
+  $.each($('.dropdown-trigger'), function (index, value) {
+    $(value).dropdown();
+  });
 </script>
 {% endblock %}
