@@ -5,11 +5,7 @@
 {{ super() }}
 
 {% block content %}
-<div id="Menu">
-  <ul id="dropdown1" class="dropdown-content" style="">
-    <li><a href="#" tabindex="-1">Add to playlist</a></li>
-  </ul>
-</div>
+
 
 <!-- <div class="container">
   <div class="row">
@@ -40,6 +36,11 @@
 
 
   {% for song in songs %}
+  <div id="Menu">
+    <ul id="{{song.id}}" class="dropdown-content" style="">
+      <li><a href="#" tabindex="-1" onclick="testFunc({{song.id}})">Add to playlist</a></li>
+    </ul>
+  </div>
   <li class="mdc-list-item mdc-ripple-upgraded" tabindex="-1">
     <img class="mdc-list-item__graphic" aria-hidden="true" src="{{song.albumImgUrl}}" />
     <span class="mdc-list-item__text"><span class="mdc-list-item__primary-text">{{song.title}}</span>
@@ -70,7 +71,7 @@
         <span role="button" tabindex="0" class="mdc-chip__text">YouTube</span>
       </a>
 
-      <a id="dropdowner" data-target='dropdown1' data-mdc-ripple-is-unbounded=""
+      <a id="dropdowner" data-target='{{song.id}}' data-mdc-ripple-is-unbounded=""
         class="dropdown-trigger mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded sideButtons"
         title="" tabindex="-1"
         style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">
@@ -104,8 +105,16 @@
   const chipSetEl = document.querySelector('.mdc-chip-set');
   MDCRipple.attachTo(chipSetEl);
 
-  $.each($('.dropdown-trigger'), function (index, value) {
-    $(value).dropdown({
+  /*$.each($('.dropdown-trigger'), function (index, value) {
+    $(value).dropdown();
+  });*/
+
+
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    var instances = M.Dropdown.init(elems, {
       inDuration: 300,
       outDuration: 225,
       container: document.getElementById('Menu'),
@@ -113,7 +122,13 @@
       belowOrigin: true, // Displays dropdown below the button
       alignment: 'right' // Displays dropdown with edge aligned to the left of button
     });
+
+    console.log(instances)
   });
+  function testFunc(id) {
+    console.log(id);
+  }
+
 
 
 </script>
