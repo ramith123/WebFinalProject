@@ -197,34 +197,43 @@
         }
 
         /* Home Page CSS */
-        .left-middle-indicator{
-        position: relative;
-        top:35%;
-        width:5%;
+        .left-middle-indicator {
+            position: relative;
+            top: 35%;
+            width: 5%;
         }
 
-        .right-middle-indicator{
-        position: relative;
-        top:35%;
-        width:5%;
+        .right-middle-indicator {
+            position: relative;
+            top: 35%;
+            width: 5%;
         }
 
-        .slider{
-            width:95%; 
-            margin-left:5%;
-            margin-right:5%;
-            margin:auto;
+        .slider {
+            width: 95%;
+            margin-left: 5%;
+            margin-right: 5%;
+            margin: auto;
         }
 
         .slider .slides li {
-        left: 5%;
-        right:5%;
-        width:90%;
-        background-color:#ff6f00;
-        margin-left: auto;
-        margin-right: auto;
+            left: 5%;
+            right: 5%;
+            width: 90%;
+            background-color: #ff6f00;
+            margin-left: auto;
+            margin-right: auto;
         }
-        
+
+        .input-field input[type=search]+.label-icon {
+            top: 6px;
+        }
+
+        nav {
+
+            height: 64px;
+
+        }
     </style>
 </head>
 
@@ -237,46 +246,46 @@
     <!--Change colours and add icons-->
     <div class="navbar-fixed">
         <nav class="nav-wrapper indigo darken-3">
-                <div>
-                    <!-- <img width="63" height="63" src="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif">   Messes up stuff-->
-                    <a href="/" class="brand-logo">RCDJ Music</a>
-                </div>
+            <div>
+                <!-- <img width="63" height="63" src="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif">   Messes up stuff-->
+                <a href="/" class="brand-logo center">RCDJ Music</a>
+            </div>
 
-                <a href="#" class="sidenav-trigger right" data-target="mobile-links">
-                    <i class="material-icons">menu</i>
-                </a>
+            <a href="#" class="sidenav-trigger right" data-target="mobile-links">
+                <i class="material-icons">menu</i>
+            </a>
 
-                <div class="left">
-                    <ul class="hide-on-med-and-down">
-                        <li><a href="/" class="waves-effect waves-light">Home</a></li>
-                        <li><a href="/playlist" class="waves-effect waves-light">Your Playlists</a></li>
-                        <!--Ensure Loggin is neccessary for access, change route to /playlists-->
-                        <li><a href="#" class="waves-effect waves-light" onclick="launchModal()">Create Playlist</a></li>
+            <div class="left">
+                <ul class="hide-on-med-and-down">
+                    <li><a href="/" class="waves-effect waves-light">Home</a></li>
+                    <li><a href="/playlist" class="waves-effect waves-light">Your Playlists</a></li>
+                    <!--Ensure Loggin is neccessary for access, change route to /playlists-->
+                    <li><a href="#" class="waves-effect waves-light" onclick="launchModal()">Create Playlist</a></li>
 
-                    </ul>
-                </div>
+                </ul>
+            </div>
 
-                <div class="right" id="right-nav">
-                    <ul>
-                        <li class="hide-on-med-and-down" id="desktop-register-button"><a href="/register"
-                                class="waves-effect waves-light">Register</a>
-                        </li>
-                        <li class="hide-on-med-and-down" id="desktop-login-button"><a href="/login"
-                                class="waves-effect waves-light">Login</a></li>
-                        <li class="hide-on-med-and-down">
-                            <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
-                        </li>
-                    </ul>
-                </div>
+            <div class="right" id="right-nav">
+                <ul>
+                    <li class="hide-on-med-and-down" id="desktop-register-button"><a href="/register"
+                            class="waves-effect waves-light">Register</a>
+                    </li>
+                    <li class="hide-on-med-and-down" id="desktop-login-button"><a href="/login"
+                            class="waves-effect waves-light">Login</a></li>
+                    <li class="hide-on-med-and-down">
+                        <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
+                    </li>
+                </ul>
+            </div>
 
-                <form class="left" method="POST" action="/search">
-                    <div class="input-field">
-                        <input class="autocomplete" id="search" type="search" name="queryBox" autocomplete="off" 
+            <form class="left" method="POST" action="/search">
+                <div class="input-field">
+                    <input class="autocomplete" id="search" type="search" name="queryBox" autocomplete="off"
                         style="width:17rem" required>
-                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                        <i class="material-icons">close</i>
-                    </div>
-                </form>
+                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                    <i class="material-icons">close</i>
+                </div>
+            </form>
         </nav>
     </div>
 
@@ -332,8 +341,8 @@
             let isOpen = false;
             inputBox.hide();
 
-            submitIcon.click(function(){
-                if(isOpen==false){
+            submitIcon.click(function () {
+                if (isOpen == false) {
                     inputBox.show();
                     // inputBox.autocomplete({
                     //     data: {
@@ -350,8 +359,8 @@
                 }
             });
 
-            $(document).mouseup(function(){
-                if(isOpen == true){
+            $(document).mouseup(function () {
+                if (isOpen == true) {
                     submitIcon.click();
                 }
             });
