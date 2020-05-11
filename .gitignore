@@ -2,3 +2,5 @@ venv
 *.pyc
 .vscode
 uni.txt
+package-lock.json
+node_modules

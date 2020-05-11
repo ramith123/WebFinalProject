@@ -12,6 +12,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif" type="image/gif">
     <title>{% block title %}{% endblock %}</title>
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 
     <style>
         body,
@@ -167,6 +169,47 @@
 
         .form-footer a {
             margin-left: auto;
+        }
+
+        button:focus {
+            outline: none;
+            background-color: rgba(0, 0, 0, 0);
+        }
+
+        .mdc-chip {
+            padding: 0 20px;
+        }
+
+        .mdc-list {
+            max-width: 800px;
+            border: 1px solid rgba(0, 0, 0, .1);
+
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .mdc-list--dense .mdc-list-item__graphic {
+
+            width: 95px;
+            height: 95px;
+
+        }
+
+        .mdc-list--dense .mdc-list-item__primary-text {
+            display: flex;
+            margin-top: 38px;
+
+        }
+
+        .mdc-chip-set {
+            flex-wrap: initial;
+
+        }
+
+        .mdc-list--two-line.mdc-list--dense .mdc-list-item,
+        .mdc-list--avatar-list.mdc-list--dense .mdc-list-item {
+            height: 100px;
         }
     </style>
 </head>

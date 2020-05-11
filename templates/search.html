@@ -6,7 +6,8 @@
 
 {% block content %}
 
-<div class="container">
+
+<!-- <div class="container">
   <div class="row">
     {% for video in videos %}
     <div class="col m3">
@@ -29,11 +30,106 @@
     </div>
     {% endfor %}
   </div>
-</div>
+</div> -->
+
+<ul class="mdc-list mdc-list--dense mdc-list--two-line" id="list">
+
+
+  {% for song in songs %}
+  <div id="Menu">
+    <ul id="{{song.id}}" class="dropdown-content" style="">
+      <li><a href="#" tabindex="-1" onclick="testFunc({{song.id}})">Add to playlist</a></li>
+    </ul>
+  </div>
+  <li class="mdc-list-item mdc-ripple-upgraded" tabindex="-1">
+    <img class="mdc-list-item__graphic" aria-hidden="true" src="{{song.albumImgUrl}}" />
+    <span class="mdc-list-item__text"><span class="mdc-list-item__primary-text">{{song.title}}</span>
+      <span class="mdc-list-item__secondary-text">{{song.artist}} - {{song.album}}</span>
+    </span>
+
+    <div class="mdc-list-item__meta mdc-chip-set">
+      <a href="{{song.url}}" class="mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17">
+        <img class="mdc-chip__icon mdc-chip__icon--leading" src="https://img.icons8.com/windows/32/000000/deezer.png">
+        <div class="mdc-chip__checkmark">
+          <svg class="mdc-chip__checkmark-svg" viewBox="-2 -3 30 30">
+            <path class="mdc-chip__checkmark-path" fill="none" stroke="black" d="M1.73,12.91 8.1,19.28 22.79,4.59">
+            </path>
+          </svg>
+        </div>
+        <span role="button" tabindex="0" class="mdc-chip__text">Deezer</span>
+      </a>
+
+      <a href="{{song.youtubeUrl}}" class=" mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17">
+        <img class="mdc-chip__icon mdc-chip__icon--leading"
+          src="https://img.icons8.com/material-sharp/24/000000/youtube-play.png">
+        <div class="mdc-chip__checkmark">
+          <svg class="mdc-chip__checkmark-svg" viewBox="-2 -3 30 30">
+            <path class="mdc-chip__checkmark-path" fill="none" stroke="black" d="M1.73,12.91 8.1,19.28 22.79,4.59">
+            </path>
+          </svg>
+        </div>
+        <span role="button" tabindex="0" class="mdc-chip__text">YouTube</span>
+      </a>
+
+      <a id="dropdowner" data-target='{{song.id}}' data-mdc-ripple-is-unbounded=""
+        class="dropdown-trigger mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded sideButtons"
+        title="" tabindex="-1"
+        style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">
+        more_vert
+      </a>
+    </div>
+
+
+
+  </li>
+  {% endfor %}
+
+
+</ul>
 
 <script>
   $(document).ready(function () {
-      $('.tooltipped').tooltip();
+    $('.tooltipped').tooltip();
   });
+
+  const MDCRipple = mdc.ripple.MDCRipple;
+  MDCRipple.attachTo(document.querySelector('.mdc-icon-button'));
+
+
+
+  const MDCList = mdc.list.MDCList;
+  const list = new MDCList(document.querySelector('.mdc-list'));
+  const listItemRipples = list.listElements.map((listItemEl) => new MDCRipple(listItemEl));
+
+  const MDCChipSet = mdc.chips.MDCChipSet;
+  const chipSetEl = document.querySelector('.mdc-chip-set');
+  MDCRipple.attachTo(chipSetEl);
+
+  /*$.each($('.dropdown-trigger'), function (index, value) {
+    $(value).dropdown();
+  });*/
+
+
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    var instances = M.Dropdown.init(elems, {
+      inDuration: 300,
+      outDuration: 225,
+      container: document.getElementById('Menu'),
+      hover: false, // Activate on hover
+      belowOrigin: true, // Displays dropdown below the button
+      alignment: 'right' // Displays dropdown with edge aligned to the left of button
+    });
+
+    console.log(instances)
+  });
+  function testFunc(id) {
+    console.log(id);
+  }
+
+
+
 </script>
 {% endblock %}
