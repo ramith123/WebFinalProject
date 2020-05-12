@@ -211,8 +211,16 @@
         }
 
         /* Home Page CSS */
-        .middle-indicator {
-            margin: 0;
+        .left-middle-indicator {
+            margin-left: 350px;
+            position: relative;
+            /* position:fixed; */
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .right-middle-indicator {
+            margin-right: 350px;
             position: relative;
             top: 50%;
             transform: translateY(-50%);
@@ -227,9 +235,29 @@
 
         }
 
+
         .home-carousel .carousel-item,
         .home-carousel2 .carousel-item {
             width: 250px;
+        }
+
+        .carousel-image{
+            width: 350px;
+        }
+        @media only screen and (max-device-width: 400px) {
+        .home-carousel,
+        .home-carousel2 {
+            height: 300px;
+
+        }
+        .home-carousel .carousel-item,
+        .home-carousel2 .carousel-item {
+            height:100%;
+        }
+
+        .carousel-image{
+            width: 250px;
+        }
         }
 
         .vertical-center {
@@ -239,42 +267,12 @@
             transform: translateY(-50%);
         }
 
-        /*  .left-middle-indicator {
-            position: relative;
-            top: 35%;
-            width: 5%;
-        }
-
-        .right-middle-indicator {
-            position: relative;
-            top: 35%;
-            width: 5%;
-        }
-
-        .slider {
-            width: 95%;
-            margin-left: 5%;
-            margin-right: 5%;
-            margin: auto;
-        }
-
-        .slider .slides li {
-            left: 5%;
-            right: 5%;
-            width: 90%;
-            background-color: #ff6f00;
-            margin-left: auto;
-            margin-right: auto;
-        }*/
-
         .input-field input[type=search]+.label-icon {
             top: 6px;
         }
 
         nav {
-
             height: 64px;
-
         }
     </style>
 </head>
