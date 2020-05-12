@@ -346,17 +346,36 @@
     </ul>
 
     <!-- Sidenav Player -->
-    <ul id="slide-out" class="sidenav nav2" style="width:500px;">
+    <ul id="slide-out" class="sidenav nav2" style="">
         <li>
-            <div class="user-view ">
-                <iframe class="music-view" width="420" height="315" src="https://www.youtube.com/embed/tgbNymZ7vqY">
+            <div class="user-view">
+                <iframe width="420" height="315" src="https://www.youtube.com/embed/tgbNymZ7vqY">
                 </iframe>
             </div>
         </li>
-        <li><a href="#!"><i class="material-icons">cloud</i>Play on Youtube</a></li>
-        <li><a href="#!"><i class="material-icons">cloud</i>Play on Youtube</a></li>
         <li>
+            <div class="card-content tooltipped view-title" data-position="top"
+                data-tooltip="Bohemian Rhapsody | Muppet Music Video | The Muppets">
+                <span class="truncate">Bohemian Rhapsody | Muppet Music Video | The Muppets</span>
+            </div>
             <div class="divider"></div>
+        </li>
+        <li>
+            <div class="mdc-list-item__meta mdc-chip-set view-buttons">
+                <a href="#" class="mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17">
+                    <img class="mdc-chip__icon mdc-chip__icon--leading"
+                        src="https://img.icons8.com/windows/32/000000/deezer.png">
+                    <span role="button" tabindex="0" class="mdc-chip__text">Play on Deezer</span>
+                </a>
+
+                <a href="#" class=" mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17">
+                    <img class="mdc-chip__icon mdc-chip__icon--leading"
+                        src="https://img.icons8.com/material-sharp/24/000000/youtube-play.png">
+                    <span role="button" tabindex="0" class="mdc-chip__text">Play on Youtube</span>
+                </a>
+
+
+            </div>
         </li>
     </ul>
 
@@ -400,6 +419,7 @@
         {% endfor %}
         {% endif %}
         {% endwith %}
+
         $(document).ready(function () {
             let inputBox = $("input.autocomplete"); //[name='QueryBox']
             let submitIcon = $('.label-icon');
@@ -449,13 +469,63 @@
             });
         });
 
+        // Change default video in player
+        function musicView(videoId, songUrl, youtubeUrl) {
+            let view = document.querySelector(".user-view");
+            let title = document.querySelector(".view-title");
+            let buttons = document.querySelector(".view-buttons")
+            view.innerHTML = `<iframe width="420" height="315" src="https://www.youtube.com/embed/${videoId}"></iframe>`;
+            //title, buttons, maybe embedded search query
+            buttons.innerHTML = `
+            <a href="#" class="mdc-chip mdc-ripple-upgraded sideButtons" onclick="deezerView(${songurl})"
+                  role="row" id="mdc-chip-17">
+                  <img class="mdc-chip__icon mdc-chip__icon--leading" src="https://img.icons8.com/windows/32/000000/deezer.png">
+                  <span role="button" tabindex="0" class="mdc-chip__text">Play on Deezer</span>
+                </a>
+          
+                <a href="#" class=" mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17" onclick="musicView(${youtubeUrl})">
+                  <img class="mdc-chip__icon mdc-chip__icon--leading"
+                    src="https://img.icons8.com/material-sharp/24/000000/youtube-play.png">
+                  <span role="button" tabindex="0" class="mdc-chip__text">Play on Youtube</span>
+                </a>
+          
+                <a id="dropdowner" data-mdc-ripple-is-unbounded=""
+                  class="dropdown-trigger mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded sideButtons"
+                  title="" tabindex="-1"
+                  style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">
+                  more_vert
+                </a>`
+        };
 
-        // function musicView(){  <!-- chaning embedded video issues -->
-        // let musicView = document.querySelector("music-view");
-        // // musicView.innerHTML = `<iframe width="420" height="315" src="https://www.youtube.com/embed/FdTAY2vmZm8"></iframe>`;
-        // alert("Test");
-        // musicView.innerHTML = `<p class="black-text">Testinggdnfjgdf</p>`;
-        // };
+        function deezerView(songId, songTitle, songArtist, songAlbum) {
+            let view = document.querySelector(".user-view");
+            let title = document.querySelector(".view-title");
+            let buttons = document.querySelector(".view-buttons")
+            console.log(songId, songTitle, songArtist, songAlbum);
+            view.innerHTML = `
+            <iframe scrolling="no" frameborder="0" allowTransparency="true" 
+            src="https://www.deezer.com/plugins/player?format=square&autoplay=false&playlist=false&width=300&height=300&color=007FEB&layout=dark&size=medium&type=tracks&id=${songId}&app_id=1" width="300" height="300"></iframe>`
+
+            buttons.innerHTML = `
+            <a href="#" class="mdc-chip mdc-ripple-upgraded sideButtons" onclick="deezerView(${songurl})"
+                  role="row" id="mdc-chip-17">
+                  <img class="mdc-chip__icon mdc-chip__icon--leading" src="https://img.icons8.com/windows/32/000000/deezer.png">
+                  <span role="button" tabindex="0" class="mdc-chip__text">Play on Deezer</span>
+                </a>
+          
+                <a href="#" class=" mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17" onclick="musicView(${youtubeUrl})">
+                  <img class="mdc-chip__icon mdc-chip__icon--leading"
+                    src="https://img.icons8.com/material-sharp/24/000000/youtube-play.png">
+                  <span role="button" tabindex="0" class="mdc-chip__text">Play on Youtube</span>
+                </a>
+          
+                <a id="dropdowner" data-mdc-ripple-is-unbounded=""
+                  class="dropdown-trigger mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded sideButtons"
+                  title="" tabindex="-1"
+                  style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">
+                  more_vert
+                </a>`
+        }
 
 
         function hideLogAndRegAndShowUser() {
