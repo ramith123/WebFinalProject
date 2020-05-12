@@ -17,7 +17,7 @@
             <div class="vertical-center">
                 <a href="{{ video.url }}" data-target="slide-out" class="sidenav-trigger" onclick="musicView(`{{ video.videoId }}`)">
                     <p class="indigo-text">#{{ video.position+1 }}</p>
-                    <img src="{{ video.thumbnail }}">
+                    <img src="{{ video.thumbnail }}" width="350px">
                     <div class="card-content tooltipped" data-position="top" data-tooltip="{{ video.title }}">
                         <!-- may remove tooltips now that titles are so wide-->
                         <p class="truncate black-text">{{ video.title}}</p>
@@ -41,7 +41,7 @@
             <div class="vertical-center">
                 <a href="{{ video.url }}" data-target="slide-out" class="sidenav-trigger" onclick="musicView(`{{ video.videoId }}`)">
                     <p class="indigo-text">#{{ video.position+1 }}</p>
-                    <img src="{{ video.thumbnail }}">
+                    <img src="{{ video.thumbnail }}" width="350px">
                     <div class="card-content tooltipped" data-position="top" data-tooltip="{{ video.title }}">
                         <!-- may remove tooltips now that titles are so wide-->
                         <p class="truncate black-text">{{ video.title}}</p>
