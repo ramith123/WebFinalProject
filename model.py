@@ -60,4 +60,12 @@ class Song(db.Model):
     youtubeUrl = db.Column(db.String(512), nullable=False)
 
     def toDict(self):
-        return {"id": self.id, "url": self.url}
+        return {
+            "id": self.id,
+            "title": self.title,
+            "artist": self.artist,
+            "album": self.album,
+            "albumImgUrl": self.albumImgUrl,
+            "url": self.url,
+            "youtubeUrl": self.youtubeUrl,
+        }

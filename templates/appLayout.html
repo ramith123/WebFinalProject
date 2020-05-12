@@ -161,7 +161,7 @@
         }
 
         .mdc-chip {
-            padding: 0 20px;
+            padding: 0 10px;
         }
 
         .mdc-list {
@@ -175,8 +175,8 @@
 
         .mdc-list--dense .mdc-list-item__graphic {
 
-            width: 95px;
-            height: 95px;
+            width: 50px;
+            height: 50px;
 
         }
 
@@ -186,41 +186,95 @@
 
         }
 
+        .mdc-list--two-line .mdc-list-item__text {
+
+            margin-top: -15px;
+        }
+
         .mdc-chip-set {
             flex-wrap: initial;
 
         }
 
+        .mdc-chip-set .mdc-chip {
+            margin: 5px;
+        }
+
+        .mdc-chip .mdc-chip__icon--leading:not(.mdc-chip__icon--leading-hidden) {
+            margin-left: -4px;
+            margin-right: -4px;
+        }
+
         .mdc-list--two-line.mdc-list--dense .mdc-list-item,
         .mdc-list--avatar-list.mdc-list--dense .mdc-list-item {
-            height: 100px;
+            height: 69px;
         }
 
         /* Home Page CSS */
-        .middle-indicator{
-        margin: 0;
-        position: relative;
-        top: 50%;
-        transform: translateY(-50%);
+        .middle-indicator {
+            margin: 0;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
-        .home-carousel, .home-carousel2{
-            height:500px;
-            width:60%; 
-            margin-left:5%;
-            margin-right:5%;
-            margin:auto;
+        .home-carousel,
+        .home-carousel2 {
+            height: 500px;
+            width: 60%;
+            margin-left: 5%;
+            margin-right: 5%;
+            margin: auto;
         }
-        .home-carousel .carousel-item, .home-carousel2 .carousel-item{
-            width:250px;
+
+        .home-carousel .carousel-item,
+        .home-carousel2 .carousel-item {
+            width: 250px;
         }
-        
+
         .vertical-center {
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /*  .left-middle-indicator {
+            position: relative;
+            top: 35%;
+            width: 5%;
+        }
+
+        .right-middle-indicator {
+            position: relative;
+            top: 35%;
+            width: 5%;
+        }
+
+        .slider {
+            width: 95%;
+            margin-left: 5%;
+            margin-right: 5%;
+            margin: auto;
+        }
+
+        .slider .slides li {
+            left: 5%;
+            right: 5%;
+            width: 90%;
+            background-color: #ff6f00;
+            margin-left: auto;
+            margin-right: auto;
+        }*/
+
+        .input-field input[type=search]+.label-icon {
+            top: 6px;
+        }
+
+        nav {
+
+            height: 64px;
+
         }
     </style>
 </head>
@@ -234,46 +288,46 @@
     <!--Change colours and add icons-->
     <div class="navbar-fixed">
         <nav class="nav-wrapper indigo darken-3">
-                <div>
-                    <!-- <img width="63" height="63" src="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif">   Messes up stuff-->
-                    <a href="/" class="brand-logo center">RCDJ Music</a>
-                </div>
+            <div>
+                <!-- <img width="63" height="63" src="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif">   Messes up stuff-->
+                <a href="/" class="brand-logo center">RCDJ Music</a>
+            </div>
 
-                <a href="#" class="sidenav-trigger right" data-target="mobile-links">
-                    <i class="material-icons">menu</i>
-                </a>
+            <a href="#" class="sidenav-trigger right" data-target="mobile-links">
+                <i class="material-icons">menu</i>
+            </a>
 
-                <div class="left">
-                    <ul class="hide-on-med-and-down">
-                        <li><a href="/" class="waves-effect waves-light">Home</a></li>
-                        <li><a href="/playlist" class="waves-effect waves-light">Your Playlists</a></li>
-                        <!--Ensure Loggin is neccessary for access, change route to /playlists-->
-                        <li><a href="#" class="waves-effect waves-light" onclick="launchModal()">Create Playlist</a></li>
+            <div class="left">
+                <ul class="hide-on-med-and-down">
+                    <li><a href="/" class="waves-effect waves-light">Home</a></li>
+                    <li><a href="/playlist" class="waves-effect waves-light">Your Playlists</a></li>
+                    <!--Ensure Loggin is neccessary for access, change route to /playlists-->
+                    <li><a href="#" class="waves-effect waves-light" onclick="launchModal()">Create Playlist</a></li>
 
-                    </ul>
-                </div>
+                </ul>
+            </div>
 
-                <div class="right" id="right-nav">
-                    <ul>
-                        <li class="hide-on-med-and-down" id="desktop-register-button"><a href="/register"
-                                class="waves-effect waves-light">Register</a>
-                        </li>
-                        <li class="hide-on-med-and-down" id="desktop-login-button"><a href="/login"
-                                class="waves-effect waves-light">Login</a></li>
-                        <li class="hide-on-small-only">
-                            <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
-                        </li>
-                    </ul>
-                </div>
+            <div class="right" id="right-nav">
+                <ul>
+                    <li class="hide-on-med-and-down" id="desktop-register-button"><a href="/register"
+                            class="waves-effect waves-light">Register</a>
+                    </li>
+                    <li class="hide-on-med-and-down" id="desktop-login-button"><a href="/login"
+                            class="waves-effect waves-light">Login</a></li>
+                    <li class="hide-on-small-only">
+                        <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
+                    </li>
+                </ul>
+            </div>
 
-                <form class="left" method="POST" action="/search">
-                    <div class="input-field">
-                        <input class="autocomplete" id="search" type="search" name="queryBox" autocomplete="off" 
+            <form class="left" method="POST" action="/search">
+                <div class="input-field">
+                    <input class="autocomplete" id="search" type="search" name="queryBox" autocomplete="off"
                         style="width:17rem" required>
-                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                        <i class="material-icons">close</i>
-                    </div>
-                </form>
+                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                    <i class="material-icons">close</i>
+                </div>
+            </form>
         </nav>
     </div>
 
@@ -290,17 +344,20 @@
             <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
         </li>
     </ul>
-    
+
     <!-- Sidenav Player -->
     <ul id="slide-out" class="sidenav nav2" style="width:500px;">
-        <li><div class="user-view ">
-            <iframe class="music-view" width="420" height="315"
-            src="https://www.youtube.com/embed/tgbNymZ7vqY">
-            </iframe>
-        </div></li>
+        <li>
+            <div class="user-view ">
+                <iframe class="music-view" width="420" height="315" src="https://www.youtube.com/embed/tgbNymZ7vqY">
+                </iframe>
+            </div>
+        </li>
         <li><a href="#!"><i class="material-icons">cloud</i>Play on Youtube</a></li>
         <li><a href="#!"><i class="material-icons">cloud</i>Play on Youtube</a></li>
-        <li><div class="divider"></div></li>
+        <li>
+            <div class="divider"></div>
+        </li>
     </ul>
 
     <!-- Modal Structure -->
@@ -336,14 +393,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <script>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        M.toast({ html: '{{message}}', classes: 'rounded' });
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
         $(document).ready(function () {
             let inputBox = $("input.autocomplete"); //[name='QueryBox']
             let submitIcon = $('.label-icon');
             let isOpen = false;
             inputBox.hide();
 
-            submitIcon.click(function(){
-                if(isOpen==false){
+            submitIcon.click(function () {
+                if (isOpen == false) {
                     inputBox.show();
                     // inputBox.autocomplete({
                     //     data: {
@@ -360,8 +424,8 @@
                 }
             });
 
-            $(document).mouseup(function(){
-                if(isOpen == true){
+            $(document).mouseup(function () {
+                if (isOpen == true) {
                     submitIcon.click();
                 }
             });

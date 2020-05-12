@@ -145,9 +145,12 @@ def logout():
 
 
 @app.route("/playlist", methods=["GET", "POST"])
-@login_required
 def playlist():
-    return render_template("playlist.html")
+    if current_user.is_anonymous:
+        flash("You have to login first")
+        return redirect(url_for("login"))
+    playlists = Playlist.query.filter_by(userid=current_user.id).all()
+    return render_template("playlist.html", playlists=playlists)
 
 
 @app.route("/createPlaylist", methods=["POST"])
@@ -241,6 +244,13 @@ def anyPageSearch():
 @app.route("/test")
 def testPage():
     return render_template("test.html")
+
+
+@app.route("/getSongs/<pid>")
+def sendSongs(pid):
+    songs = Playlist.query.filter_by(id=pid).first().songs
+    songs = [song.toDict() for song in songs]
+    return json.dumps(songs)
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 import requests
 
 # from termcolor import colored
-from model import Song
+from model import Song, Playlist
 
 trackUrl = "https://api.deezer.com/track/"
 searchUrl = "https://api.deezer.com/search?q="
@@ -91,5 +91,3 @@ def getYoutubeLink(song, artist, quota=False):
 
 
 # pip install termcolor before executing this file
-if __name__ == "__main__":
-    print(getSongModelById(954718872))
