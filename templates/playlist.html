@@ -57,7 +57,7 @@
         });*/
 
     $('.carousel').carousel({
-        duration: 1000,
+        duration: 500,
         indicators: true,
         onCycleTo: function (data) {
 
@@ -80,9 +80,10 @@
 
 
     function populateSongs(songs) {
-        let html = "";
+        let html = "<h4>Loading Songs...</h4>";
         let ele = document.getElementById("list");
         ele.innerHTML = html;
+        html = "";
         for (song of songs) {
             html += `
             <li class="mdc-list-item mdc-ripple-upgraded" tabindex="-1">

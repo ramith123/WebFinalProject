@@ -145,8 +145,10 @@ def logout():
 
 
 @app.route("/playlist", methods=["GET", "POST"])
-@login_required
 def playlist():
+    if current_user.is_anonymous:
+        flash("You have to login first")
+        return redirect(url_for("login"))
     playlists = Playlist.query.filter_by(userid=current_user.id).all()
     return render_template("playlist.html", playlists=playlists)
 
