@@ -57,10 +57,10 @@
         });*/
 
     $('.carousel').carousel({
-        duration: 100,
+        duration: 1000,
         indicators: true,
         onCycleTo: function (data) {
-            console.log(data.id)
+
             getSongs(data.id)
         }
     });

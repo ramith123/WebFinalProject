@@ -340,6 +340,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <script>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        M.toast({ html: '{{message}}', classes: 'rounded' });
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
         $(document).ready(function () {
             let inputBox = $("input.autocomplete"); //[name='QueryBox']
             let submitIcon = $('.label-icon');
