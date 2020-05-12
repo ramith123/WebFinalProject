@@ -7,22 +7,22 @@
 
 <h4 class="center-align">Hot 100 Music Videos</h4>
 <div class="carousel home-carousel">
-    <a href="#" class="prev left middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
+    <a href="#" class="prev left left-middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
             class="large material-icons">chevron_left</i></a>
-    <a href="#" class="next right middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
+    <a href="#" class="next right right-middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
             class="large material-icons">chevron_right</i></a>
     <div>
         {% for video in videos %}
         <div class="carousel-item center">
             <div class="vertical-center">
-                <a href="{{ video.url }}" data-target="slide-out" class="sidenav-trigger" onclick="musicView()">
-                    <p class="indigo-text">#{{ video.position+1 }}</p>
-                    <img src="{{ video.thumbnail }}">
+                <a href="{{ video.url }}" data-target="slide-out" class="sidenav-trigger" onclick="musicView(`{{ video.videoId }}`)">
+                    <p class="indigo-text">#{{ video.position+1 }}</p></a>
+                    <img src="{{ video.thumbnail }}" class="carousel-image">
                     <div class="card-content tooltipped" data-position="top" data-tooltip="{{ video.title }}">
                         <!-- may remove tooltips now that titles are so wide-->
                         <p class="truncate black-text">{{ video.title}}</p>
                     </div>
-                </a>
+                
             </div>
         </div>
         {% endfor %}
@@ -31,17 +31,17 @@
 
 <h4 class="center-align">Recent 100 Songs</h4> <!-- Deezer Songs-->
 <div class="carousel home-carousel2">
-    <a href="#" class="prev2 left middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
+    <a href="#" class="prev2 left left-middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
             class="large material-icons">chevron_left</i></a>
-    <a href="#" class="next2 right middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
+    <a href="#" class="next2 right right-middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
             class="large material-icons">chevron_right</i></a>
     <div>
         {% for video in videos %}
         <div class="carousel-item center">
             <div class="vertical-center">
-                <a href="{{ video.url }}" data-target="slide-out" class="sidenav-trigger">
+                <a href="{{ video.url }}" data-target="slide-out" class="sidenav-trigger" onclick="musicView(`{{ video.videoId }}`)">
                     <p class="indigo-text">#{{ video.position+1 }}</p>
-                    <img src="{{ video.thumbnail }}">
+                    <img src="{{ video.thumbnail }}" class="carousel-image">
                     <div class="card-content tooltipped" data-position="top" data-tooltip="{{ video.title }}">
                         <!-- may remove tooltips now that titles are so wide-->
                         <p class="truncate black-text">{{ video.title}}</p>

@@ -32,7 +32,6 @@
     <ul class="mdc-list mdc-list--dense mdc-list--two-line" id="list">
 
 
-
     </ul>
 
 
@@ -169,12 +168,15 @@
             </li>
             `
         }
+        console.log(songs)
+        if (songs.length == 0) html = `<h5>Playlist is empty.</h5>`;
         ele.innerHTML = html;
     }
 
     function testFunc(id) {
         console.log(id);
     }
+
 
 </script>
 
