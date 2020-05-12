@@ -15,7 +15,7 @@
         {% for video in videos %}
         <div class="carousel-item center">
             <div class="vertical-center">
-                <a href="{{ video.url }}" data-target="slide-out" class="sidenav-trigger" onclick="musicView()">
+                <a href="{{ video.url }}" data-target="slide-out" class="sidenav-trigger" onclick="musicView(`{{ video.videoId }}`)">
                     <p class="indigo-text">#{{ video.position+1 }}</p>
                     <img src="{{ video.thumbnail }}">
                     <div class="card-content tooltipped" data-position="top" data-tooltip="{{ video.title }}">
@@ -39,7 +39,7 @@
         {% for video in videos %}
         <div class="carousel-item center">
             <div class="vertical-center">
-                <a href="{{ video.url }}" data-target="slide-out" class="sidenav-trigger">
+                <a href="{{ video.url }}" data-target="slide-out" class="sidenav-trigger" onclick="musicView(`{{ video.videoId }}`)">
                     <p class="indigo-text">#{{ video.position+1 }}</p>
                     <img src="{{ video.thumbnail }}">
                     <div class="card-content tooltipped" data-position="top" data-tooltip="{{ video.title }}">
