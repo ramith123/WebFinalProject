@@ -1,16 +1,17 @@
 {% include "appLayout.html" %}
 <!-- <title>{% block title %}{% endblock %}</title> Not actually showing in title..... -->
-<div class="valign-wrapper ">
+<div class="valign-wrapper" style="
+height: 100%;">
   <div class="container">
-    <div class="row">
+    <div class="row center">
       <div class="col l6 m8 s12 offset-l3 offset-m2">
 
         <div class="card hoverable ">
 
           <div>
             <nav class="amber darken-3">
-              <div class="nav-wrapper">
-                <a href="" class="center">{% block page %}{% endblock %}</a>
+              <div class="nav-wrapper valign-wrapper">
+                <h5 href="" class="center-align" style="width: 100%;">{% block page %}{% endblock %}</h5>
               </div>
             </nav>
             <div>{% block content %}{% endblock %}</div>
