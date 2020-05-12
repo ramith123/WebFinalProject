@@ -346,7 +346,7 @@
     </ul>
 
     <!-- Sidenav Player -->
-    <ul id="slide-out" class="sidenav nav2" style="width:500px;">
+    <ul id="slide-out" class="sidenav nav2" style="">
         <li>
             <div class="user-view">
                 <iframe width="420" height="315" src="https://www.youtube.com/embed/tgbNymZ7vqY">
@@ -354,32 +354,33 @@
             </div>
         </li>
         <li>
-            <div class="card-content tooltipped view-title" data-position="top" data-tooltip="Bohemian Rhapsody | Muppet Music Video | The Muppets">
-            <span class="truncate">Bohemian Rhapsody | Muppet Music Video | The Muppets</span>
+            <div class="card-content tooltipped view-title" data-position="top"
+                data-tooltip="Bohemian Rhapsody | Muppet Music Video | The Muppets">
+                <span class="truncate">Bohemian Rhapsody | Muppet Music Video | The Muppets</span>
             </div>
             <div class="divider"></div>
         </li>
         <li>
             <div class="mdc-list-item__meta mdc-chip-set view-buttons">
-                <a href="#" class="mdc-chip mdc-ripple-upgraded sideButtons"
-                  role="row" id="mdc-chip-17">
-                  <img class="mdc-chip__icon mdc-chip__icon--leading" src="https://img.icons8.com/windows/32/000000/deezer.png">
-                  <span role="button" tabindex="0" class="mdc-chip__text">Play on Deezer</span>
+                <a href="#" class="mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17">
+                    <img class="mdc-chip__icon mdc-chip__icon--leading"
+                        src="https://img.icons8.com/windows/32/000000/deezer.png">
+                    <span role="button" tabindex="0" class="mdc-chip__text">Play on Deezer</span>
                 </a>
-          
+
                 <a href="#" class=" mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17">
-                  <img class="mdc-chip__icon mdc-chip__icon--leading"
-                    src="https://img.icons8.com/material-sharp/24/000000/youtube-play.png">
-                  <span role="button" tabindex="0" class="mdc-chip__text">Play on Youtube</span>
+                    <img class="mdc-chip__icon mdc-chip__icon--leading"
+                        src="https://img.icons8.com/material-sharp/24/000000/youtube-play.png">
+                    <span role="button" tabindex="0" class="mdc-chip__text">Play on Youtube</span>
                 </a>
-          
+
                 <a id="dropdowner" data-mdc-ripple-is-unbounded=""
-                  class="dropdown-trigger mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded sideButtons"
-                  title="" tabindex="-1"
-                  style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">
-                  more_vert
+                    class="dropdown-trigger mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded sideButtons"
+                    title="" tabindex="-1"
+                    style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">
+                    more_vert
                 </a>
-              </div>
+            </div>
         </li>
     </ul>
 
@@ -474,7 +475,7 @@
         });
 
         // Change default video in player
-        function musicView(videoId, songUrl, youtubeUrl){  
+        function musicView(videoId, songUrl, youtubeUrl) {
             let view = document.querySelector(".user-view");
             let title = document.querySelector(".view-title");
             let buttons = document.querySelector(".view-buttons")
@@ -501,7 +502,7 @@
                 </a>`
         };
 
-        function deezerView(songId, songTitle, songArtist, songAlbum){
+        function deezerView(songId, songTitle, songArtist, songAlbum) {
             let view = document.querySelector(".user-view");
             let title = document.querySelector(".view-title");
             let buttons = document.querySelector(".view-buttons")

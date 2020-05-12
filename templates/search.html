@@ -41,17 +41,17 @@
       <li><a href="#" tabindex="-1" onclick="testFunc({{song.id}})">loading...</a></li>
     </ul>
   </div>
-  <li class="sidenav-trigger mdc-list-item mdc-ripple-upgraded" tabindex="-1">
-   
+  <li class="mdc-list-item mdc-ripple-upgraded" tabindex="-1">
+
     <img class="mdc-list-item__graphic" aria-hidden="true" src="{{song.albumImgUrl}}" />
-    <span class="mdc-list-item__text" style="position: relative;" data-target="slide-out" onclick="deezerView(`{{song.id}}`, `{{song.title}}`, `{{song.artist}}`, `{{song.album}}`)"><span
+    <span class="sidenav-trigger mdc-list-item__text" style="position: relative;" data-target="slide-out"
+      onclick="deezerView(`{{song.id}}`, `{{song.title}}`, `{{song.artist}}`, `{{song.album}}`)"><span
         class="mdc-list-item__primary-text">{{song.title}}</span>
       <span class="mdc-list-item__secondary-text">{{song.artist}} - {{song.album}}</span>
     </span>
-   
+
     <div class="mdc-list-item__meta mdc-chip-set">
-      <a href="{{song.url}}" class="mdc-chip mdc-ripple-upgraded sideButtons"
-        role="row" id="mdc-chip-17" >
+      <a href="{{song.url}}" class="mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17">
         <img class="mdc-chip__icon mdc-chip__icon--leading" src="https://img.icons8.com/windows/32/000000/deezer.png">
         <div class="mdc-chip__checkmark">
           <svg class="mdc-chip__checkmark-svg" viewBox="-2 -3 30 30">
@@ -62,9 +62,9 @@
         <span role="button" tabindex="0" class="mdc-chip__text"></span>
       </a>
 
-      <a href="{{song.youtubeUrl}}" data-target="slide-out" 
-        class="sidenav-trigger mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17"">
-        <img class="mdc-chip__icon mdc-chip__icon--leading"
+      <a href="{{song.youtubeUrl}}" data-target="slide-out" class="mdc-chip mdc-ripple-upgraded sideButtons" role="row"
+        id="mdc-chip-17">
+        <img class=" mdc-chip__icon mdc-chip__icon--leading"
           src="https://img.icons8.com/material-sharp/24/000000/youtube-play.png">
         <div class="mdc-chip__checkmark">
           <svg class="mdc-chip__checkmark-svg" viewBox="-2 -3 30 30">
