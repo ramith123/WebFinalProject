@@ -198,12 +198,13 @@
 
         /* Home Page CSS */
         .middle-indicator{
+        margin: 0;
         position: relative;
-        top:35%;
-        width:5%;
+        top: 50%;
+        transform: translateY(-50%);
         }
 
-        .slider{
+        /* .slider{
             width:95%; 
             margin-left:5%;
             margin-right:5%;
@@ -217,8 +218,26 @@
         background-color:#ff6f00;
         margin-left: auto;
         margin-right: auto;
+        } */
+
+        .home-carousel, .home-carousel2{
+            height:500px;
+            width:60%; 
+            margin-left:5%;
+            margin-right:5%;
+            margin:auto;
+        }
+        .home-carousel .carousel-item, .home-carousel2 .carousel-item{
+            width:250px;
         }
         
+        .vertical-center {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        
+        }
     </style>
 </head>
 
