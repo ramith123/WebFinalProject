@@ -197,34 +197,31 @@
         }
 
         /* Home Page CSS */
-        .left-middle-indicator{
+        .middle-indicator{
+        margin: 0;
         position: relative;
-        top:35%;
-        width:5%;
+        top: 50%;
+        transform: translateY(-50%);
         }
 
-        .right-middle-indicator{
-        position: relative;
-        top:35%;
-        width:5%;
-        }
-
-        .slider{
-            width:95%; 
+        .home-carousel, .home-carousel2{
+            height:500px;
+            width:60%; 
             margin-left:5%;
             margin-right:5%;
             margin:auto;
         }
-
-        .slider .slides li {
-        left: 5%;
-        right:5%;
-        width:90%;
-        background-color:#ff6f00;
-        margin-left: auto;
-        margin-right: auto;
+        .home-carousel .carousel-item, .home-carousel2 .carousel-item{
+            width:250px;
         }
         
+        .vertical-center {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        
+        }
     </style>
 </head>
 
@@ -239,7 +236,7 @@
         <nav class="nav-wrapper indigo darken-3">
                 <div>
                     <!-- <img width="63" height="63" src="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif">   Messes up stuff-->
-                    <a href="/" class="brand-logo">RCDJ Music</a>
+                    <a href="/" class="brand-logo center">RCDJ Music</a>
                 </div>
 
                 <a href="#" class="sidenav-trigger right" data-target="mobile-links">
@@ -263,7 +260,7 @@
                         </li>
                         <li class="hide-on-med-and-down" id="desktop-login-button"><a href="/login"
                                 class="waves-effect waves-light">Login</a></li>
-                        <li class="hide-on-med-and-down">
+                        <li class="hide-on-small-only">
                             <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
                         </li>
                     </ul>
@@ -289,7 +286,7 @@
         <li id="mobile-register-button"><a href="/register" class="waves-effect waves-dark">Register</a></li>
         <li id="mobile-login-button"><a href="/login" class="waves-effect waves-dark">Login</a></li>
         <li>
-            <div class="user-profile2"><a href="#" class="user-logged-in2"></a></div>
+            <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
         </li>
     </ul>
 
