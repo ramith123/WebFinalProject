@@ -7,21 +7,7 @@
 {% block content %}
 
 
-
-<!-- <div class="valign-wrapper">
-  <div class="row">
-    <form method="POST">
-      <div class="input-field col s12 ">
-        <input class="black-text" name="query" type="text" class="validate">
-        <label for="search">Enter Search</label>
-        <button type="submit" name="submit" value="search" class="waves-effect waves-light btn">Search</a>
-      </div>
-
-    </form>
-  </div>
-</div> -->
-
-<div class="container">
+<!-- <div class="container">
   <div class="row">
     {% for video in videos %}
     <div class="col m3">
@@ -38,17 +24,165 @@
         </div>
         <div class="card-action left-align">
           <a href="{{ video.url }}" target="_blank">View</a>
-          <small class="right-align text-black">{{ video.duration }} mins</small> <!--need this to align right-->
+          <small class="right-align text-black">{{ video.duration }} mins</small>
         </div>
       </div>
     </div>
     {% endfor %}
   </div>
-</div>
+</div> -->
+
+<ul class="mdc-list mdc-list--dense mdc-list--two-line" id="list">
+
+
+  {% for song in songs %}
+  <div id="Menu">
+    <ul id="{{song.id}}" class="dropdown-content" style="">
+      <li><a href="#" tabindex="-1" onclick="testFunc({{song.id}})">loading...</a></li>
+    </ul>
+  </div>
+  <li class="mdc-list-item mdc-ripple-upgraded" tabindex="-1">
+    <img class="mdc-list-item__graphic" aria-hidden="true" src="{{song.albumImgUrl}}" />
+    <span class="mdc-list-item__text" style="position: relative;"><span
+        class="mdc-list-item__primary-text">{{song.title}}</span>
+      <span class="mdc-list-item__secondary-text">{{song.artist}} - {{song.album}}</span>
+    </span>
+
+    <div class="mdc-list-item__meta mdc-chip-set">
+      <a href="{{song.url}}" data-target="slide-out" class="sidenav-trigger mdc-chip mdc-ripple-upgraded sideButtons"
+        role="row" id="mdc-chip-17">
+        <img class="mdc-chip__icon mdc-chip__icon--leading" src="https://img.icons8.com/windows/32/000000/deezer.png">
+        <div class="mdc-chip__checkmark">
+          <svg class="mdc-chip__checkmark-svg" viewBox="-2 -3 30 30">
+            <path class="mdc-chip__checkmark-path" fill="none" stroke="black" d="M1.73,12.91 8.1,19.28 22.79,4.59">
+            </path>
+          </svg>
+        </div>
+        <span role="button" tabindex="0" class="mdc-chip__text"></span>
+      </a>
+
+      <a href="{{song.youtubeUrl}}" data-target="slide-out"
+        class="sidenav-trigger mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17">
+        <img class="mdc-chip__icon mdc-chip__icon--leading"
+          src="https://img.icons8.com/material-sharp/24/000000/youtube-play.png">
+        <div class="mdc-chip__checkmark">
+          <svg class="mdc-chip__checkmark-svg" viewBox="-2 -3 30 30">
+            <path class="mdc-chip__checkmark-path" fill="none" stroke="black" d="M1.73,12.91 8.1,19.28 22.79,4.59">
+            </path>
+          </svg>
+        </div>
+        <span role="button" tabindex="0" class="mdc-chip__text"></span>
+      </a>
+
+      <a id="dropdowner" data-target='{{song.id}}' data-mdc-ripple-is-unbounded=""
+        class="dropdown-trigger mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded sideButtons"
+        title="" tabindex="-1"
+        style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">
+        more_vert
+      </a>
+    </div>
+
+
+
+  </li>
+  {% endfor %}
+
+
+</ul>
 
 <script>
   $(document).ready(function () {
-      $('.tooltipped').tooltip();
+    $('.tooltipped').tooltip();
   });
+
+  const MDCRipple = mdc.ripple.MDCRipple;
+  MDCRipple.attachTo(document.querySelector('.mdc-icon-button'));
+
+
+
+  const MDCList = mdc.list.MDCList;
+  const list = new MDCList(document.querySelector('.mdc-list'));
+  const listItemRipples = list.listElements.map((listItemEl) => new MDCRipple(listItemEl));
+
+  const MDCChipSet = mdc.chips.MDCChipSet;
+  const chipSetEl = document.querySelector('.mdc-chip-set');
+  MDCRipple.attachTo(chipSetEl);
+
+  /*$.each($('.dropdown-trigger'), function (index, value) {
+    $(value).dropdown();
+  });*/
+
+
+  var getUrl = window.location;
+  var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    var instances = M.Dropdown.init(elems, {
+      inDuration: 300,
+      outDuration: 225,
+      container: document.getElementById('Menu'),
+      hover: false, // Activate on hover
+      belowOrigin: true, // Displays dropdown below the button
+      alignment: 'right', // Displays dropdown with edge aligned to the left of button
+      onOpenStart: getPlaylistData
+    }
+    );
+  });
+  function addSong(songId, playlistId) {
+    postData([songId, playlistId]);
+
+  }
+
+  function getPlaylists(data, ele) {
+    var i = M.Dropdown.getInstance(ele);
+    let el = i.dropdownEl;
+    let id = el.id;
+    console.log(id);
+    let html = ""
+    for (ele of data) {
+      html += `<li>
+        <a href="#" tabindex="-1" onclick="addSong(${id},${ele.id})">add to ${ele.name}</a>
+      </li>
+      `
+    }
+    el.innerHTML = html;
+    i.recalculateDimensions();
+
+  }
+
+  async function getPlaylistData(ele) {
+    url = baseUrl + "getPlaylists"
+
+    try {
+      let response = await fetch(url);//1. Send http request and get response
+      let result = await response.json();//2. Get data from response
+      getPlaylists(result, ele);// 3. Do something with the data
+    } catch (e) {
+      console.log(e);//catch and log any errors
+    }
+  }
+  async function postData(data) {
+    let url = baseUrl + "addToPlaylist"
+    try {
+
+      let response = await fetch(
+        url,
+        {
+          method: 'PUT',
+          body: JSON.stringify(data),//convert data to JSON string
+          headers: { 'Content-Type': 'application/json' }// JSON data
+        },
+      );//1. Send http request and get response
+
+      let result = await response.text();//2. Get message from response
+      console.log(result);//3. Do something with the message
+
+    } catch (error) {
+      console.log(error);//catch and log any errors
+    }
+  }
+
+
 </script>
 {% endblock %}

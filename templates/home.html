@@ -5,56 +5,90 @@
 
 {% block content %}
 
-<h4 class="left-align">Hot 100</h4>
-<div class="slider sliderone hide-on-med-and-down">
-    <ul class="slides grey lighten-3 center-align">
-        {% for row in videos|slice(17) %}  <!-- right now the last 2 slides only have 5 songs: maybe use a container of 90% with then slice by 20 so you can get 5 images per slide, i had issues with the container -->
-        <li>
-            <div class="row">
-                {% for video in row %}
-                <div class="col m2 s5">
-                    <div class="card">
-                        <div class="card-image">
-                            <a href="{{ video.url }}" target="_blank"><img src="{{ video.thumbnail }}" class="responsive-img"></a>
-                        </div>
-                        <div class="card-content tooltipped" data-position="top" data-tooltip="{{ video.title }}">
-                            <a href="{{ video.url }}" target="_blank"><p class="p-title">{{ video.title}}</p></a>
-                        </div>
+<h4 class="center-align">Hot 100 Music Videos</h4>
+<div class="carousel home-carousel">
+    <a href="#" class="prev left middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
+            class="large material-icons">chevron_left</i></a>
+    <a href="#" class="next right middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
+            class="large material-icons">chevron_right</i></a>
+    <div>
+        {% for video in videos %}
+        <div class="carousel-item center">
+            <div class="vertical-center">
+                <a href="{{ video.url }}" data-target="slide-out" class="sidenav-trigger" onclick="musicView()">
+                    <p class="indigo-text">#{{ video.position+1 }}</p>
+                    <img src="{{ video.thumbnail }}">
+                    <div class="card-content tooltipped" data-position="top" data-tooltip="{{ video.title }}">
+                        <!-- may remove tooltips now that titles are so wide-->
+                        <p class="truncate black-text">{{ video.title}}</p>
                     </div>
-                </div>
-                {% endfor %}
+                </a>
             </div>
-        </li>
+        </div>
         {% endfor %}
-    </ul>
-</div>
-<div class="right">
-    <button class="prev z-depth-0 btn grey btn-flat center"><i class="large material-icons">chevron_left</i></button>
-    <button class="next z-depth-0 btn grey btn-flat center"><i class="large material-icons">chevron_right</i></button>
+    </div>
 </div>
 
-<!-- implement Jevon's carousels for mobile hot 100 -->
+<h4 class="center-align">Recent 100 Songs</h4> <!-- Deezer Songs-->
+<div class="carousel home-carousel2">
+    <a href="#" class="prev2 left middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
+            class="large material-icons">chevron_left</i></a>
+    <a href="#" class="next2 right middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
+            class="large material-icons">chevron_right</i></a>
+    <div>
+        {% for video in videos %}
+        <div class="carousel-item center">
+            <div class="vertical-center">
+                <a href="{{ video.url }}" data-target="slide-out" class="sidenav-trigger">
+                    <p class="indigo-text">#{{ video.position+1 }}</p>
+                    <img src="{{ video.thumbnail }}">
+                    <div class="card-content tooltipped" data-position="top" data-tooltip="{{ video.title }}">
+                        <!-- may remove tooltips now that titles are so wide-->
+                        <p class="truncate black-text">{{ video.title}}</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 
 <script>
+    // let musicView = document.querySelector("music-view");
+    // musicView.innerHTML = `<iframe width="420" height="315" src="https://www.youtube.com/embed/{{videos.videoId}}"></iframe>`;
+
     $(document).ready(function () {
-        $('.sliderone').slider({
-            height: 400,
-            indicators: false    
-        });
-        $('.sliderone').slider('pause');
         $('.tooltipped').tooltip();
+        $('.home-carousel, .home-carousel2').carousel({
+        });
     });
 
-    $('.next').click(function () {
-        $('.sliderone').slider('next');
-        $('.sliderone').slider('pause');
+    $('.next').click(function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $('.home-carousel').carousel('next');
     });
 
-    $('.prev').click(function () {
-        $('.sliderone').slider('prev');
-        $('.sliderone').slider('pause');
+    $('.prev').click(function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $('.home-carousel').carousel('prev');
     });
 
-    
+    $('.next2').click(function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $('.home-carousel2').carousel('next');
+    });
+
+    $('.prev2').click(function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $('.home-carousel2').carousel('prev');
+    });
+
+
+
+
 </script>
 {% endblock %}

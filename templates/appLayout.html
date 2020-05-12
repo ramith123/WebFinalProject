@@ -12,6 +12,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif" type="image/gif">
     <title>{% block title %}{% endblock %}</title>
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 
     <style>
         body,
@@ -37,20 +39,20 @@
             z-index: 0;
         }
 
-        .user-profile {
-            position: relative;
-        }
+
 
         .user-profile li {
-            width: 100%;
+
             height: 0px;
             background-color: #3f51b5;
             transition: height 0.2s ease;
             position: absolute;
+            /* in Absolute, it breaks the non-mobile. in static it breaks the mobile. fixed it by modifying the carousal style*/
         }
 
         .user-profile a {
-            width: 100%;
+            width: 70px;
+
         }
 
         .play-list {
@@ -82,47 +84,308 @@
         .play-list-item button {
             margin-left: 40px;
         }
+
+        #modal1.modal {
+            background-color: rgba(0, 0, 0, 0.8);
+            width: 100%;
+            height: 100%;
+            max-height: 100%;
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #modal1 .modal-container {
+            background-color: rgb(12, 11, 11);
+            color: #fff;
+            padding: 20px;
+            width: 600px;
+            height: 420px;
+        }
+
+        #modal1 .modal-header {
+            display: flex;
+            height: 30px;
+        }
+
+        .modal-header span {
+            margin-left: auto;
+        }
+
+        .modal-header span:hover {
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-body .modal-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .modal-form {
+            width: 100%;
+            padding: 40px;
+        }
+
+        .modal-form form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start
+        }
+
+        #modal1 input {
+            margin-bottom: 40px;
+            color: #fff
+        }
+
+        .modal-form .form-footer {
+            display: flex;
+            width: 100%;
+        }
+
+        .form-footer a {
+            margin-left: auto;
+        }
+
+        button:focus {
+            outline: none;
+            background-color: rgba(0, 0, 0, 0);
+        }
+
+        .mdc-chip {
+            padding: 0 10px;
+        }
+
+        .mdc-list {
+            max-width: 800px;
+            border: 1px solid rgba(0, 0, 0, .1);
+
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .mdc-list--dense .mdc-list-item__graphic {
+
+            width: 50px;
+            height: 50px;
+
+        }
+
+        .mdc-list--dense .mdc-list-item__primary-text {
+            display: flex;
+            margin-top: 38px;
+
+        }
+
+        .mdc-list--two-line .mdc-list-item__text {
+
+            margin-top: -15px;
+        }
+
+        .mdc-chip-set {
+            flex-wrap: initial;
+
+        }
+
+        .mdc-chip-set .mdc-chip {
+            margin: 5px;
+        }
+
+        .mdc-chip .mdc-chip__icon--leading:not(.mdc-chip__icon--leading-hidden) {
+            margin-left: -4px;
+            margin-right: -4px;
+        }
+
+        .mdc-list--two-line.mdc-list--dense .mdc-list-item,
+        .mdc-list--avatar-list.mdc-list--dense .mdc-list-item {
+            height: 69px;
+        }
+
+        /* Home Page CSS */
+        .middle-indicator {
+            margin: 0;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .home-carousel,
+        .home-carousel2 {
+            height: 500px;
+            width: 60%;
+            margin-left: 5%;
+            margin-right: 5%;
+            margin: auto;
+        }
+
+        .home-carousel .carousel-item,
+        .home-carousel2 .carousel-item {
+            width: 250px;
+        }
+
+        .vertical-center {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /*  .left-middle-indicator {
+            position: relative;
+            top: 35%;
+            width: 5%;
+        }
+
+        .right-middle-indicator {
+            position: relative;
+            top: 35%;
+            width: 5%;
+        }
+
+        .slider {
+            width: 95%;
+            margin-left: 5%;
+            margin-right: 5%;
+            margin: auto;
+        }
+
+        .slider .slides li {
+            left: 5%;
+            right: 5%;
+            width: 90%;
+            background-color: #ff6f00;
+            margin-left: auto;
+            margin-right: auto;
+        }*/
+
+        .input-field input[type=search]+.label-icon {
+            top: 6px;
+        }
+
+        nav {
+
+            height: 64px;
+
+        }
     </style>
 </head>
 
 <body>
+    <div class="fixed-action-btn hide-on-med-and-down">
+        <a href="#" class="btn-floating bth-large indigo darken-3" id="scroll" style="display: none;">
+            <i class="large material-icons">arrow_drop_up</i>
+        </a>
+    </div>
     <!--Change colours and add icons-->
-    <nav class="nav-wrapper indigo">
-        <div class="container">
-            <div class="left">
+    <div class="navbar-fixed">
+        <nav class="nav-wrapper indigo darken-3">
+            <div>
                 <!-- <img width="63" height="63" src="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif">   Messes up stuff-->
-                <a href="/" class="brand-logo">RDCJ Music</a>
+                <a href="/" class="brand-logo center">RCDJ Music</a>
             </div>
-            <a href="#" class="sidenav-trigger" data-target="mobile-links">
+
+            <a href="#" class="sidenav-trigger right" data-target="mobile-links">
                 <i class="material-icons">menu</i>
             </a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="/" class="waves-effect waves-light">Home</a></li>
-                <li><a href="#" class="waves-effect waves-light">Your Playlists</a></li>
-                <!--Ensure Loggin is neccessary for access, change route to /playlists-->
-                <li><a href="#" class="waves-effect waves-light"></a>Create Playlist</a></li>
-                <!--Ensure Loggin is neccessary for access-->
-                <li><a href="/search" class="waves-effect waves-light">Search</a></li>
-                <li><a href="/register" class="waves-effect waves-light">Register</a></li>
-                <li><a href="/login" class="waves-effect waves-light">Login</a></li>
-                <li>
-                    <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
-                </li>
-            </ul>
-        </div>
-    </nav>
 
+            <div class="left">
+                <ul class="hide-on-med-and-down">
+                    <li><a href="/" class="waves-effect waves-light">Home</a></li>
+                    <li><a href="/playlist" class="waves-effect waves-light">Your Playlists</a></li>
+                    <!--Ensure Loggin is neccessary for access, change route to /playlists-->
+                    <li><a href="#" class="waves-effect waves-light" onclick="launchModal()">Create Playlist</a></li>
+
+                </ul>
+            </div>
+
+            <div class="right" id="right-nav">
+                <ul>
+                    <li class="hide-on-med-and-down" id="desktop-register-button"><a href="/register"
+                            class="waves-effect waves-light">Register</a>
+                    </li>
+                    <li class="hide-on-med-and-down" id="desktop-login-button"><a href="/login"
+                            class="waves-effect waves-light">Login</a></li>
+                    <li class="hide-on-small-only">
+                        <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
+                    </li>
+                </ul>
+            </div>
+
+            <form class="left" method="POST" action="/search">
+                <div class="input-field">
+                    <input class="autocomplete" id="search" type="search" name="queryBox" autocomplete="off"
+                        style="width:17rem" required>
+                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                    <i class="material-icons">close</i>
+                </div>
+            </form>
+        </nav>
+    </div>
+
+    <!-- Mobile sidenav menu -->
     <ul class="sidenav left-align" id="mobile-links">
         <li><a href="/" class="waves-effect waves-dark">Home</a></li>
-        <li><a href="#" class="waves-effect waves-dark">Your Playlists</a></li>
+        <li><a href="/playlist" class="waves-effect waves-dark">Your Playlists</a></li>
         <!--Ensure Loggin is neccessary for access, change route to /playlists-->
-        <li><a href="#" class="waves-effect waves-dark">Create Playlist</a></li>
+        <li><a href="#" class="waves-effect waves-dark" onclick="launchModal()">Create Playlist</a></li>
         <!--Ensure Loggin is neccessary for access-->
-        <li><a href="/search" class="waves-effect waves-dark">Search</a></li>
-        <li><a href="/register" class="waves-effect waves-dark">Register</a></li>
-        <li><a href="/login" class="waves-effect waves-dark">Login</a></li>
+        <li id="mobile-register-button"><a href="/register" class="waves-effect waves-dark">Register</a></li>
+        <li id="mobile-login-button"><a href="/login" class="waves-effect waves-dark">Login</a></li>
+        <li>
+            <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
+        </li>
     </ul>
-    <a href="" class="brand-logo center ">{% block page %}{% endblock %}</a>
+
+    <!-- Sidenav Player -->
+    <ul id="slide-out" class="sidenav nav2" style="width:500px;">
+        <li>
+            <div class="user-view ">
+                <iframe class="music-view" width="420" height="315" src="https://www.youtube.com/embed/tgbNymZ7vqY">
+                </iframe>
+            </div>
+        </li>
+        <li><a href="#!"><i class="material-icons">cloud</i>Play on Youtube</a></li>
+        <li><a href="#!"><i class="material-icons">cloud</i>Play on Youtube</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+    </ul>
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-container">
+            <div class="modal-header"><span onclick="closeModal()">&#10005;</span></div>
+            <div class="modal-body">
+                <div class="modal-title">Create Playlist</div>
+                <div class="modal-form">
+                    <form method="POST" action="/createPlaylist">
+                        <label for="title">Name</label>
+                        <input type="text" id="play-list-title" name="title" required>
+                        <label for="description">Description</label>
+                        <input type="text" id="play-list-description" name="description">
+
+                        <!-- <div class="form-footer"><a class="waves-effect waves-light btn">Create</a></div> -->
+                        <div class="form-footer ">
+                            <input class="waves-effect waves-light btn" id="submit" name="submit" type="submit"
+                                value="create">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <a class="center">{% block page %}{% endblock %}</a>
 
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
     <script src="https://code.iconify.design/1/1.0.4/iconify.min.js"></script>
@@ -130,9 +393,148 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <script>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        M.toast({ html: '{{message}}', classes: 'rounded' });
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
         $(document).ready(function () {
+            let inputBox = $("input.autocomplete"); //[name='QueryBox']
+            let submitIcon = $('.label-icon');
+            let isOpen = false;
+            inputBox.hide();
+
+            submitIcon.click(function () {
+                if (isOpen == false) {
+                    inputBox.show();
+                    // inputBox.autocomplete({
+                    //     data: {
+                    //     "Drake": null,
+                    //     "Travis Scott": null,
+                    //     "Eminem": null,
+                    //     "Taylor Swift": null
+                    //     }
+                    // });
+                    isOpen = true;
+                } else {
+                    inputBox.hide();
+                    isOpen = false;
+                }
+            });
+
+            $(document).mouseup(function () {
+                if (isOpen == true) {
+                    submitIcon.click();
+                }
+            });
+
             $('.sidenav').sidenav();
-        })
+            $('.nav2').sidenav({
+                edge: 'right'
+            });
+
+            $('.fixed-action-btn').floatingActionButton();
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('#scroll').fadeIn();
+                } else {
+                    $('#scroll').fadeOut();
+                }
+            });
+            $('#scroll').click(function () {
+                $("html, body").animate({ scrollTop: 0 }, 400);
+                return false;
+            });
+        });
+
+
+        // function musicView(){  <!-- chaning embedded video issues -->
+        // let musicView = document.querySelector("music-view");
+        // // musicView.innerHTML = `<iframe width="420" height="315" src="https://www.youtube.com/embed/FdTAY2vmZm8"></iframe>`;
+        // alert("Test");
+        // musicView.innerHTML = `<p class="black-text">Testinggdnfjgdf</p>`;
+        // };
+
+
+        function hideLogAndRegAndShowUser() {
+            let registerBtn = document.querySelector("#desktop-register-button");
+            let loginBtn = document.querySelector("#desktop-login-button");
+            let mobileRegisterBtn = document.querySelector("#mobile-register-button");
+            let mobileLoginBtn = document.querySelector("#mobile-login-button");
+            registerBtn.style.visibility = "hidden";
+            loginBtn.style.visibility = "hidden";
+            mobileRegisterBtn.style.visibility = "hidden";
+            mobileLoginBtn.style.visibility = "hidden";
+
+            let userProfile = document.querySelector(".user-profile");
+            // let userProfile2 = document.querySelector(".user-profile2");
+            //console.log(userProfile.innerHTML);
+
+            let userProfileHTML = `
+        <a href="#" class = "user-logged-in">{{current_user.username}}</a>
+        <li style="height: 0px;">
+            <a href="/logout" class="waves-effect waves-light" style="height: 0px;">logout</a>
+        </li>`;
+            console.log(userProfileHTML);
+            userProfile.innerHTML = userProfileHTML;
+            // userProfile2.innerHTML = userProfileHTML;
+
+            userProfile.addEventListener("mouseleave", e => {
+                userProfile.querySelector("li").style.height = "0px";
+                userProfile.querySelectorAll("a")[1].style.height = "0px";
+            })
+
+            userProfile.addEventListener("mouseover", e => {
+                userProfile.querySelector("li").style.height = "64px";
+                userProfile.querySelectorAll("a")[1].style.height = "64px";
+
+            })
+
+            // userProfile2.addEventListener("mouseleave", e => {
+            //     userProfile2.querySelector("li").style.height = "0px";
+            //     userProfile2.querySelectorAll("a")[1].style.height = "0px";
+            // })
+
+            // userProfile2.addEventListener("mouseover", e => {
+            //     userProfile.querySelector("li").style.height = "64px";
+            //     userProfile2.querySelectorAll("a")[1].style.height = "64px";
+
+            // })
+
+
+
+        }
+        {% if current_user.is_authenticated %}
+        hideLogAndRegAndShowUser();
+        {% else %}
+        let profileNameButton = document.querySelector(".user-logged-in");
+        // let profileNameButton2 = document.querySelector(".user-logged-in2");
+        let userProfile = document.querySelector(".user-profile");
+        // let userProfile2 = document.querySelector(".user-profile2");
+        userProfile.style.width = "0px";
+        // userProfile2.style.width = "0px";
+        profileNameButton.style.width = "0px";
+        // profileNameButton2.style.width = "0px";
+        /*need to put above in a function */
+        {% endif %}
+
+        function launchModal() {
+            {% if current_user.is_anonymous %}
+            window.location.pathname = '/login';
+            {% else %}
+            let modal = document.getElementById("modal1");
+            modal.style.display = "flex";
+            {% endif %}
+        }
+
+        function closeModal() {
+            let modal = document.getElementById("modal1");
+            modal.style.display = "none";
+        }
+
+
     </script>
 
     <div>{% block content %}{% endblock %}</div>

@@ -1,23 +1,32 @@
 import requests
 
 # from termcolor import colored
-from model import Song
+from model import Song, Playlist
 
 trackUrl = "https://api.deezer.com/track/"
-serachUrl = "https://api.deezer.com/search?q="
+searchUrl = "https://api.deezer.com/search?q="
 youtubeApiKey = "AIzaSyC0VqCv-KW7cRsmYBUUHHqTJeRBTVnP-h0"
 search_url = "https://www.googleapis.com/youtube/v3/search"
 youtubeVideoLink = "https://www.youtube.com/watch?v="
 
 
 def getJsonForSearch(query):  # get json data for a search query
-    url = serachUrl + query
+    url = searchUrl + query
     reply = requests.get(url)
     return reply.json()["data"]
 
 
-def getSongsList(query):  # get SongList with required information
-    data = getJsonForSearch(query)
+def getJsonForSongId(id):  # get json data for a search query
+    url = trackUrl + id
+    reply = requests.get(url)
+    return reply.json()
+
+
+def getSongsList(query=None, data=None):  # get SongList with required information
+    if data:
+        data = [data]
+    else:
+        data = getJsonForSearch(query)
     songList = []
     for i, song in enumerate(data):
         track = {
@@ -27,7 +36,6 @@ def getSongsList(query):  # get SongList with required information
             "album": song["album"]["title"],
             "albumImgUrl": song["album"]["cover_big"],
             "url": song["link"],
-            # maybe add youtube link here. Cerate a separate function that will get artist and song name
         }
         if i < 3:
             track["youtubeUrl"] = getYoutubeLink(song["title"], song["artist"]["name"])
@@ -37,6 +45,12 @@ def getSongsList(query):  # get SongList with required information
             )
         songList.append(track)
     return songList
+
+
+def getSongModelById(id):
+    data = getJsonForSongId(str(id))
+    songList = getSongsList(data=data)
+    return getSongModel(songList[0])
 
 
 def getSongModel(song):  # returns sqlalchemy Song model for a song
@@ -77,6 +91,3 @@ def getYoutubeLink(song, artist, quota=False):
 
 
 # pip install termcolor before executing this file
-# if __name__ == "__main__":
-
-# print(getYoutubeLink("hello", "Adele"))

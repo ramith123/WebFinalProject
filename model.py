@@ -47,9 +47,7 @@ class Playlist(db.Model):
     )
 
     def toDict(self):
-        return {
-            "id": self.id,
-        }
+        return {"id": self.id, "name": self.name, "description": self.description}
 
 
 class Song(db.Model):
@@ -59,7 +57,15 @@ class Song(db.Model):
     album = db.Column(db.String(128), nullable=False)
     albumImgUrl = db.Column(db.String(512), nullable=False, unique=True)
     url = db.Column(db.String(512), nullable=False, unique=True)
-    youtubeUrl = db.Column(db.String(512), nullable=False, unique=True)
+    youtubeUrl = db.Column(db.String(512), nullable=False)
 
     def toDict(self):
-        return {"id": self.id, "url": self.url}
+        return {
+            "id": self.id,
+            "title": self.title,
+            "artist": self.artist,
+            "album": self.album,
+            "albumImgUrl": self.albumImgUrl,
+            "url": self.url,
+            "youtubeUrl": self.youtubeUrl,
+        }
