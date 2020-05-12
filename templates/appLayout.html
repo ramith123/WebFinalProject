@@ -21,8 +21,35 @@
             height: 100%;
             text-align: center;
             margin: 0;
-            background-color: rgb(255, 255, 255);
+            background-color: #373a40;
+            color: rgba(255, 255, 255, 0.72);
             /*background-color: rgb(14, 17, 31);*/
+
+        }
+
+        .amber.darken-3 {
+            background-color: #393C43 !important;
+        }
+
+        /* autofill override*/
+        @-webkit-keyframes autofill {
+
+            0%,
+            100% {
+                color: rgba(255, 255, 255, 0.72);
+                background: transparent;
+            }
+        }
+
+        input:-webkit-autofill {
+            -webkit-animation-delay: 1s;
+            /* Safari support - any positive time runs instantly */
+            -webkit-animation-name: autofill;
+            -webkit-animation-fill-mode: both;
+        }
+
+        .black-text {
+            color: rgba(255, 255, 255, 0.72) !important;
 
         }
 
@@ -30,12 +57,23 @@
             color: white;
         }
 
+        .card {
+
+            background-color: #36393E;
+
+
+        }
+
+        .indigo.darken-3 {
+            background-color: #1e2124 !important;
+        }
+
         [type="checkbox"].filled-in:checked+span:not(.lever):after {
             top: 0;
             width: 20px;
             height: 20px;
-            border: 2px solid #ff6f00;
-            background-color: #ff6f00;
+            border: 2px solid #393C43;
+            background-color: #393C43;
             z-index: 0;
         }
 
@@ -241,23 +279,26 @@
             width: 250px;
         }
 
-        .carousel-image{
+        .carousel-image {
             width: 350px;
         }
+
         @media only screen and (max-device-width: 400px) {
-        .home-carousel,
-        .home-carousel2 {
-            height: 300px;
 
-        }
-        .home-carousel .carousel-item,
-        .home-carousel2 .carousel-item {
-            height:100%;
-        }
+            .home-carousel,
+            .home-carousel2 {
+                height: 300px;
 
-        .carousel-image{
-            width: 250px;
-        }
+            }
+
+            .home-carousel .carousel-item,
+            .home-carousel2 .carousel-item {
+                height: 100%;
+            }
+
+            .carousel-image {
+                width: 250px;
+            }
         }
 
         .vertical-center {
