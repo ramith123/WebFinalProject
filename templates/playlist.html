@@ -72,7 +72,20 @@
             let response = await fetch(url);//1. Send http request and get response
             let result = await response.json();//2. Get data from response
 
-            populateSongs(result);// 3. Do something with the data
+            populateSongs(result);
+            var elems = document.querySelectorAll('.dropdown-trigger');
+            var instances = M.Dropdown.init(elems, {
+                inDuration: 300,
+                outDuration: 225,
+                container: document.getElementById('Menu'),
+                hover: false, // Activate on hover
+                belowOrigin: true, // Displays dropdown below the button
+                alignment: 'right', // Displays dropdown with edge aligned to the left of button
+                //onOpenStart: getPlaylistData
+            }
+            );
+
+            // 3. Do something with the data
         } catch (e) {
             console.log(e);//catch and log any errors
         }
@@ -82,10 +95,32 @@
     function populateSongs(songs) {
         let html = "<h4>Loading Songs...</h4>";
         let ele = document.getElementById("list");
+
+        {
+            var elems = document.querySelectorAll('.dropdown-trigger');
+            var instances = M.Dropdown.init(elems, {
+                inDuration: 300,
+                outDuration: 225,
+                container: document.getElementById('Menu'),
+                hover: false, // Activate on hover
+                belowOrigin: true, // Displays dropdown below the button
+                alignment: 'right', // Displays dropdown with edge aligned to the left of button
+                //onOpenStart: getPlaylistData
+            }
+            );
+        }
+
+
         ele.innerHTML = html;
         html = "";
         for (song of songs) {
             html += `
+            <div id="Menu">
+                <ul id="${song.id}" class="dropdown-content" style="">
+                  <li><a href="#" tabindex="-1" onclick="testFunc(${song.id})">delete</a></li>
+                </ul>
+              </div>
+
             <li class="mdc-list-item mdc-ripple-upgraded" tabindex="-1">
                 <img class="mdc-list-item__graphic" aria-hidden="true" src="${song.albumImgUrl}" />
                 <span class="mdc-list-item__text"><span class="mdc-list-item__primary-text">${song.title}</span>
@@ -137,7 +172,9 @@
         ele.innerHTML = html;
     }
 
-
+    function testFunc(id) {
+        console.log(id);
+    }
 
 </script>
 
