@@ -22,7 +22,7 @@ class Register(FlaskForm):
     )
     confirm = PasswordField("Repeat password", validators=[InputRequired()])
     accept_tos = BooleanField(
-        'I accept the <a href="/termsOfService">Terms of Service</a> and the <a href="/Privacypolicy.html"> Privacy Policy</a>',
+        'I accept the <a href="/termsOfService">Terms of Service</a> and the <a href="/Privacypolicy"> Privacy Policy</a>',
         validators=[InputRequired()],
         render_kw={"class": "filled-in"},
     )
