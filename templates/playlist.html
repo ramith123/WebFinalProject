@@ -1,6 +1,6 @@
 {% extends "appLayout.html" %}
 {% block title %}Playlists{% endblock %}
-{% block page %}Playlists{% endblock %}
+{% block page %}{% endblock %}
 
 {{ super() }}
 
@@ -71,7 +71,7 @@
             let response = await fetch(url);//1. Send http request and get response
             let result = await response.json();//2. Get data from response
 
-            populateSongs(result);
+            populateSongs(result, pid);
             var elems = document.querySelectorAll('.dropdown-trigger');
             var instances = M.Dropdown.init(elems, {
                 inDuration: 300,
@@ -91,7 +91,7 @@
     }
 
 
-    function populateSongs(songs) {
+    function populateSongs(songs, pid) {
         let html = "<h4>Loading Songs...</h4>";
         let ele = document.getElementById("list");
 
@@ -116,7 +116,7 @@
             html += `
             <div id="Menu">
                 <ul id="${song.id}" class="dropdown-content" style="">
-                  <li><a href="#" tabindex="-1" onclick="testFunc(${song.id})">delete</a></li>
+                  <li><a href="#" tabindex="-1" onclick="testFunc(${song.id},${pid})">delete</a></li>
                 </ul>
               </div>
 
@@ -173,11 +173,31 @@
         ele.innerHTML = html;
     }
 
-    function testFunc(id) {
-        console.log(id);
+    async function testFunc(sid, pid) {
+        await deleteSong([sid, pid]);
+        await getSongs(pid);
     }
 
+    async function deleteSong(data) {
+        let url = baseUrl + "playlist"
+        try {
 
+            let response = await fetch(
+                url,
+                {
+                    method: 'DELETE',
+                    body: JSON.stringify(data),//convert data to JSON string
+                    headers: { 'Content-Type': 'application/json' }// JSON data
+                },
+            );//1. Send http request and get response
+
+            let result = await response.text();//2. Get message from response
+            console.log(result);//3. Do something with the message
+
+        } catch (error) {
+            console.log(error);//catch and log any errors
+        }
+    }
 </script>
 
 {% endblock %}

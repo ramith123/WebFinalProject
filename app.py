@@ -144,8 +144,20 @@ def logout():
     return render_template("logout.html")
 
 
-@app.route("/playlist", methods=["GET", "POST"])
+@app.route("/playlist", methods=["GET", "DELETE"])
 def playlist():
+    if request.method == "DELETE":
+        songId, playlistId = request.get_json()
+        playlist = Playlist.query.filter_by(id=playlistId).first()
+        song = Song.query.filter_by(id=songId).first()
+        try:
+            playlist.songs.remove(song)
+            db.session.commit()
+            return "success", 200
+        except:
+            return "Song not found", 204
+
+        print(songId, playlistId)
     if current_user.is_anonymous:
         flash("You have to login first")
         return redirect(url_for("login"))
