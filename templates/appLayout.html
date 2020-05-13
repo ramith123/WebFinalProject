@@ -365,7 +365,25 @@
             width: 350px;
         }
 
+        .nav2{
+            width:500px;
+        }
+
+        .nav2 .frame{
+            width:420;
+            height:315;
+        }
+
         @media only screen and (max-device-width: 764px) {
+            .nav2{
+                width:300px;
+            }
+
+            .nav2 .frame{
+                width:336px;
+                height:252px;
+            }
+
             .myContainer {
                 /*if i put with only in here for some reason its keeping the old css for margin-left and margin-right*/
                 width: 100%;
@@ -413,7 +431,7 @@
         }
 
         .modal2{
-            height:500px;
+            height:400px;
         }
     </style>
 </head>
@@ -489,35 +507,22 @@
     </ul>
 
     <!-- Sidenav Player -->
-    <ul id="slide-out" class="sidenav nav2" style="">
+    <ul id="slide-out" class="sidenav nav2">
         <li>
-            <div class="user-view">
-                <iframe width="420" height="315" src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                </iframe>
-            </div>
-        </li>
-        <li>
-            <div class="card-content tooltipped view-title" data-position="top"
-                data-tooltip="Bohemian Rhapsody | Muppet Music Video | The Muppets">
-                <span class="truncate">Bohemian Rhapsody | Muppet Music Video | The Muppets</span>
+            <div class="music-view">
+                
             </div>
             <div class="divider"></div>
         </li>
         <li>
+            <div class="view-title">
+                
+            </div>
+        </li>
+        <li>
+            <div class="divider"></div>
             <div class="mdc-list-item__meta mdc-chip-set view-buttons">
-                <a href="#" class="mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17">
-                    <img class="mdc-chip__icon mdc-chip__icon--leading"
-                        src="https://img.icons8.com/windows/32/000000/deezer.png">
-                    <span role="button" tabindex="0" class="mdc-chip__text">Play on Deezer</span>
-                </a>
-
-                <a href="#" class=" mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17">
-                    <img class="mdc-chip__icon mdc-chip__icon--leading"
-                        src="https://img.icons8.com/material-sharp/24/000000/youtube-play.png">
-                    <span role="button" tabindex="0" class="mdc-chip__text">Play on Youtube</span>
-                </a>
-
-
+                
             </div>
         </li>
     </ul>
@@ -564,7 +569,7 @@
         {% endwith %}
 
         $(document).ready(function () {
-            let inputBox = $("input.nav-search"); //[name='QueryBox']
+            let inputBox = $("input.nav-search");
             let submitIcon = $('.label-icon');
             let isOpen = false;
             inputBox.hide();
@@ -613,61 +618,59 @@
         });
 
         // Change default video in player
-        function musicView(videoId, songUrl, youtubeUrl) {
-            let view = document.querySelector(".user-view");
-            let title = document.querySelector(".view-title");
-            let buttons = document.querySelector(".view-buttons")
-            view.innerHTML = `<iframe width="420" height="315" src="https://www.youtube.com/embed/${videoId}"></iframe>`;
-            //title, buttons, maybe embedded search query
-            buttons.innerHTML = `
-            <a href="#" class="mdc-chip mdc-ripple-upgraded sideButtons" onclick="deezerView(${songurl})"
-                  role="row" id="mdc-chip-17">
-                  <img class="mdc-chip__icon mdc-chip__icon--leading" src="https://img.icons8.com/windows/32/000000/deezer.png">
-                  <span role="button" tabindex="0" class="mdc-chip__text">Play on Deezer</span>
-                </a>
+        // function musicView(videoId, songUrl, youtubeUrl) {
+        //     let view = document.querySelector(".user-view");
+        //     let title = document.querySelector(".view-title");
+        //     let buttons = document.querySelector(".view-buttons")
+        //     view.innerHTML = `<iframe width="420" height="315" src="https://www.youtube.com/embed/${videoId}"></iframe>`;
+        //     //title, buttons, maybe embedded search query
+        //     buttons.innerHTML = `
+        //     <a href="#" class="mdc-chip mdc-ripple-upgraded sideButtons" onclick="deezerView(${songurl})"
+        //           role="row" id="mdc-chip-17">
+        //           <img class="mdc-chip__icon mdc-chip__icon--leading" src="https://img.icons8.com/windows/32/000000/deezer.png">
+        //           <span role="button" tabindex="0" class="mdc-chip__text">Play on Deezer</span>
+        //         </a>
           
-                <a href="#" class=" mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17" onclick="musicView(${youtubeUrl})">
-                  <img class="mdc-chip__icon mdc-chip__icon--leading"
-                    src="https://img.icons8.com/material-sharp/24/000000/youtube-play.png">
-                  <span role="button" tabindex="0" class="mdc-chip__text">Play on Youtube</span>
-                </a>
+        //         <a href="#" class=" mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17" onclick="musicView(${youtubeUrl})">
+        //           <img class="mdc-chip__icon mdc-chip__icon--leading"
+        //             src="https://img.icons8.com/material-sharp/24/000000/youtube-play.png">
+        //           <span role="button" tabindex="0" class="mdc-chip__text">Play on Youtube</span>
+        //         </a>
           
-                <a id="dropdowner" data-mdc-ripple-is-unbounded=""
-                  class="dropdown-trigger mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded sideButtons"
-                  title="" tabindex="-1"
-                  style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">
-                  more_vert
-                </a>`
-        };
+        //         <a id="dropdowner" data-mdc-ripple-is-unbounded=""
+        //           class="dropdown-trigger mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded sideButtons"
+        //           title="" tabindex="-1"
+        //           style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">
+        //           more_vert
+        //         </a>`
+        // };
 
-        function deezerView(songId, songTitle, songArtist, songAlbum) {
-            let view = document.querySelector(".user-view");
+        function deezerView(songUrl, youtubeUrl, songId, songTitle, songArtist, songAlbum) {
+            let view = document.querySelector(".music-view");
             let title = document.querySelector(".view-title");
             let buttons = document.querySelector(".view-buttons")
-            console.log(songId, songTitle, songArtist, songAlbum);
             view.innerHTML = `
             <iframe scrolling="no" frameborder="0" allowTransparency="true" 
             src="https://www.deezer.com/plugins/player?format=square&autoplay=false&playlist=false&width=300&height=300&color=007FEB&layout=dark&size=medium&type=tracks&id=${songId}&app_id=1" width="300" height="300"></iframe>`
+            
+            // <div class="tooltipped view-title" data-position="top" data-tooltip="${songArtist} - ${songTitle}">
+                // <div class="tooltipped view-title" data-position="top" data-tooltip="Album: ${songAlbum}">
+            title.innerHTML =  `<span class="center-align truncate">${songArtist} - ${songTitle}</span>
+                                <span class="center-align truncate">Album: ${songAlbum}</span>`
+
+
 
             buttons.innerHTML = `
-            <a href="#" class="mdc-chip mdc-ripple-upgraded sideButtons" onclick="deezerView(${songurl})"
-                  role="row" id="mdc-chip-17">
-                  <img class="mdc-chip__icon mdc-chip__icon--leading" src="https://img.icons8.com/windows/32/000000/deezer.png">
-                  <span role="button" tabindex="0" class="mdc-chip__text">Play on Deezer</span>
-                </a>
+            <a href="${songUrl}" target="_blank" class="mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17">
+                <img class="mdc-chip__icon mdc-chip__icon--leading" src="https://img.icons8.com/windows/32/000000/deezer.png">
+                <span role="button" tabindex="0" class="mdc-chip__text">Play on Deezer</span>
+            </a>
           
-                <a href="#" class=" mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17" onclick="musicView(${youtubeUrl})">
-                  <img class="mdc-chip__icon mdc-chip__icon--leading"
-                    src="https://img.icons8.com/material-sharp/24/000000/youtube-play.png">
-                  <span role="button" tabindex="0" class="mdc-chip__text">Play on Youtube</span>
-                </a>
-          
-                <a id="dropdowner" data-mdc-ripple-is-unbounded=""
-                  class="dropdown-trigger mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded sideButtons"
-                  title="" tabindex="-1"
-                  style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">
-                  more_vert
-                </a>`
+            <a href="${youtubeUrl}" target="_blank" class="mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17">
+                <img class="mdc-chip__icon mdc-chip__icon--leading"
+                src="https://img.icons8.com/material-sharp/24/000000/youtube-play.png">
+                <span role="button" tabindex="0" class="mdc-chip__text">Play on Youtube</span>
+            </a>`
         }
 
 

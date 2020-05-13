@@ -36,14 +36,11 @@
     <a href="#" class="next2 right right-middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
             class="large material-icons">chevron_right</i></a>
     <div>
-        {% set position = 0 %}
         {% for track in tracks %}
-        {% set position = position + 1 %}
         <div class="carousel-item center">
             <div class="vertical-center">
-                <a href="{{ track.url }}" data-target="modal2" class="modal-trigger"
-                    onclick="modalDeezerView(`{{ track.id }}`)">
-                    <p class="indigo-text">#{{ position }}</p>
+                <a href="{{ track.url }}" data-target="modal2" class="modal-trigger" onclick="modalDeezerView(`{{ track.id }}`)">
+                    <p class="indigo-text">#{{ track.position }}</p>
                     <img src="{{ track.albumImgUrl }}" class="carousel-image ">
                     <div class="card-content tooltipped" data-position="top" data-tooltip="{{ track.title }}">
                         <!-- may remove tooltips now that titles are so wide-->
