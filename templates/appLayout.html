@@ -248,6 +248,12 @@
             height: 69px;
         }
 
+        .myContainer{
+            width:80%;
+            margin-left:10%;
+            margin-right:10%;
+        }
+
         /* Home Page CSS */
         .left-middle-indicator {
             margin-left: 350px;
@@ -283,7 +289,12 @@
             width: 350px;
         }
 
-        @media only screen and (max-device-width: 400px) {
+        @media only screen and (max-device-width: 764px) {
+            .myContainer{ /*if i put with only in here for some reason its keeping the old css for margin-left and margin-right*/
+                width:100%;
+                margin-left:0%;
+                margin-right:0%;
+            }
 
             .home-carousel,
             .home-carousel2 {
@@ -327,6 +338,7 @@
     <!--Change colours and add icons-->
     <div class="navbar-fixed">
         <nav class="nav-wrapper indigo darken-3">
+            <div class="myContainer center">
             <div>
                 <!-- <img width="63" height="63" src="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif">   Messes up stuff-->
                 <a href="/" class="brand-logo center">RCDJ Music</a>
@@ -358,16 +370,17 @@
                     </li>
                 </ul>
             </div>
-
+            <div>
             <form class="left" method="POST" action="/search">
                 <div class="input-field">
-                    <input class="autocomplete" id="search" type="search" name="queryBox" autocomplete="off"
-                        style="width:17rem" required>
+                    <input class="nav-search" id="search" type="search" name="queryBox" autocomplete="off" style="width:17rem; height:64px;" required>
                     <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                     <i class="material-icons">close</i>
                 </div>
             </form>
+            </div>
         </nav>
+    </div>
     </div>
 
     <!-- Mobile sidenav menu -->
@@ -460,7 +473,7 @@
         {% endwith %}
 
         $(document).ready(function () {
-            let inputBox = $("input.autocomplete"); //[name='QueryBox']
+            let inputBox = $("input.nav-search"); //[name='QueryBox']
             let submitIcon = $('.label-icon');
             let isOpen = false;
             inputBox.hide();
