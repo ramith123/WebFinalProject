@@ -433,6 +433,10 @@
         .modal2 {
             height: 400px;
         }
+        .nav-icons{
+            position:relative;
+            top:6px;
+        }
     </style>
 </head>
 
@@ -457,22 +461,24 @@
 
                 <div class="left">
                     <ul class="hide-on-med-and-down">
-                        <li><a href="/" class="waves-effect waves-light">Home</a></li>
-                        <li><a href="/playlist" class="waves-effect waves-light">Your Playlists</a></li>
+                        <li><a href="/" class="waves-effect waves-light"><i class="material-icons nav-icons" style="display:inline;">home</i>Home</a></li>
+                        <li><a href="/playlist" class="waves-effect waves-light"><i class="material-icons nav-icons" style="display:inline;">library_music</i>Your Playlists</a></li>
                         <!--Ensure Loggin is neccessary for access, change route to /playlists-->
-                        <li><a href="#" class="waves-effect waves-light" onclick="launchModal()">Create Playlist</a>
-                        </li>
+                        <li><a href="#" class="waves-effect waves-light" onclick="launchModal()"><i class="material-icons nav-icons" style="display:inline;">add_box</i>Create Playlist</a></li>
 
                     </ul>
                 </div>
 
                 <div class="right" id="right-nav">
                     <ul>
+                        <li class="hide-on-med-and-down" id="desktop-aboutus-button"><a href="#"
+                            class="waves-effect waves-light"><i class="material-icons nav-icons" style="display:inline;">info</i>About Us</a>
+                        </li>
                         <li class="hide-on-med-and-down" id="desktop-register-button"><a href="/register"
-                                class="waves-effect waves-light">Register</a>
+                                class="waves-effect waves-light"><i class="material-icons nav-icons" style="display:inline;">account_circle</i>Register</a>
                         </li>
                         <li class="hide-on-med-and-down" id="desktop-login-button"><a href="/login"
-                                class="waves-effect waves-light">Login</a></li>
+                                class="waves-effect waves-light"><i class="material-icons nav-icons" style="display:inline;">exit_to_app</i>Login</a></li>
                         <li class="hide-on-small-only">
                             <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
                         </li>
@@ -675,10 +681,12 @@
 
 
         function hideLogAndRegAndShowUser() {
+            let aboutUsBtn = document.querySelector("#desktop-aboutus-button");
             let registerBtn = document.querySelector("#desktop-register-button");
             let loginBtn = document.querySelector("#desktop-login-button");
             let mobileRegisterBtn = document.querySelector("#mobile-register-button");
             let mobileLoginBtn = document.querySelector("#mobile-login-button");
+            aboutUsBtn.style.visibility = "hidden";
             registerBtn.style.visibility = "hidden";
             loginBtn.style.visibility = "hidden";
             mobileRegisterBtn.style.visibility = "hidden";
@@ -688,10 +696,10 @@
             // let userProfile2 = document.querySelector(".user-profile2");
             //console.log(userProfile.innerHTML);
 
-            let userProfileHTML = `
-        <a href="#" class = "user-logged-in">{{current_user.username}}<i class="material-icons">arrow_drop_down</i></a>
+        let userProfileHTML = `
+        <a class="user-logged-in" href="#!">{{current_user.username}}<i class="material-icons nav-icons" style="display:inline;">arrow_drop_down</i></a>
         <li style="height: 0px;">
-            <a href="/logout" class="waves-effect waves-light" style="height: 0px;">logout</a>
+             <a href="/logout" class="waves-effect waves-light" style="height: 0px;">logout</a>
         </li>`;
             console.log(userProfileHTML);
             userProfile.innerHTML = userProfileHTML;
