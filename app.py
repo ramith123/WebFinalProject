@@ -122,6 +122,13 @@ def register():
             return redirect(url_for("login"))
     return render_template("register.html", form=form)
 
+@app.route("/termsOfService")
+def termsOfService():
+    return render_template("termsOfService.html")
+
+@app.route("/Privacypolicy")
+def Privacypolicy():
+    return render_template("Privacypolicy.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
