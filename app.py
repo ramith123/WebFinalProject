@@ -12,7 +12,12 @@ import json
 from requests.models import Response
 from unittest.mock import Mock
 from isodate import parse_duration
-from deezerAndYoutubeThings import getSongsList, getSongModelById, getDeezerPlaylist
+from deezerAndYoutubeThings import (
+    getSongsList,
+    getSongModelById,
+    getDeezerPlaylist,
+    getRandomColor,
+)
 
 # from sqlalchemy.exc import IntegrityError
 # from datetime import timedelta
@@ -172,7 +177,10 @@ def createPLaylist():
     if request.method == "POST":
         data = request.form
         newPlaylist = Playlist(
-            name=data["title"], description=data["description"], userid=current_user.id
+            name=data["title"],
+            description=data["description"],
+            userid=current_user.id,
+            color=getRandomColor(),
         )
         db.session.add(newPlaylist)
         db.session.commit()
