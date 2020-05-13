@@ -12,7 +12,12 @@ import json
 from requests.models import Response
 from unittest.mock import Mock
 from isodate import parse_duration
-from deezerAndYoutubeThings import getSongsList, getSongModelById
+from deezerAndYoutubeThings import (
+    getSongsList,
+    getSongModelById,
+    getDeezerPlaylist,
+    getRandomColor,
+)
 
 # from sqlalchemy.exc import IntegrityError
 # from datetime import timedelta
@@ -68,7 +73,6 @@ app.app_context().push()
 def hello():
     playlist_url = "https://www.googleapis.com/youtube/v3/playlistItems"
     videos = []
-
     playlist_params = {
         "key": app.config["YOUTUBE_API_KEY"],
         "playlistId": "PL4fGSI1pDJn69On1f-8NAvX_CYlx7QyZc",  # Top 100 Music Videos United States(Playlist) on YouTube Music Global Charts channel",
@@ -94,7 +98,9 @@ def hello():
             "position": result["snippet"]["position"],
         }
         videos.append(video_data)
-    return render_template("home.html", videos=videos)
+
+    playList = getDeezerPlaylist()
+    return render_template("home.html", videos=videos, tracks=playList)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -144,8 +150,20 @@ def logout():
     return render_template("logout.html")
 
 
-@app.route("/playlist", methods=["GET", "POST"])
+@app.route("/playlist", methods=["GET", "DELETE"])
 def playlist():
+    if request.method == "DELETE":
+        songId, playlistId = request.get_json()
+        playlist = Playlist.query.filter_by(id=playlistId).first()
+        song = Song.query.filter_by(id=songId).first()
+        try:
+            playlist.songs.remove(song)
+            db.session.commit()
+            return "success", 200
+        except:
+            return "Song not found", 204
+
+        print(songId, playlistId)
     if current_user.is_anonymous:
         flash("You have to login first")
         return redirect(url_for("login"))
@@ -159,7 +177,10 @@ def createPLaylist():
     if request.method == "POST":
         data = request.form
         newPlaylist = Playlist(
-            name=data["title"], description=data["description"], userid=current_user.id
+            name=data["title"],
+            description=data["description"],
+            userid=current_user.id,
+            color=getRandomColor(),
         )
         db.session.add(newPlaylist)
         db.session.commit()

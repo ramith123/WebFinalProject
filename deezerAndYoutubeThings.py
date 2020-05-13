@@ -2,12 +2,45 @@ import requests
 
 # from termcolor import colored
 from model import Song, Playlist
+from random import choice
 
+colors = [
+    "(80, 114, 226)",
+    "(80, 209, 226)",
+    "(80, 226, 102)",
+    "(180, 226, 80)",
+    "(236, 167, 72)",
+    "(236, 84, 72)",
+    "(236, 72, 159)",
+    "(207, 72, 236)",
+    "(147, 72, 236)",
+    "(96, 98, 111)",
+    "(20, 21, 27)",
+]
 trackUrl = "https://api.deezer.com/track/"
 searchUrl = "https://api.deezer.com/search?q="
-youtubeApiKey = "AIzaSyC0VqCv-KW7cRsmYBUUHHqTJeRBTVnP-h0"
+youtubeApiKey = "AIzaSyDIk63q5hnaaQTLlPqLRPSrUYIYmLgMMTA"
 search_url = "https://www.googleapis.com/youtube/v3/search"
 youtubeVideoLink = "https://www.youtube.com/watch?v="
+playlistUrl = "https://api.deezer.com/playlist/1282495565"
+
+
+def getDeezerPlaylist():
+    reply = requests.get(playlistUrl)
+    data = reply.json()["tracks"]["data"]
+    songList = []
+    for i, song in enumerate(data):
+        track = {
+            "id": song["id"],
+            "title": song["title"],
+            "artist": song["artist"]["name"],
+            "album": song["album"]["title"],
+            "albumImgUrl": song["album"]["cover_big"],
+            "url": song["link"],
+            "position": i + 1,
+        }
+        songList.append(track)
+    return songList
 
 
 def getJsonForSearch(query):  # get json data for a search query
@@ -39,6 +72,7 @@ def getSongsList(query=None, data=None):  # get SongList with required informati
         }
         if i < 3:
             track["youtubeUrl"] = getYoutubeLink(song["title"], song["artist"]["name"])
+
         else:
             track["youtubeUrl"] = getYoutubeLink(
                 song["title"], song["artist"]["name"], True
@@ -86,8 +120,10 @@ def getYoutubeLink(song, artist, quota=False):
     try:
         videoId = r.json()["items"][0]["id"]["videoId"]
         return youtubeVideoLink + videoId
-    except KeyError:
+    except:
+        print("got an error from youtube API. Default serach link is stored")
         return defaultLink
 
 
-# pip install termcolor before executing this file
+def getRandomColor():
+    return choice(colors)

@@ -45,6 +45,7 @@ class Playlist(db.Model):
         lazy="subquery",
         backref=db.backref("songPlaylists", lazy="dynamic"),
     )
+    color = db.Column(db.String(256), nullable=False)
 
     def toDict(self):
         return {"id": self.id, "name": self.name, "description": self.description}

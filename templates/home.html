@@ -4,7 +4,6 @@
 {{ super() }}
 
 {% block content %}
-
 <h4 class="center-align">Hot 100 Music Videos</h4>
 <div class="carousel home-carousel">
     <a href="#" class="prev left left-middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
@@ -15,31 +14,8 @@
         {% for video in videos %}
         <div class="carousel-item center">
             <div class="vertical-center">
-                <a href="{{ video.url }}" data-target="slide-out" class="sidenav-trigger" onclick="musicView(`{{ video.videoId }}`)">
-                    <p class="indigo-text">#{{ video.position+1 }}</p></a>
-                    <img src="{{ video.thumbnail }}" class="carousel-image">
-                    <div class="card-content tooltipped" data-position="top" data-tooltip="{{ video.title }}">
-                        <!-- may remove tooltips now that titles are so wide-->
-                        <p class="truncate black-text">{{ video.title}}</p>
-                    </div>
-                
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-</div>
-
-<h4 class="center-align">Recent 100 Songs</h4> <!-- Deezer Songs-->
-<div class="carousel home-carousel2">
-    <a href="#" class="prev2 left left-middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
-            class="large material-icons">chevron_left</i></a>
-    <a href="#" class="next2 right right-middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
-            class="large material-icons">chevron_right</i></a>
-    <div>
-        {% for video in videos %}
-        <div class="carousel-item center">
-            <div class="vertical-center">
-                <a href="{{ video.url }}" data-target="slide-out" class="sidenav-trigger" onclick="musicView(`{{ video.videoId }}`)">
+                <a href="{{ video.url }}" data-target="modal2" class="modal-trigger"
+                    onclick="modalView(`{{ video.videoId }}`)">
                     <p class="indigo-text">#{{ video.position+1 }}</p>
                     <img src="{{ video.thumbnail }}" class="carousel-image">
                     <div class="card-content tooltipped" data-position="top" data-tooltip="{{ video.title }}">
@@ -53,14 +29,47 @@
     </div>
 </div>
 
-<script>
-    // let musicView = document.querySelector("music-view");
-    // musicView.innerHTML = `<iframe width="420" height="315" src="https://www.youtube.com/embed/{{videos.videoId}}"></iframe>`;
+<h4 class="center-align">Recent 100 Songs</h4> <!-- Deezer Songs-->
+<div class="carousel home-carousel2">
+    <a href="#" class="prev2 left left-middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
+            class="large material-icons">chevron_left</i></a>
+    <a href="#" class="next2 right right-middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
+            class="large material-icons">chevron_right</i></a>
+    <div>
+        {% for track in tracks %}
+        <div class="carousel-item center">
+            <div class="vertical-center">
+                <a href="{{ track.url }}" data-target="modal2" class="modal-trigger" onclick="modalDeezerView(`{{ track.id }}`)">
+                    <p class="indigo-text">#{{ track.position }}</p>
+                    <img src="{{ track.albumImgUrl }}" class="carousel-image ">
+                    <div class="card-content tooltipped" data-position="top" data-tooltip="{{ track.title }}">
+                        <!-- may remove tooltips now that titles are so wide-->
+                        <p class="truncate black-text">{{track.artist}} - {{ track.title}}</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 
+<div id="modal2" class="modal2 modal">
+    <div class="modal-content">
+        <div class="user-view" id="modal22">
+            <!-- <iframe width="420" height="315" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe> -->
+        </div>
+    </div>
+    <div class="divider"></div>
+    <div class="modal-footer">
+        <a href="#" class="waves-effect waves-green btn-flat">Play Playlist</a>
+    </div>
+</div>
+
+<script>
     $(document).ready(function () {
         $('.tooltipped').tooltip();
-        $('.home-carousel, .home-carousel2').carousel({
-        });
+        $('.home-carousel, .home-carousel2').carousel();
+        $('.modal2').modal();
     });
 
     $('.next').click(function (e) {
@@ -88,7 +97,30 @@
     });
 
 
+    function modalView(videoId) { //, songTitle, songArtist, songAlbum
+        let view = document.querySelector("#modal22");
+        let title = document.querySelector(".view-title");
+        let buttons = document.querySelector(".view-buttons");
+        console.log(view);
+        // console.log(songId, songTitle, songArtist, songAlbum);
+        view.innerHTML = `<iframe width="420" height="315" src="https://www.youtube.com/embed/${videoId}?autoplay=0"></iframe>`;
+    }
 
+    function modalDeezerView(songId) { //, songTitle, songArtist, songAlbum
+        let view = document.querySelector(".user-view");
+        let title = document.querySelector(".view-title");
+        let buttons = document.querySelector(".view-buttons");
+        console.log(songId);
+        // console.log(songId, songTitle, songArtist, songAlbum);
+        view.innerHTML = `
+            <iframe scrolling="no" frameborder="0" allowTransparency="true" 
+            src="https://www.deezer.com/plugins/player?format=square&autoplay=true&playlist=false&width=420&height=420&color=ff0000&layout=dark&size=big&type=tracks&id=${songId}&app_id=1" width="200" height="200"></iframe>`;
+    }
+
+    function closeModal() {
+        let modal = document.getElementById("modal2");
+        modal.style.display = "none";
+    }
 
 </script>
 {% endblock %}

@@ -1,13 +1,14 @@
 from app import app
 from model import db
-import deezerAndYoutubeThings as dez
+
+# import deezerAndYoutubeThings as dez
 
 # db.init_app(app)
 db.create_all(app=app)
 
 # temp test
 # import deezerThings
-from model import User, Playlist
+# from model import User, Playlist
 
 # get song list for a certain query
 # li = dez.getSongsList("let it go")
@@ -27,6 +28,6 @@ from model import User, Playlist
 # db.session.add(playlist)
 # db.session.commit()
 
-if __name__ == "__main__":
-    playlists = Playlist.query.filter_by(userid="2").all()
-    print(playlists[0].songs)
+# if __name__ == "__main__":
+#     playlists = Playlist.query.filter_by(userid="2").all()
+#     print(playlists[0].songs)
