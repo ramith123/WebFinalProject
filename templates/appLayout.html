@@ -57,7 +57,7 @@
         }
 
         .amber.darken-3 {
-            background-color: #393C43 !important;
+            background-color: #4d587c !important;
         }
 
         /* autofill override*/
@@ -365,23 +365,23 @@
             width: 350px;
         }
 
-        .nav2{
-            width:500px;
+        .nav2 {
+            width: 500px;
         }
 
-        .nav2 .frame{
-            width:420;
-            height:315;
+        .nav2 .frame {
+            width: 420;
+            height: 315;
         }
 
         @media only screen and (max-device-width: 764px) {
-            .nav2{
-                width:300px;
+            .nav2 {
+                width: 300px;
             }
 
-            .nav2 .frame{
-                width:336px;
-                height:252px;
+            .nav2 .frame {
+                width: 336px;
+                height: 252px;
             }
 
             .myContainer {
@@ -422,7 +422,7 @@
             height: 64px;
         }
 
-        .truncate{
+        .truncate {
             width: 250px;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -430,8 +430,8 @@
             text-align: center;
         }
 
-        .modal2{
-            height:400px;
+        .modal2 {
+            height: 400px;
         }
     </style>
 </head>
@@ -510,19 +510,19 @@
     <ul id="slide-out" class="sidenav nav2">
         <li>
             <div class="music-view">
-                
+
             </div>
             <div class="divider"></div>
         </li>
         <li>
             <div class="view-title">
-                
+
             </div>
         </li>
         <li>
             <div class="divider"></div>
             <div class="mdc-list-item__meta mdc-chip-set view-buttons">
-                
+
             </div>
         </li>
     </ul>
@@ -630,13 +630,13 @@
         //           <img class="mdc-chip__icon mdc-chip__icon--leading" src="https://img.icons8.com/windows/32/000000/deezer.png">
         //           <span role="button" tabindex="0" class="mdc-chip__text">Play on Deezer</span>
         //         </a>
-          
+
         //         <a href="#" class=" mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17" onclick="musicView(${youtubeUrl})">
         //           <img class="mdc-chip__icon mdc-chip__icon--leading"
         //             src="https://img.icons8.com/material-sharp/24/000000/youtube-play.png">
         //           <span role="button" tabindex="0" class="mdc-chip__text">Play on Youtube</span>
         //         </a>
-          
+
         //         <a id="dropdowner" data-mdc-ripple-is-unbounded=""
         //           class="dropdown-trigger mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded sideButtons"
         //           title="" tabindex="-1"
@@ -652,10 +652,10 @@
             view.innerHTML = `
             <iframe scrolling="no" frameborder="0" allowTransparency="true" 
             src="https://www.deezer.com/plugins/player?format=square&autoplay=false&playlist=false&width=300&height=300&color=007FEB&layout=dark&size=medium&type=tracks&id=${songId}&app_id=1" width="300" height="300"></iframe>`
-            
+
             // <div class="tooltipped view-title" data-position="top" data-tooltip="${songArtist} - ${songTitle}">
-                // <div class="tooltipped view-title" data-position="top" data-tooltip="Album: ${songAlbum}">
-            title.innerHTML =  `<span class="center-align truncate">${songArtist} - ${songTitle}</span>
+            // <div class="tooltipped view-title" data-position="top" data-tooltip="Album: ${songAlbum}">
+            title.innerHTML = `<span class="center-align truncate">${songArtist} - ${songTitle}</span>
                                 <span class="center-align truncate">Album: ${songAlbum}</span>`
 
 

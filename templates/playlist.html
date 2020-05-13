@@ -12,7 +12,7 @@
 <div class="carousel">
     {% for playlist in playlists %}
     <a id="{{playlist.id}}" class="carousel-item valign-wrapper"
-        style="background: linear-gradient(rgb(60, 89, 187) 20%, rgba(30, 33, 36, 0) 95%);" href="#">
+        style="background: linear-gradient(rgb{{playlist.color}} -17%, rgba(30, 33, 36, 0) 93%);" href="#">
         <h3 class="truncate "
             style="width:100%; color: #ffffff; white-space: pre-line;margin: 1.9466666667rem 0 4.168rem 0;">
             {{playlist.name}}</h3>
