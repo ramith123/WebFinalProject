@@ -10,22 +10,22 @@
     <form id="myForm" class="col s12 m8 offset-m2" method="POST">
       {{ form.csrf_token }}
 
-      <div class="input-field col s12">
+      <div class="input-field col l12 m12 s10 offset-s1">
         {{ form.username(size=20, class="validate black-text") }}
         {{ form.username.label }}
       </div>
 
-      <div class="input-field col s12">
+      <div class="input-field col l12 m12 s10 offset-s1">
         {{ form.password(size=20, class="validate black-text") }}
         {{ form.password.label }}
       </div>
 
-      <div class="input-field col s12">
+      <div class="input-field col l12 m12 s10 offset-s1">
         {{ form.confirm(size=20, class="validate black-text") }}
         {{ form.confirm.label }}
       </div>
 
-      <div class="col s12">
+      <div class="col l12 m12 s10 offset-s1">
         <ul>
           {% for error in form.password.errors %}
           <div style="color:orangered">
@@ -34,17 +34,17 @@
           {% endfor %}
         </ul>
       </div>
-      <div>
+      <div class="col l12 m12 s10 offset-s1">
         <label>
           {{ form.accept_tos }}
           <span>{{ form.accept_tos.label.text|safe }}</span>
         </label>
       </div>
-      <div class="input-field col s12">
+      <div class="input-field col l12 m12 s12">
         {{form.submit}}
         <div>
           <p style="color: #9E9e9e;">or</p>
-          <a href="/login" style="color: #ffa040">Login</a>
+          <a href="/login" style="color: #7289DA;">Login</a>
         </div>
       </div>
 

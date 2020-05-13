@@ -8,14 +8,16 @@ from flask_login import (
 from flask import Flask, request, render_template, redirect, flash, url_for
 import os
 import requests
+import json
 from requests.models import Response
 from unittest.mock import Mock
 from isodate import parse_duration
+from deezerAndYoutubeThings import getSongsList, getSongModelById
 
 # from sqlalchemy.exc import IntegrityError
 # from datetime import timedelta
 
-from model import db, User
+from model import db, User, Playlist, Song
 from forms import Register, Login
 
 
@@ -39,7 +41,7 @@ def create_app():
     app.config["SECRET_KEY"] = "c3a93f55-2015-4042-9ef7-77de85976f78"
     login_manager.init_app(app)
 
-    #app.config["YOUTUBE_API_KEY"] = "AIzaSyC0VqCv-KW7cRsmYBUUHHqTJeRBTVnP-h0"
+    # app.config["YOUTUBE_API_KEY"] = "AIzaSyC0VqCv-KW7cRsmYBUUHHqTJeRBTVnP-h0"
     app.config["YOUTUBE_API_KEY"] = "AIzaSyDIk63q5hnaaQTLlPqLRPSrUYIYmLgMMTA"
 
     # =======
@@ -118,7 +120,7 @@ def register():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for("loginTest"))
+        return redirect(url_for("playlist"))
     form = Login()
     if form.validate_on_submit():
         data = request.form
@@ -126,7 +128,7 @@ def login():
         if user and user.check_password(data["password"]):
             flash("Logged in successfully.")
             login_user(user)
-            return redirect(url_for("loginTest"))
+            return redirect(url_for("playlist"))
         else:
             flash("Invalid username or password")
             return redirect(url_for("login"))
@@ -142,58 +144,113 @@ def logout():
     return render_template("logout.html")
 
 
-@app.route("/playlist", methods=["GET"])
+@app.route("/playlist", methods=["GET", "POST"])
+def playlist():
+    if current_user.is_anonymous:
+        flash("You have to login first")
+        return redirect(url_for("login"))
+    playlists = Playlist.query.filter_by(userid=current_user.id).all()
+    return render_template("playlist.html", playlists=playlists)
+
+
+@app.route("/createPlaylist", methods=["POST"])
 @login_required
-def loginTest():
-    return render_template("playlist.html")
+def createPLaylist():
+    if request.method == "POST":
+        data = request.form
+        newPlaylist = Playlist(
+            name=data["title"], description=data["description"], userid=current_user.id
+        )
+        db.session.add(newPlaylist)
+        db.session.commit()
+
+    return redirect(url_for("playlist"))
+
+
+@app.route("/addToPlaylist", methods=["PUT"])
+@login_required
+def addSongToPlaylist():
+    data = request.get_json()
+    songId, playlistId = [ele for ele in data]
+    song = Song.query.filter_by(id=songId).first()
+    playlist = Playlist.query.filter_by(userid=current_user.id, id=playlistId).first()
+    if song is None:
+        song = getSongModelById(songId)
+        print("New song")
+        # db.session.commit(song)
+    playlist.songs.append(song)
+    db.session.commit()
+    return "Success", 200
+
+
+@app.route("/getPlaylists", methods=["GET"])
+@login_required
+def getPlaylists():
+    playlists = Playlist.query.filter_by(userid=current_user.id).all()
+
+    data = [playlist.toDict() for playlist in playlists]
+    return json.dumps(data)
 
 
 @app.route("/search", methods=["GET", "POST"])
 def anyPageSearch():
     search_url = "https://www.googleapis.com/youtube/v3/search"
     video_url = "https://www.googleapis.com/youtube/v3/videos"
-    videos = []
-    query = request.form.get("queryBox")
     # Search Requests from user
     if request.method == "POST":
-        search_params = {
-            "key": app.config["YOUTUBE_API_KEY"],
-            "q": query,
-            "part": "snippet",
-            "maxResults": 16,
-            "type": "video",
-        }
-        r = requests.get(search_url, params=search_params)
-        results = r.json()["items"]
+        query = request.form.get("queryBox")
+        songList = getSongsList(query)
 
-        video_ids = []
-        for result in results:
-            video_ids.append(result["id"]["videoId"])
+        # search_params = {
+        #     "key": app.config["YOUTUBE_API_KEY"],
+        #     "q": query,
+        #     "part": "snippet",
+        #     "maxResults": 16,
+        #     "type": "video",
+        # }
+        # r = requests.get(search_url, params=search_params)
+        # results = r.json()["items"]
 
-        video_params = {
-            "key": app.config["YOUTUBE_API_KEY"],
-            "id": ",".join(video_ids),
-            "part": "snippet,contentDetails",
-            "maxResults": 16,
-        }
+        # video_ids = []
+        # for result in results:
+        #     video_ids.append(result["id"]["videoId"])
 
-        r = requests.get(video_url, params=video_params)
-        results = r.json()["items"]
+        # video_params = {
+        #     "key": app.config["YOUTUBE_API_KEY"],
+        #     "id": ",".join(video_ids),
+        #     "part": "snippet,contentDetails",
+        #     "maxResults": 16,
+        # }
 
-        for result in results:
-            video_data = {
-                "id": result["id"],
-                "url": f"https://www.youtube.com/watch?v={ result['id'] }",
-                "thumbnail": result["snippet"]["thumbnails"]["high"]["url"],
-                "duration": int(
-                    parse_duration(result["contentDetails"]["duration"]).total_seconds()
-                    // 60
-                ),
-                "title": result["snippet"]["title"],
-            }
-            videos.append(video_data)
+        # r = requests.get(video_url, params=video_params)
+        # results = r.json()["items"]
 
-    return render_template("search.html", videos=videos)
+        # for result in results:
+        #     video_data = {
+        #         "id": result["id"],
+        #         "url": f"https://www.youtube.com/watch?v={ result['id'] }",
+        #         "thumbnail": result["snippet"]["thumbnails"]["high"]["url"],
+        #         "duration": int(
+        #             parse_duration(result["contentDetails"]["duration"]).total_seconds()
+        #             // 60
+        #         ),
+        #         "title": result["snippet"]["title"],
+        #     }
+        #     videos.append(video_data)
+
+    return render_template("search.html", songs=songList)
+
+
+@app.route("/test")
+def testPage():
+    return render_template("test.html")
+
+
+@app.route("/getSongs/<pid>")
+def sendSongs(pid):
+    songs = Playlist.query.filter_by(id=pid).first().songs
+    songs = [song.toDict() for song in songs]
+    return json.dumps(songs)
 
 
 if __name__ == "__main__":

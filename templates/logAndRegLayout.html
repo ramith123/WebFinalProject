@@ -1,33 +1,19 @@
 {% include "appLayout.html" %}
 <!-- <title>{% block title %}{% endblock %}</title> Not actually showing in title..... -->
-<div class="valign-wrapper ">
+<div class="valign-wrapper" style="
+height: 100%;">
   <div class="container">
-    <div class="row">
-      <!-- <div class="col s4 offset-s4"> -->
-      <div class="col s6 offset-s3">
+    <div class="row center">
+      <div class="col l6 m8 s12 offset-l3 offset-m2">
 
         <div class="card hoverable ">
 
           <div>
             <nav class="amber darken-3">
-              <div class="nav-wrapper">
-                <a href="" class="center">{% block page %}{% endblock %}</a>
+              <div class="nav-wrapper valign-wrapper">
+                <h5 href="" class="center-align" style="width: 100%;">{% block page %}{% endblock %}</h5>
               </div>
             </nav>
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            <nav class="white" style="padding: 10px">
-              <div class="nav-wrapper ">
-                <ul>
-                  {% for message in messages %}
-                  <li id="flashMessage" class="black-text">{{ message }}</li>
-                  {% endfor %}
-                </ul>
-              </div>
-            </nav>
-            {% endif %}
-            {% endwith %}
-
             <div>{% block content %}{% endblock %}</div>
 
             <script src="https://code.iconify.design/1/1.0.4/iconify.min.js"></script>

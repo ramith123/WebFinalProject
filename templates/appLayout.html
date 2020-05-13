@@ -12,6 +12,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif" type="image/gif">
     <title>{% block title %}{% endblock %}</title>
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 
     <style>
         body,
@@ -19,8 +21,35 @@
             height: 100%;
             text-align: center;
             margin: 0;
-            background-color: rgb(255, 255, 255);
+            background-color: #373a40;
+            color: rgba(255, 255, 255, 0.72);
             /*background-color: rgb(14, 17, 31);*/
+
+        }
+
+        .amber.darken-3 {
+            background-color: #393C43 !important;
+        }
+
+        /* autofill override*/
+        @-webkit-keyframes autofill {
+
+            0%,
+            100% {
+                color: rgba(255, 255, 255, 0.72);
+                background: transparent;
+            }
+        }
+
+        input:-webkit-autofill {
+            -webkit-animation-delay: 1s;
+            /* Safari support - any positive time runs instantly */
+            -webkit-animation-name: autofill;
+            -webkit-animation-fill-mode: both;
+        }
+
+        .black-text {
+            color: rgba(255, 255, 255, 0.72) !important;
 
         }
 
@@ -28,29 +57,40 @@
             color: white;
         }
 
+        .card {
+
+            background-color: #36393E;
+
+
+        }
+
+        .indigo.darken-3 {
+            background-color: #1e2124 !important;
+        }
+
         [type="checkbox"].filled-in:checked+span:not(.lever):after {
             top: 0;
             width: 20px;
             height: 20px;
-            border: 2px solid #ff6f00;
-            background-color: #ff6f00;
+            border: 2px solid #393C43;
+            background-color: #393C43;
             z-index: 0;
         }
 
-        .user-profile {
-            position: relative;
-        }
+
 
         .user-profile li {
-            width: 100%;
+
             height: 0px;
             background-color: #3f51b5;
             transition: height 0.2s ease;
             position: absolute;
+            /* in Absolute, it breaks the non-mobile. in static it breaks the mobile. fixed it by modifying the carousal style*/
         }
 
         .user-profile a {
-            width: 100%;
+            width: 70px;
+
         }
 
         .play-list {
@@ -83,24 +123,8 @@
             margin-left: 40px;
         }
 
-        /* .p-title {
-            width: 250px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            color: black;
-        }
-
-        .p-title-mobile {
-            width: 200px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            color: black;
-        } */
-
-        #modal1.modal{
-            background-color: rgba(0,0,0,0.8);            
+        #modal1.modal {
+            background-color: rgba(0, 0, 0, 0.8);
             width: 100%;
             height: 100%;
             max-height: 100%;
@@ -109,7 +133,7 @@
             justify-content: center;
         }
 
-        #modal1 .modal-container{
+        #modal1 .modal-container {
             background-color: rgb(12, 11, 11);
             color: #fff;
             padding: 20px;
@@ -117,73 +141,207 @@
             height: 420px;
         }
 
-        #modal1 .modal-header{
+        #modal1 .modal-header {
             display: flex;
             height: 30px;
         }
 
-        .modal-header span{
+        .modal-header span {
             margin-left: auto;
         }
 
-        .modal-header span:hover{
+        .modal-header span:hover {
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
         }
 
-        .modal-body{
+        .modal-body {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
         }
 
-        .modal-body .modal-title{
+        .modal-body .modal-title {
             font-size: 24px;
             margin-bottom: 20px;
         }
 
-        .modal-form{
+        .modal-form {
             width: 100%;
             padding: 40px;
         }
 
-        .modal-form form{
+        .modal-form form {
             display: flex;
             flex-direction: column;
             align-items: flex-start
         }
 
-        #modal1 input{
+        #modal1 input {
             margin-bottom: 40px;
             color: #fff
         }
 
-        .modal-form .form-footer{
+        .modal-form .form-footer {
             display: flex;
             width: 100%;
         }
 
-        .form-footer a{
+        .form-footer a {
             margin-left: auto;
         }
-        
+
+        button:focus {
+            outline: none;
+            background-color: rgba(0, 0, 0, 0);
+        }
+
+        .mdc-chip {
+            padding: 0 10px;
+        }
+
+        .mdc-list {
+            max-width: 800px;
+            border: 1px solid rgba(0, 0, 0, .1);
+
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .mdc-list--dense .mdc-list-item__graphic {
+
+            width: 50px;
+            height: 50px;
+
+        }
+
+        .mdc-list--dense .mdc-list-item__primary-text {
+            display: flex;
+            margin-top: 38px;
+
+        }
+
+        .mdc-list--two-line .mdc-list-item__text {
+
+            margin-top: -15px;
+        }
+
+        .mdc-chip-set {
+            flex-wrap: initial;
+
+        }
+
+        .mdc-chip-set .mdc-chip {
+            margin: 5px;
+        }
+
+        .mdc-chip .mdc-chip__icon--leading:not(.mdc-chip__icon--leading-hidden) {
+            margin-left: -4px;
+            margin-right: -4px;
+        }
+
+        .mdc-list--two-line.mdc-list--dense .mdc-list-item,
+        .mdc-list--avatar-list.mdc-list--dense .mdc-list-item {
+            height: 69px;
+        }
+
+        .myContainer{
+            width:80%;
+            margin-left:10%;
+            margin-right:10%;
+        }
+
+        /* Home Page CSS */
+        .left-middle-indicator {
+            margin-left: 350px;
+            position: relative;
+            /* position:fixed; */
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .right-middle-indicator {
+            margin-right: 350px;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .home-carousel,
+        .home-carousel2 {
+            height: 500px;
+
+            /* margin-left: 5%;
+            margin-right: 5%;*/
+
+        }
+
+
+        .home-carousel .carousel-item,
+        .home-carousel2 .carousel-item {
+            width: 250px;
+        }
+
+        .carousel-image {
+            width: 350px;
+        }
+
+        @media only screen and (max-device-width: 764px) {
+            .myContainer{ /*if i put with only in here for some reason its keeping the old css for margin-left and margin-right*/
+                width:100%;
+                margin-left:0%;
+                margin-right:0%;
+            }
+
+            .home-carousel,
+            .home-carousel2 {
+                height: 300px;
+
+            }
+
+            .home-carousel .carousel-item,
+            .home-carousel2 .carousel-item {
+                height: 100%;
+            }
+
+            .carousel-image {
+                width: 250px;
+            }
+        }
+
+        .vertical-center {
+            margin: 0 -50px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .input-field input[type=search]+.label-icon {
+            top: 6px;
+        }
+
+        nav {
+            height: 64px;
+        }
     </style>
 </head>
 
 <body>
-    <div class="fixed-action-btn">
-    <a href="#" class="btn-floating bth-large indigo darken-3" id="scroll" style="display: none;">
-        <i class="large material-icons">arrow_drop_up</i>
-    </a>
+    <div class="fixed-action-btn hide-on-med-and-down">
+        <a href="#" class="btn-floating bth-large indigo darken-3" id="scroll" style="display: none;">
+            <i class="large material-icons">arrow_drop_up</i>
+        </a>
     </div>
     <!--Change colours and add icons-->
-    <nav>
-        <div class="navbar-fixed nav-wrapper indigo darken-3">
+    <div class="navbar-fixed">
+        <nav class="nav-wrapper indigo darken-3">
+            <div class="myContainer center">
             <div>
                 <!-- <img width="63" height="63" src="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif">   Messes up stuff-->
-                <a href="/" class="brand-logo">RCDJ Music</a>
+                <a href="/" class="brand-logo center">RCDJ Music</a>
             </div>
 
             <a href="#" class="sidenav-trigger right" data-target="mobile-links">
@@ -193,7 +351,7 @@
             <div class="left">
                 <ul class="hide-on-med-and-down">
                     <li><a href="/" class="waves-effect waves-light">Home</a></li>
-                    <li><a href="#" class="waves-effect waves-light">Your Playlists</a></li>
+                    <li><a href="/playlist" class="waves-effect waves-light">Your Playlists</a></li>
                     <!--Ensure Loggin is neccessary for access, change route to /playlists-->
                     <li><a href="#" class="waves-effect waves-light" onclick="launchModal()">Create Playlist</a></li>
 
@@ -207,33 +365,71 @@
                     </li>
                     <li class="hide-on-med-and-down" id="desktop-login-button"><a href="/login"
                             class="waves-effect waves-light">Login</a></li>
-                    <li>
+                    <li class="hide-on-small-only">
                         <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
-                        <!-- maybe hide-on-med-and-down -->
                     </li>
                 </ul>
             </div>
-
+            <div>
             <form class="left" method="POST" action="/search">
-                <div class="input-field"> <!-- Needs a lot of work -->
-                    <input class="autocomplete" id="search" type="search" name="queryBox" autocomplete="off"
-                        style="width:15rem" required> 
+                <div class="input-field">
+                    <input class="nav-search" id="search" type="search" name="queryBox" autocomplete="off" style="width:17rem; height:64px;" required>
                     <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                     <i class="material-icons">close</i>
                 </div>
             </form>
-        </div>
-    </nav>
+            </div>
+        </nav>
+    </div>
+    </div>
 
+    <!-- Mobile sidenav menu -->
     <ul class="sidenav left-align" id="mobile-links">
         <li><a href="/" class="waves-effect waves-dark">Home</a></li>
-        <li><a href="#" class="waves-effect waves-dark">Your Playlists</a></li>
+        <li><a href="/playlist" class="waves-effect waves-dark">Your Playlists</a></li>
         <!--Ensure Loggin is neccessary for access, change route to /playlists-->
-        <li><a href="#" class="waves-effect waves-dark">Create Playlist</a></li>
+        <li><a href="#" class="waves-effect waves-dark" onclick="launchModal()">Create Playlist</a></li>
         <!--Ensure Loggin is neccessary for access-->
         <li id="mobile-register-button"><a href="/register" class="waves-effect waves-dark">Register</a></li>
         <li id="mobile-login-button"><a href="/login" class="waves-effect waves-dark">Login</a></li>
-    </ul>    
+        <li>
+            <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
+        </li>
+    </ul>
+
+    <!-- Sidenav Player -->
+    <ul id="slide-out" class="sidenav nav2" style="">
+        <li>
+            <div class="user-view">
+                <iframe width="420" height="315" src="https://www.youtube.com/embed/tgbNymZ7vqY">
+                </iframe>
+            </div>
+        </li>
+        <li>
+            <div class="card-content tooltipped view-title" data-position="top"
+                data-tooltip="Bohemian Rhapsody | Muppet Music Video | The Muppets">
+                <span class="truncate">Bohemian Rhapsody | Muppet Music Video | The Muppets</span>
+            </div>
+            <div class="divider"></div>
+        </li>
+        <li>
+            <div class="mdc-list-item__meta mdc-chip-set view-buttons">
+                <a href="#" class="mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17">
+                    <img class="mdc-chip__icon mdc-chip__icon--leading"
+                        src="https://img.icons8.com/windows/32/000000/deezer.png">
+                    <span role="button" tabindex="0" class="mdc-chip__text">Play on Deezer</span>
+                </a>
+
+                <a href="#" class=" mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17">
+                    <img class="mdc-chip__icon mdc-chip__icon--leading"
+                        src="https://img.icons8.com/material-sharp/24/000000/youtube-play.png">
+                    <span role="button" tabindex="0" class="mdc-chip__text">Play on Youtube</span>
+                </a>
+
+
+            </div>
+        </li>
+    </ul>
 
     <!-- Modal Structure -->
     <div id="modal1" class="modal">
@@ -242,21 +438,25 @@
             <div class="modal-body">
                 <div class="modal-title">Create Playlist</div>
                 <div class="modal-form">
-                    <form method="POST" action="/playlist">
-                        <label for="play-list-title">Name</label>
-                        <input type="text" id="play-list-title" name="play-list-title">
-                        <label for="play-list-description">Description</label>
-                        <input type="text" id="play-list-description" name="play-list-description">
-                       
-                        <div class="form-footer"><a class="waves-effect waves-light btn" >Create</a></div>
+                    <form method="POST" action="/createPlaylist">
+                        <label for="title">Name</label>
+                        <input type="text" id="play-list-title" name="title" required>
+                        <label for="description">Description</label>
+                        <input type="text" id="play-list-description" name="description">
+
+                        <!-- <div class="form-footer"><a class="waves-effect waves-light btn">Create</a></div> -->
+                        <div class="form-footer ">
+                            <input class="waves-effect waves-light btn" id="submit" name="submit" type="submit"
+                                value="create">
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
-        
+
     </div>
 
-    <a href="" class="center">{% block page %}{% endblock %}</a>
+    <a class="center">{% block page %}{% endblock %}</a>
 
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
     <script src="https://code.iconify.design/1/1.0.4/iconify.min.js"></script>
@@ -264,30 +464,120 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <script>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        M.toast({ html: '{{message}}', classes: 'rounded' });
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
         $(document).ready(function () {
+            let inputBox = $("input.nav-search"); //[name='QueryBox']
+            let submitIcon = $('.label-icon');
+            let isOpen = false;
+            inputBox.hide();
+
+            submitIcon.click(function () {
+                if (isOpen == false) {
+                    inputBox.show();
+                    // inputBox.autocomplete({
+                    //     data: {
+                    //     "Drake": null,
+                    //     "Travis Scott": null,
+                    //     "Eminem": null,
+                    //     "Taylor Swift": null
+                    //     }
+                    // });
+                    isOpen = true;
+                } else {
+                    inputBox.hide();
+                    isOpen = false;
+                }
+            });
+
+            $(document).mouseup(function () {
+                if (isOpen == true) {
+                    submitIcon.click();
+                }
+            });
+
             $('.sidenav').sidenav();
-            // $('input.autocomplete').autocomplete({ //Calling autocomplete messes up the alignment(even more) for some unknown reason
-            //     data: {
-            //         "Drake": null,
-            //         "Travis Scott": null,
-            //         "Eminem": null,
-            //         "Taylor Swift": null
-            //     }
-            // });
+            $('.nav2').sidenav({
+                edge: 'right'
+            });
+
             $('.fixed-action-btn').floatingActionButton();
-            $(window).scroll(function(){
-                if($(this).scrollTop() > 100){
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
                     $('#scroll').fadeIn();
                 } else {
                     $('#scroll').fadeOut();
                 }
             });
-            $('#scroll').click(function(){
-                $("html, body").animate({ scrollTop: 0}, 400);
+            $('#scroll').click(function () {
+                $("html, body").animate({ scrollTop: 0 }, 400);
                 return false;
             });
         });
-        
+
+        // Change default video in player
+        function musicView(videoId, songUrl, youtubeUrl) {
+            let view = document.querySelector(".user-view");
+            let title = document.querySelector(".view-title");
+            let buttons = document.querySelector(".view-buttons")
+            view.innerHTML = `<iframe width="420" height="315" src="https://www.youtube.com/embed/${videoId}"></iframe>`;
+            //title, buttons, maybe embedded search query
+            buttons.innerHTML = `
+            <a href="#" class="mdc-chip mdc-ripple-upgraded sideButtons" onclick="deezerView(${songurl})"
+                  role="row" id="mdc-chip-17">
+                  <img class="mdc-chip__icon mdc-chip__icon--leading" src="https://img.icons8.com/windows/32/000000/deezer.png">
+                  <span role="button" tabindex="0" class="mdc-chip__text">Play on Deezer</span>
+                </a>
+          
+                <a href="#" class=" mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17" onclick="musicView(${youtubeUrl})">
+                  <img class="mdc-chip__icon mdc-chip__icon--leading"
+                    src="https://img.icons8.com/material-sharp/24/000000/youtube-play.png">
+                  <span role="button" tabindex="0" class="mdc-chip__text">Play on Youtube</span>
+                </a>
+          
+                <a id="dropdowner" data-mdc-ripple-is-unbounded=""
+                  class="dropdown-trigger mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded sideButtons"
+                  title="" tabindex="-1"
+                  style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">
+                  more_vert
+                </a>`
+        };
+
+        function deezerView(songId, songTitle, songArtist, songAlbum) {
+            let view = document.querySelector(".user-view");
+            let title = document.querySelector(".view-title");
+            let buttons = document.querySelector(".view-buttons")
+            console.log(songId, songTitle, songArtist, songAlbum);
+            view.innerHTML = `
+            <iframe scrolling="no" frameborder="0" allowTransparency="true" 
+            src="https://www.deezer.com/plugins/player?format=square&autoplay=false&playlist=false&width=300&height=300&color=007FEB&layout=dark&size=medium&type=tracks&id=${songId}&app_id=1" width="300" height="300"></iframe>`
+
+            buttons.innerHTML = `
+            <a href="#" class="mdc-chip mdc-ripple-upgraded sideButtons" onclick="deezerView(${songurl})"
+                  role="row" id="mdc-chip-17">
+                  <img class="mdc-chip__icon mdc-chip__icon--leading" src="https://img.icons8.com/windows/32/000000/deezer.png">
+                  <span role="button" tabindex="0" class="mdc-chip__text">Play on Deezer</span>
+                </a>
+          
+                <a href="#" class=" mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17" onclick="musicView(${youtubeUrl})">
+                  <img class="mdc-chip__icon mdc-chip__icon--leading"
+                    src="https://img.icons8.com/material-sharp/24/000000/youtube-play.png">
+                  <span role="button" tabindex="0" class="mdc-chip__text">Play on Youtube</span>
+                </a>
+          
+                <a id="dropdowner" data-mdc-ripple-is-unbounded=""
+                  class="dropdown-trigger mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded sideButtons"
+                  title="" tabindex="-1"
+                  style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">
+                  more_vert
+                </a>`
+        }
 
 
         function hideLogAndRegAndShowUser() {
@@ -301,6 +591,7 @@
             mobileLoginBtn.style.visibility = "hidden";
 
             let userProfile = document.querySelector(".user-profile");
+            // let userProfile2 = document.querySelector(".user-profile2");
             //console.log(userProfile.innerHTML);
 
             let userProfileHTML = `
@@ -310,6 +601,8 @@
         </li>`;
             console.log(userProfileHTML);
             userProfile.innerHTML = userProfileHTML;
+            // userProfile2.innerHTML = userProfileHTML;
+
             userProfile.addEventListener("mouseleave", e => {
                 userProfile.querySelector("li").style.height = "0px";
                 userProfile.querySelectorAll("a")[1].style.height = "0px";
@@ -321,23 +614,48 @@
 
             })
 
+            // userProfile2.addEventListener("mouseleave", e => {
+            //     userProfile2.querySelector("li").style.height = "0px";
+            //     userProfile2.querySelectorAll("a")[1].style.height = "0px";
+            // })
+
+            // userProfile2.addEventListener("mouseover", e => {
+            //     userProfile.querySelector("li").style.height = "64px";
+            //     userProfile2.querySelectorAll("a")[1].style.height = "64px";
+
+            // })
+
 
 
         }
         {% if current_user.is_authenticated %}
         hideLogAndRegAndShowUser();
-        {% endif %}  
+        {% else %}
+        let profileNameButton = document.querySelector(".user-logged-in");
+        // let profileNameButton2 = document.querySelector(".user-logged-in2");
+        let userProfile = document.querySelector(".user-profile");
+        // let userProfile2 = document.querySelector(".user-profile2");
+        userProfile.style.width = "0px";
+        // userProfile2.style.width = "0px";
+        profileNameButton.style.width = "0px";
+        // profileNameButton2.style.width = "0px";
+        /*need to put above in a function */
+        {% endif %}
 
-        function launchModal(){            
+        function launchModal() {
+            {% if current_user.is_anonymous %}
+            window.location.pathname = '/login';
+            {% else %}
             let modal = document.getElementById("modal1");
             modal.style.display = "flex";
+            {% endif %}
         }
 
-        function closeModal(){
+        function closeModal() {
             let modal = document.getElementById("modal1");
             modal.style.display = "none";
-        }     
-        
+        }
+
 
     </script>
 

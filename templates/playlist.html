@@ -1,197 +1,181 @@
 {% extends "appLayout.html" %}
-{% block title %}Testing Login{% endblock %}
-{% block page %}Testing Login{% endblock %}
+{% block title %}Playlists{% endblock %}
+{% block page %}Playlists{% endblock %}
 
 {{ super() }}
 
 {% block content %}
+
 <!-- {% if current_user.is_authenticated %} -->
 <!-- <h3 style="color:black"> Hi {{ current_user.username }}! </h3> -->
 <!-- <a href="/logout" class="btn waves-effect waves-light white-text amber darken-3">Logout</a> -->
-<div class="user-login-username" style="display:none">{{ current_user.username }}</div>
 <div class="carousel">
-    <a class="carousel-item item-1" href="#one!"><img
-            src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Lose_Yourself.jpg/220px-Lose_Yourself.jpg"></a>
-    <a class="carousel-item item-2" href="#two!"><img src="https://via.placeholder.com/288x216"></a>
-    <a class="carousel-item item-3" href="#three!"><img src="https://via.placeholder.com/288x216"></a>
-    <a class="carousel-item item-4" href="#four!"><img src="https://via.placeholder.com/288x216"></a>
-    <a class="carousel-item item-5" href="#five!"><img src="https://via.placeholder.com/288x216"></a>
+    {% for playlist in playlists %}
+    <a id="{{playlist.id}}" class="carousel-item valign-wrapper"
+        style="background: linear-gradient(184deg, rgba(35, 29, 138,1) 0%, rgba(9,9,121,1) 53%, rgba(0,212,255,1) 100%);"
+        href="#">
+        <h3 class="truncate " style="color: #ffffff; white-space: pre-line;margin: 1.9466666667rem 0 4.168rem 0;">
+            {{playlist.name}}</h3>
+    </a>
+
+    {% else %}
+    <h4>Create some playlists</h4>
+    {%endfor%}
 </div>
 
-<div class='play-list'>
+
+
+
+<div>
+
+
+    <ul class="mdc-list mdc-list--dense mdc-list--two-line" id="list">
+
+
+    </ul>
+
 
 </div>
 
 <!-- {% endif %} -->
 
-
+<!-- onclick="testFunction('')" -->
 <script>
-    //let navMenu = document.getElementsByClassName("right")[1];
+    var getUrl = window.location;
+    var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 
 
-    //let registerBtn = navMenu.querySelectorAll("li")[0];
+    /*    document.addEventListener('DOMContentLoaded', function () {
+            var elem = document.querySelector('.carousel');
+            var instances = M.Carousel.init(elem, {
+    
+                OnCycleTo: function (name) {
+                    console.log(name.el);
+                }
+            });
+        });*/
 
-    //let loginBtn = navMenu.querySelectorAll("li")[1];
+    $('.carousel').carousel({
+        duration: 500,
+        indicators: true,
+        onCycleTo: function (data) {
 
-    //let playlistPlaceholder = document.querySelector(".play-list");
-
-    // let userLoggedInBtn = document.querySelector(".user-logged-in");
-
-    //userLoggedInBtn.innerHTML = "Ramith";
-
-    //let userLoggedInUsername = document.querySelector(".user-login-username");
-
-    //let topNavigationMenu = document.querySelector("ul.right");
-
-    //let userProfile = document.querySelector(".user-profile");
-
-    //let logoutButton = document.createElement("li");
-
-    //let logoutLink = document.createElement("a");
-
-    //logoutLink.href = "/logout";
-
-    //logoutLink.classList.add("waves-effect");
-
-    //logoutLink.classList.add("waves-light");
-
-    //logoutLink.style.height = "0px";
-
-    // logoutLink.innerText = "logout";
-
-    /* userLoggedInBtn.addEventListener("mouseover", e => {
-        logoutLink.style.height = "64px";
-        logoutButton.style.height = "64px";
-
-    })
-
-    userProfile.addEventListener("mouseleave", e => {
-        logoutLink.style.height = "0px";
-        logoutButton.style.height = "0px";
-    })*/
-
-    //logoutButton.appendChild(logoutLink);
-
-    //userProfile.appendChild(logoutButton);
-    //console.log(userProfile);
-
-
-    //display default playlist
-    addPlayList(1);
-
-    //registerBtn.style.visibility = "hidden";
-
-    //loginBtn.style.visibility = "hidden";
-
-    //initialize carousel
-    $(document).ready(function () {
-        $('.carousel').carousel();
+            getSongs(data.id)
+        }
     });
 
+    async function getSongs(pid) {
+        url = baseUrl + `getSongs/${pid}`
 
-    let carouselSliderItems = document.querySelectorAll(".carousel-item");
+        try {
+            let response = await fetch(url);//1. Send http request and get response
+            let result = await response.json();//2. Get data from response
 
-    carouselSliderItems.forEach((item) => {
-
-        item.onclick = () => {
-
-            emptyPlayList();
-
-            if (item.classList[1] == "item-1") {
-
-                addPlayList(1);
+            populateSongs(result);
+            var elems = document.querySelectorAll('.dropdown-trigger');
+            var instances = M.Dropdown.init(elems, {
+                inDuration: 300,
+                outDuration: 225,
+                container: document.getElementById('Menu'),
+                hover: false, // Activate on hover
+                belowOrigin: true, // Displays dropdown below the button
+                alignment: 'right', // Displays dropdown with edge aligned to the left of button
+                //onOpenStart: getPlaylistData
             }
+            );
 
-            else {
-
-                addPlayList(2);
-            }
-
-        };
-
-    })
-
-    function emptyPlayList() {
-
-        let playListContainer = document.querySelector(".play-list");
-
-        let playListItems = document.getElementsByClassName("play-list-item");
-
-        let playListLength = playListItems.length;
-
-        for (i = 0; i < playListLength; i++) {
-
-            playListContainer.removeChild(playListContainer.childNodes[0]);
+            // 3. Do something with the data
+        } catch (e) {
+            console.log(e);//catch and log any errors
         }
     }
 
-    function addPlayList(selection) {
 
-        let playListContainer = document.querySelector(".play-list");
+    function populateSongs(songs) {
+        let html = "<h4>Loading Songs...</h4>";
+        let ele = document.getElementById("list");
 
-        let playList = [];
-
-        switch (selection) {
-            case 1:
-                playList.push("The way i am");
-                playList.push("some random song name");
-                playList.push("kompany you");
-                playList.push(" chris brown go crazy");
-                playList.push(" gunna go mad ");
-                playList.push(" Rotimi love song");
-                break;
-            case 2:
-                playList.push(" Jevon ft kompany love you");
-                playList.push("Kompany get away");
-                playList.push(" young thug big slim ");
-                playList.push(" young thug pop bottles");
-                playList.push(" pop smoke dior");
-                playList.push(" machel go up");
-                playList.push(" pie man mad song");
-                playList.push(" drake no guidance");
-                break;
+        {
+            var elems = document.querySelectorAll('.dropdown-trigger');
+            var instances = M.Dropdown.init(elems, {
+                inDuration: 300,
+                outDuration: 225,
+                container: document.getElementById('Menu'),
+                hover: false, // Activate on hover
+                belowOrigin: true, // Displays dropdown below the button
+                alignment: 'right', // Displays dropdown with edge aligned to the left of button
+                //onOpenStart: getPlaylistData
+            }
+            );
         }
 
-        playList.forEach((songTitle) => {
 
-            let songContainer = document.createElement("div");
+        ele.innerHTML = html;
+        html = "";
+        for (song of songs) {
+            html += `
+            <div id="Menu">
+                <ul id="${song.id}" class="dropdown-content" style="">
+                  <li><a href="#" tabindex="-1" onclick="testFunc(${song.id})">delete</a></li>
+                </ul>
+              </div>
 
-            let songPlaceholderImage = document.createElement("img");
-
-            let songTitleContainer = document.createElement("span");
-
-            let firstButton = document.createElement("button");
-
-            let secondButton = document.createElement("button");
-
-            songContainer.classList.add("play-list-item");
-
-            songPlaceholderImage.src = "https://cdn.pixabay.com/photo/2019/03/31/18/38/cd-rom-4093712_960_720.png";
-
-            songTitleContainer.innerHTML = songTitle;
-
-            firstButton.classList.add("btn");
-
-            firstButton.innerText = "Play";
-
-            secondButton.classList.add("btn")
-
-            secondButton.innerText = "Download";
-
-            songContainer.appendChild(songPlaceholderImage);
-
-            songContainer.appendChild(songTitleContainer);
-
-            songContainer.appendChild(firstButton);
-
-            songContainer.appendChild(secondButton);
-
-            playListContainer.appendChild(songContainer);
-
-        })
-
+            <li class="mdc-list-item mdc-ripple-upgraded" tabindex="-1">
+                <img class="mdc-list-item__graphic" aria-hidden="true" src="${song.albumImgUrl}" />
+                <span class="mdc-list-item__text"><span class="mdc-list-item__primary-text">${song.title}</span>
+                    <span class="mdc-list-item__secondary-text">${song.artist} - ${song.album}</span>
+                </span>
+    
+                <div class="mdc-list-item__meta mdc-chip-set">
+                    <a href="${song.url}" target="_blank" class="mdc-chip mdc-ripple-upgraded sideButtons" role="row"
+                        id="mdc-chip-17">
+                        <img class="mdc-chip__icon mdc-chip__icon--leading"
+                            src="https://img.icons8.com/windows/32/000000/deezer.png">
+                        <div class="mdc-chip__checkmark">
+                            <svg class="mdc-chip__checkmark-svg" viewBox="-2 -3 30 30">
+                                <path class="mdc-chip__checkmark-path" fill="none" stroke="black"
+                                    d="M1.73,12.91 8.1,19.28 22.79,4.59">
+                                </path>
+                            </svg>
+                        </div>
+                        <span role="button" tabindex="0" class="mdc-chip__text"></span>
+                    </a>
+    
+                    <a href="${song.youtubeUrl}" target="_blank" class=" mdc-chip mdc-ripple-upgraded sideButtons"
+                        role="row" id="mdc-chip-17">
+                        <img class="mdc-chip__icon mdc-chip__icon--leading"
+                            src="https://img.icons8.com/material-sharp/24/000000/youtube-play.png">
+                        <div class="mdc-chip__checkmark">
+                            <svg class="mdc-chip__checkmark-svg" viewBox="-2 -3 30 30">
+                                <path class="mdc-chip__checkmark-path" fill="none" stroke="black"
+                                    d="M1.73,12.91 8.1,19.28 22.79,4.59">
+                                </path>
+                            </svg>
+                        </div>
+                        <span role="button" tabindex="0" class="mdc-chip__text"></span>
+                    </a>
+    
+                    <a id="dropdowner" data-target='${song.id}' data-mdc-ripple-is-unbounded=""
+                        class="dropdown-trigger mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded sideButtons"
+                        title="" tabindex="-1"
+                        style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">
+                        more_vert
+                    </a>
+                </div>
+    
+    
+    
+            </li>
+            `
+        }
+        console.log(songs)
+        if (songs.length == 0) html = `<h5>Playlist is empty.</h5>`;
+        ele.innerHTML = html;
     }
 
+    function testFunc(id) {
+        console.log(id);
+    }
 
 
 </script>
