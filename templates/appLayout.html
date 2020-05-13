@@ -373,43 +373,6 @@
             height: 315;
         }
 
-        @media only screen and (max-device-width: 764px) {
-            .nav2 {
-                width: 300px;
-            }
-
-            .nav2 .frame {
-                width: 336px;
-                height: 252px;
-            }
-
-            .myContainer {
-                /*if i put with only in here for some reason its keeping the old css for margin-left and margin-right*/
-                width: 100%;
-                margin-left: 0%;
-                margin-right: 0%;
-            }
-
-            .home-carousel,
-            .home-carousel2 {
-                height: 300px;
-
-            }
-
-            .home-carousel .carousel-item,
-            .home-carousel2 .carousel-item {
-                height: 100%;
-            }
-
-            .carousel-image {
-                width: 250px;
-            }
-
-            .nav-icons{
-                line-height: 38px !important;
-            }
-        }
-
         .vertical-center {
             margin: 0 -50px;
             position: absolute;
@@ -436,10 +399,41 @@
         .modal2 {
             height: 400px;
         }
+
         .nav-icons{
             position:relative;
             padding:2px;
             top:5px;
+        }
+
+        @media only screen and (max-device-width: 764px) {
+            .nav2 {
+                width: 300px;
+            }
+
+            .nav2 .frame {
+                width: 336px;
+                height: 252px;
+            }
+
+            .home-carousel,
+            .home-carousel2 {
+                height: 300px;
+
+            }
+
+            .home-carousel .carousel-item,
+            .home-carousel2 .carousel-item {
+                height: 100%;
+            }
+
+            .carousel-image {
+                width: 250px;
+            }
+
+            .nav-icons{
+                line-height: 38px !important;
+            }
         }
     </style>
 </head>
@@ -453,9 +447,7 @@
     <!--Change colours and add icons-->
     <div class="navbar-fixed">
         <nav class="nav-wrapper indigo darken-3">
-            <div class="myContainer center">
                 <div>
-                    <!-- <img width="63" height="63" src="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif">   Messes up stuff-->
                     <a href="/" class="brand-logo center">RCDJ Music</a>
                 </div>
 
@@ -499,7 +491,6 @@
                     </form>
                 </div>
         </nav>
-    </div>
     </div>
 
     <!-- Mobile sidenav menu -->
