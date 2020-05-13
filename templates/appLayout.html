@@ -12,89 +12,766 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif" type="image/gif">
     <title>{% block title %}{% endblock %}</title>
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 
     <style>
+        nav .brand-logo {
+
+            color: #318ed4;
+
+        }
+
+        nav ul a {
+
+            color: rgba(255, 255, 255, 0.85);
+
+        }
+
+        .mdc-list-item__meta {
+            margin-left: auto;
+            margin-right: -18px;
+        }
+
         body,
         html {
             height: 100%;
             text-align: center;
             margin: 0;
-            background-color: rgb(255, 255, 255);
+            background-color: #282b30;
+            color: rgba(255, 255, 255, 0.72);
             /*background-color: rgb(14, 17, 31);*/
 
+        }
+
+        .dropdown-content li>a,
+        .dropdown-content li>span {
+
+            color: rgba(255, 255, 255, 0.85);
+            background-color: #424549;
+
+        }
+
+        .indigo-text {
+            color: #cccc !important;
+        }
+
+        .amber.darken-3 {
+            background-color: #4d587c !important;
+        }
+
+        /* autofill override*/
+        @-webkit-keyframes autofill {
+
+            0%,
+            100% {
+                color: rgba(255, 255, 255, 0.72);
+                background: transparent;
+            }
+        }
+
+        input:-webkit-autofill {
+            -webkit-animation-delay: 1s;
+            /* Safari support - any positive time runs instantly */
+            -webkit-animation-name: autofill;
+            -webkit-animation-fill-mode: both;
+        }
+
+        .black-text {
+            color: rgba(255, 255, 255, 0.72) !important;
+
+        }
+
+        .sidenav li>a {
+            color: rgba(255, 255, 255, 0.83);
+
+        }
+
+        .sidenav {
+            background-color: #424549;
+            color: white !important;
+            ;
         }
 
         .input-field input {
             color: white;
         }
 
+        .card {
+
+            background-color: #36393E;
+
+
+        }
+
+        .indigo.darken-3 {
+            background-color: #1e2124 !important;
+        }
+
         [type="checkbox"].filled-in:checked+span:not(.lever):after {
             top: 0;
             width: 20px;
             height: 20px;
-            border: 2px solid #ff6f00;
-            background-color: #ff6f00;
+            border: 2px solid #393C43;
+            background-color: #393C43;
             z-index: 0;
         }
 
-        .p-title {
-        width: 250px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        color: black;
+
+
+        .user-profile li {
+
+            height: 0px;
+            background-color: #1e212487;
+            transition: height 0.2s ease;
+            position: absolute;
+            /* in Absolute, it breaks the non-mobile. in static it breaks the mobile. fixed it by modifying the carousal style*/
         }
-        
+
+        .user-profile a {
+            width: 100px;
+        }
+
+        .play-list {
+            display: flex;
+            flex-direction: column;
+            height: 200px;
+            overflow: auto;
+            align-items: center;
+        }
+
+        .play-list-item {
+            border: 1px solid gainsboro;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            width: 700px;
+        }
+
+        .play-list-item img {
+            width: 30px;
+            margin-right: 20px;
+        }
+
+        .play-list-item button:nth-of-type(1) {
+            margin-left: auto;
+        }
+
+        .play-list-item button {
+            margin-left: 40px;
+        }
+
+        #modal1.modal {
+            background-color: rgba(0, 0, 0, 0.8);
+            width: 100%;
+            height: 100%;
+            max-height: 100%;
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #modal1 .modal-container {
+            background-color: #424549;
+            color: #fff;
+            padding: 20px;
+            width: 600px;
+            height: 420px;
+        }
+
+        #modal1 .modal-header {
+            display: flex;
+            height: 30px;
+        }
+
+        .modal-header span {
+            margin-left: auto;
+        }
+
+        .modal-header span:hover {
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-body .modal-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .modal-form {
+            width: 100%;
+            padding: 40px;
+        }
+
+        .modal-form form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start
+        }
+
+        #modal1 input {
+            margin-bottom: 40px;
+            color: #fff
+        }
+
+        .modal-form .form-footer {
+            display: flex;
+            width: 100%;
+        }
+
+        .form-footer a {
+            margin-left: auto;
+        }
+
+        button:focus {
+            outline: none;
+            background-color: #424549;
+        }
+
+        .mdc-chip {
+            padding: 0 10px;
+            background-color: #424549;
+        }
+
+        .mdc-list-divider {
+            border-bottom-color: #424549;
+        }
+
+        .mdc-list {
+            max-width: 800px;
+            border: 1px solid #424549;
+            background-color: #282b30;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .mdc-list--dense .mdc-list-item__graphic {
+
+            width: 50px;
+            height: 50px;
+
+        }
+
+        .mdc-list--dense .mdc-list-item__primary-text {
+            display: flex;
+            margin-top: 38px;
+
+        }
+
+        .mdc-list--two-line .mdc-list-item__text {
+
+            margin-top: -15px;
+        }
+
+        .mdc-chip-set {
+            flex-wrap: initial;
+
+        }
+
+        .mdc-chip-set .mdc-chip {
+            margin: 4px;
+        }
+
+        .mdc-chip-set .mdc-chip {
+            margin-top: auto;
+            margin-block-end: auto;
+        }
+
+        .mdc-chip .mdc-chip__icon--leading:not(.mdc-chip__icon--leading-hidden) {
+            margin-left: -4px;
+            margin-right: -4px;
+        }
+
+        .mdc-list--two-line.mdc-list--dense .mdc-list-item,
+        .mdc-list--avatar-list.mdc-list--dense .mdc-list-item {
+            height: 69px;
+        }
+
+        .mdc-icon-button {
+            padding-left: 17px;
+            margin-left: -15px;
+        }
+
+        /* .myContainer {
+            width: 80%;
+            margin-left: 10%;
+            margin-right: 10%;
+        }*/
+
+        :root {
+
+            --mdc-theme-text-primary-on-background: rgba(255, 255, 255, 0.87);
+            --mdc-theme-text-secondary-on-background: rgba(255, 255, 255, 0.397);
+            --mdc-theme-text-hint-on-background: rgba(255, 255, 255, 0.38);
+
+
+        }
+
+
+
+        .mdc-list-item__secondary-text {
+            margin-top: 6px;
+        }
+
+        .mdc-list--dense {
+            padding-top: 0px;
+            padding-bottom: 0px;
+            font-size: 12px;
+        }
+
+        /* Home Page CSS */
+        .left-middle-indicator {
+            margin-left: 350px;
+            position: relative;
+            /* position:fixed; */
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .right-middle-indicator {
+            margin-right: 350px;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .home-carousel,
+        .home-carousel2 {
+            height: 500px;
+
+            /* margin-left: 5%;
+            margin-right: 5%;*/
+
+        }
+
+
+        .home-carousel .carousel-item,
+        .home-carousel2 .carousel-item {
+            width: 250px;
+        }
+
+        .carousel-image {
+            width: 350px;
+        }
+
+        .nav2 {
+            width: 500px;
+        }
+
+        .nav2 .frame {
+            width: 420;
+            height: 315;
+        }
+
+        @media only screen and (max-device-width: 764px) {
+            .nav2 {
+                width: 300px;
+            }
+
+            .nav2 .frame {
+                width: 336px;
+                height: 252px;
+            }
+
+            .myContainer {
+                /*if i put with only in here for some reason its keeping the old css for margin-left and margin-right*/
+                width: 100%;
+                margin-left: 0%;
+                margin-right: 0%;
+            }
+
+            .home-carousel,
+            .home-carousel2 {
+                height: 300px;
+
+            }
+
+            .home-carousel .carousel-item,
+            .home-carousel2 .carousel-item {
+                height: 100%;
+            }
+
+            .carousel-image {
+                width: 250px;
+            }
+
+            .nav-icons{
+            top:0px;
+            }
+        }
+
+        .vertical-center {
+            margin: 0 -50px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .input-field input[type=search]+.label-icon {
+            top: 6px;
+        }
+
+        nav {
+            height: 64px;
+        }
+
+        .truncate {
+            width: 250px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .modal2 {
+            height: 400px;
+        }
+        .nav-icons{
+            position:relative;
+            line-height: 38px;
+        }
     </style>
 </head>
 
 <body>
+    <div class="fixed-action-btn hide-on-med-and-down">
+        <a href="#" class="btn-floating bth-large indigo darken-3" id="scroll" style="display: none;">
+            <i class="large material-icons">arrow_drop_up</i>
+        </a>
+    </div>
     <!--Change colours and add icons-->
-    <nav class="nav-wrapper indigo"> 
-        <div>
-            <div>
-                <!-- <img width="63" height="63" src="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif">   Messes up stuff-->
-                <a href="/" class="brand-logo center">RCDJ Music</a>
-            </div>
-            <a href="#" class="sidenav-trigger" data-target="mobile-links">
-                <i class="material-icons">menu</i>
-            </a>
-            
-            <ul class="hide-on-med-and-down">
-                <li><a href="/" class="waves-effect waves-light">Home</a></li>
-                <li><a href="#" class="waves-effect waves-light">Your Playlists</a></li> <!--Ensure Loggin is neccessary for access, change route to /playlists-->
-                <li><a href="#" class="waves-effect waves-light">Create Playlist</a></li> <!--Ensure Loggin is neccessary for access-->
-                <li><a href="/search" class="waves-effect waves-light">Search</a></li>
-                <div class="right">
-                    <li><a href="/register" class="waves-effect waves-light">Register</a></li>
-                    <li><a href="/login" class="waves-effect waves-light">Login</a></li>
+    <div class="navbar-fixed">
+        <nav class="nav-wrapper indigo darken-3">
+            <div class="myContainer center">
+                <div>
+                    <!-- <img width="63" height="63" src="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif">   Messes up stuff-->
+                    <a href="/" class="brand-logo center">RCDJ Music</a>
                 </div>
-            </ul>
-        </div>
-    </nav>
 
+                <a href="#" class="sidenav-trigger right" data-target="mobile-links">
+                    <i class="material-icons">menu</i>
+                </a>
+
+                <div class="left">
+                    <ul class="hide-on-med-and-down">
+                        <li><a href="/" class="waves-effect waves-light"><i class="material-icons nav-icons" style="display:inline;">home</i>Home</a></li>
+                        <li><a href="/playlist" class="waves-effect waves-light"><i class="material-icons nav-icons" style="display:inline;">library_music</i>Your Playlists</a></li>
+                        <!--Ensure Loggin is neccessary for access, change route to /playlists-->
+                        <li><a href="#" class="waves-effect waves-light" onclick="launchModal()"><i class="material-icons nav-icons" style="display:inline;">add_box</i>Create Playlist</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="right" id="right-nav">
+                    <ul>
+                        <li class="hide-on-med-and-down" id="desktop-aboutus-button"><a href="#"
+                            class="waves-effect waves-light"><i class="material-icons nav-icons" style="display:inline;">info</i>About Us</a>
+                        </li>
+                        <li class="hide-on-med-and-down" id="desktop-register-button"><a href="/register"
+                                class="waves-effect waves-light"><i class="material-icons nav-icons" style="display:inline;">account_circle</i>Register</a>
+                        </li>
+                        <li class="hide-on-med-and-down" id="desktop-login-button"><a href="/login"
+                                class="waves-effect waves-light"><i class="material-icons nav-icons" style="display:inline;">exit_to_app</i>Login</a></li>
+                        <li class="hide-on-small-only">
+                            <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <form class="left" method="POST" action="/search">
+                        <div class="input-field">
+                            <input class="nav-search" id="search" type="search" name="queryBox" autocomplete="off"
+                                style="width:17rem; height:64px;" required>
+                            <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                            <i class="material-icons">close</i>
+                        </div>
+                    </form>
+                </div>
+        </nav>
+    </div>
+    </div>
+
+    <!-- Mobile sidenav menu -->
     <ul class="sidenav left-align" id="mobile-links">
-        <li><a href="/" class="waves-effect waves-dark">About Us</a></li>
-        <li><a href="/" class="waves-effect waves-dark">Home</a></li>
-        <li><a href="#" class="waves-effect waves-dark">Your Playlists</a></li> <!--Ensure Loggin is neccessary for access, change route to /playlists-->
-        <li><a href="#" class="waves-effect waves-dark">Create Playlist</a></li> <!--Ensure Loggin is neccessary for access-->
-        <li><a href="/search" class="waves-effect waves-dark">Search</a></li>
-        <li><a href="/register" class="waves-effect waves-dark">Register</a></li>
-        <li><a href="/login" class="waves-effect waves-dark">Login</a></li>
+        <li><a href="/" class="waves-effect waves-dark"><i class="material-icons nav-icons">home</i>Home</a></li>
+        <div class="divider indigo darken-3"></div>
+        <li><a href="/playlist" class="waves-effect waves-dark"><i class="material-icons nav-icons">library_music</i>Your Playlists</a></li>
+        <div class="divider indigo darken-3"></div>
+        <!--Ensure Loggin is neccessary for access, change route to /playlists-->
+        <li><a href="#" class="waves-effect waves-dark" onclick="launchModal()"><i class="material-icons nav-icons">add_box</i>Create Playlist</a></li>
+        <div class="divider indigo darken-3"></div>
+        <!--Ensure Loggin is neccessary for access-->
+        <li id="desktop-aboutus-button"><a href="#" class="waves-effect waves-light"><i class="material-icons nav-icons">info</i>About Us</a></li>
+        <div class="divider indigo darken-3"></div>
+        <li id="mobile-register-button"><a href="/register" class="waves-effect waves-dark"><i class="material-icons nav-icons">account_circle</i>Register</a></li>
+        <div class="divider indigo darken-3"></div>
+        <li id="mobile-login-button"><a href="/login" class="waves-effect waves-dark"><i class="material-icons nav-icons">exit_to_app</i>Login</a></li>
+        <div class="divider indigo darken-3"></div>
+        <li>
+            <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
+        </li>
     </ul>
-    <a href="" class="brand-logo center ">{% block page %}{% endblock %}</a>
-    
+
+    <!-- Sidenav Player -->
+    <ul id="slide-out" class="sidenav nav2">
+        <li>
+            <div class="music-view">
+
+            </div>
+            <div class="divider"></div>
+        </li>
+        <li>
+            <div class="view-title">
+
+            </div>
+        </li>
+        <li>
+            <div class="divider"></div>
+            <div class="mdc-list-item__meta mdc-chip-set view-buttons">
+
+            </div>
+        </li>
+    </ul>
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-container">
+            <div class="modal-header"><span onclick="closeModal()">&#10005;</span></div>
+            <div class="modal-body">
+                <div class="modal-title">Create Playlist</div>
+                <div class="modal-form">
+                    <form method="POST" action="/createPlaylist">
+                        <label for="title">Name</label>
+                        <input type="text" id="play-list-title" name="title" required>
+                        <label for="description">Description</label>
+                        <input type="text" id="play-list-description" name="description">
+
+                        <!-- <div class="form-footer"><a class="waves-effect waves-light btn">Create</a></div> -->
+                        <div class="form-footer ">
+                            <input class="waves-effect waves-light btn amber darken-3" id="submit" name="submit"
+                                type="submit" value="create">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <a class="center">{% block page %}{% endblock %}</a>
+
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
     <script src="https://code.iconify.design/1/1.0.4/iconify.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    
+
     <script>
-        $(document).ready(function(){
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        M.toast({ html: '{{message}}', classes: 'rounded' });
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        $(document).ready(function () {
+            let inputBox = $("input.nav-search");
+            let submitIcon = $('.label-icon');
+            let isOpen = false;
+            inputBox.hide();
+
+            submitIcon.click(function () {
+                if (isOpen == false) {
+                    inputBox.show();
+                    // inputBox.autocomplete({
+                    //     data: {
+                    //     "Drake": null,
+                    //     "Travis Scott": null,
+                    //     "Eminem": null,
+                    //     "Taylor Swift": null
+                    //     }
+                    // });
+                    isOpen = true;
+                } else {
+                    inputBox.hide();
+                    isOpen = false;
+                }
+            });
+
+            $(document).mouseup(function () {
+                if (isOpen == true) {
+                    submitIcon.click();
+                }
+            });
+
             $('.sidenav').sidenav();
-        })
+            $('.nav2').sidenav({
+                edge: 'right'
+            });
+
+            $('.fixed-action-btn').floatingActionButton();
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('#scroll').fadeIn();
+                } else {
+                    $('#scroll').fadeOut();
+                }
+            });
+            $('#scroll').click(function () {
+                $("html, body").animate({ scrollTop: 0 }, 400);
+                return false;
+            });
+        });
+
+        // Change default video in player
+        // function musicView(videoId, songUrl, youtubeUrl) {
+        //     let view = document.querySelector(".user-view");
+        //     let title = document.querySelector(".view-title");
+        //     let buttons = document.querySelector(".view-buttons")
+        //     view.innerHTML = `<iframe width="420" height="315" src="https://www.youtube.com/embed/${videoId}"></iframe>`;
+        //     //title, buttons, maybe embedded search query
+        //     buttons.innerHTML = `
+        //     <a href="#" class="mdc-chip mdc-ripple-upgraded sideButtons" onclick="deezerView(${songurl})"
+        //           role="row" id="mdc-chip-17">
+        //           <img class="mdc-chip__icon mdc-chip__icon--leading" src="https://img.icons8.com/windows/32/000000/deezer.png">
+        //           <span role="button" tabindex="0" class="mdc-chip__text">Play on Deezer</span>
+        //         </a>
+
+        //         <a href="#" class=" mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17" onclick="musicView(${youtubeUrl})">
+        //           <img class="mdc-chip__icon mdc-chip__icon--leading"
+        //             src="https://img.icons8.com/material-sharp/24/000000/youtube-play.png">
+        //           <span role="button" tabindex="0" class="mdc-chip__text">Play on Youtube</span>
+        //         </a>
+
+        //         <a id="dropdowner" data-mdc-ripple-is-unbounded=""
+        //           class="dropdown-trigger mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded sideButtons"
+        //           title="" tabindex="-1"
+        //           style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">
+        //           more_vert
+        //         </a>`
+        // };
+
+        function deezerView(songUrl, youtubeUrl, songId, songTitle, songArtist, songAlbum) {
+            let view = document.querySelector(".music-view");
+            let title = document.querySelector(".view-title");
+            let buttons = document.querySelector(".view-buttons")
+            view.innerHTML = `
+            <iframe scrolling="no" frameborder="0" allowTransparency="true" 
+            src="https://www.deezer.com/plugins/player?format=square&autoplay=false&playlist=false&width=300&height=300&color=007FEB&layout=dark&size=medium&type=tracks&id=${songId}&app_id=1" width="300" height="300"></iframe>`
+
+            // <div class="tooltipped view-title" data-position="top" data-tooltip="${songArtist} - ${songTitle}">
+            // <div class="tooltipped view-title" data-position="top" data-tooltip="Album: ${songAlbum}">
+            title.innerHTML = `<span class="center truncate" style="width:100%">${songArtist} - ${songTitle}</span>
+                                <span class="center truncate" style="width:100%">Album: ${songAlbum}</span>`
+
+
+
+            buttons.innerHTML = `
+            <a href="${songUrl}" target="_blank" class="mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17">
+                <img class="mdc-chip__icon mdc-chip__icon--leading" src="https://img.icons8.com/windows/32/000000/deezer.png">
+                <span role="button" tabindex="0" class="mdc-chip__text">Play on Deezer</span>
+            </a>
+          
+            <a href="${youtubeUrl}" target="_blank" class="mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17">
+                <img class="mdc-chip__icon mdc-chip__icon--leading"
+                src="https://img.icons8.com/material-sharp/24/000000/youtube-play.png">
+                <span role="button" tabindex="0" class="mdc-chip__text">Play on Youtube</span>
+            </a>`
+        }
+
+
+        function hideLogAndRegAndShowUser() {
+            let aboutUsBtn = document.querySelector("#desktop-aboutus-button");
+            let registerBtn = document.querySelector("#desktop-register-button");
+            let loginBtn = document.querySelector("#desktop-login-button");
+            let mobileRegisterBtn = document.querySelector("#mobile-register-button");
+            let mobileLoginBtn = document.querySelector("#mobile-login-button");
+            aboutUsBtn.style.visibility = "hidden";
+            registerBtn.style.visibility = "hidden";
+            loginBtn.style.visibility = "hidden";
+            mobileRegisterBtn.style.visibility = "hidden";
+            mobileLoginBtn.style.visibility = "hidden";
+
+            let userProfile = document.querySelector(".user-profile");
+            // let userProfile2 = document.querySelector(".user-profile2");
+            //console.log(userProfile.innerHTML);
+
+        let userProfileHTML = `
+        <a class="user-logged-in" href="#!">{{current_user.username}}<i class="material-icons nav-icons" style="display:inline;">arrow_drop_down</i></a>
+        <li style="height: 0px;">
+             <a href="/logout" class="waves-effect waves-light" style="height: 0px;"><i class="material-icons nav-icons" style="display:inline;">launch</i>Logout</a>
+        </li>`;
+            console.log(userProfileHTML);
+            userProfile.innerHTML = userProfileHTML;
+            // userProfile2.innerHTML = userProfileHTML;
+
+            userProfile.addEventListener("mouseleave", e => {
+                userProfile.querySelector("li").style.height = "0px";
+                userProfile.querySelectorAll("a")[1].style.height = "0px";
+            })
+
+            userProfile.addEventListener("mouseover", e => {
+                userProfile.querySelector("li").style.height = "64px";
+                userProfile.querySelectorAll("a")[1].style.height = "64px";
+
+            })
+
+            // userProfile2.addEventListener("mouseleave", e => {
+            //     userProfile2.querySelector("li").style.height = "0px";
+            //     userProfile2.querySelectorAll("a")[1].style.height = "0px";
+            // })
+
+            // userProfile2.addEventListener("mouseover", e => {
+            //     userProfile.querySelector("li").style.height = "64px";
+            //     userProfile2.querySelectorAll("a")[1].style.height = "64px";
+
+            // })
+
+
+
+        }
+        {% if current_user.is_authenticated %}
+        hideLogAndRegAndShowUser();
+        {% else %}
+        let profileNameButton = document.querySelector(".user-logged-in");
+        // let profileNameButton2 = document.querySelector(".user-logged-in2");
+        let userProfile = document.querySelector(".user-profile");
+        // let userProfile2 = document.querySelector(".user-profile2");
+        userProfile.style.width = "0px";
+        // userProfile2.style.width = "0px";
+        profileNameButton.style.width = "0px";
+        // profileNameButton2.style.width = "0px";
+        /*need to put above in a function */
+        {% endif %}
+
+        function launchModal() {
+            {% if current_user.is_anonymous %}
+            window.location.pathname = '/login';
+            {% else %}
+            let modal = document.getElementById("modal1");
+            modal.style.display = "flex";
+            {% endif %}
+        }
+
+        function closeModal() {
+            let modal = document.getElementById("modal1");
+            modal.style.display = "none";
+        }
+
+
     </script>
 
     <div>{% block content %}{% endblock %}</div>
 </body>
+
 </html>
