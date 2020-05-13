@@ -12,7 +12,7 @@ import json
 from requests.models import Response
 from unittest.mock import Mock
 from isodate import parse_duration
-from deezerAndYoutubeThings import getSongsList, getSongModelById
+from deezerAndYoutubeThings import getSongsList, getSongModelById, getDeezerPlaylist
 
 # from sqlalchemy.exc import IntegrityError
 # from datetime import timedelta
@@ -68,7 +68,6 @@ app.app_context().push()
 def hello():
     playlist_url = "https://www.googleapis.com/youtube/v3/playlistItems"
     videos = []
-
     playlist_params = {
         "key": app.config["YOUTUBE_API_KEY"],
         "playlistId": "PL4fGSI1pDJn69On1f-8NAvX_CYlx7QyZc",  # Top 100 Music Videos United States(Playlist) on YouTube Music Global Charts channel",
@@ -94,7 +93,9 @@ def hello():
             "position": result["snippet"]["position"],
         }
         videos.append(video_data)
-    return render_template("home.html", videos=videos)
+
+    playList = getDeezerPlaylist()
+    return render_template("home.html", videos=videos, tracks=playList)
 
 
 @app.route("/register", methods=["GET", "POST"])

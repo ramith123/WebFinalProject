@@ -8,7 +8,23 @@ searchUrl = "https://api.deezer.com/search?q="
 youtubeApiKey = "AIzaSyC0VqCv-KW7cRsmYBUUHHqTJeRBTVnP-h0"
 search_url = "https://www.googleapis.com/youtube/v3/search"
 youtubeVideoLink = "https://www.youtube.com/watch?v="
+playlistUrl = "https://api.deezer.com/playlist/1282495565"
 
+def getDeezerPlaylist():
+    reply = requests.get(playlistUrl)
+    data = reply.json()['tracks']['data']
+    songList = []
+    for i, song in enumerate(data):
+        track = {
+            "id": song["id"],
+            "title": song["title"],
+            "artist": song["artist"]["name"],
+            "album": song["album"]["title"],
+            "albumImgUrl": song["album"]["cover_big"],
+            "url": song["link"],
+        }
+        songList.append(track)
+    return songList
 
 def getJsonForSearch(query):  # get json data for a search query
     url = searchUrl + query
