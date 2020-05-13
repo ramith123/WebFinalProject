@@ -274,6 +274,16 @@ def sendSongs(pid):
     return json.dumps(songs)
 
 
+@app.route("/termsOfService")
+def termsOfService():
+    return render_template("termsOfService.html")
+
+
+@app.route("/Privacypolicy")
+def Privacypolicy():
+    return render_template("Privacypolicy.html")
+
+
 if __name__ == "__main__":
     # Bind to PORT if defined, otherwise default to 5000.
     port = int(os.environ.get("PORT", 5000))
