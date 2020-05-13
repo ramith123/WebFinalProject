@@ -28,15 +28,32 @@
 
         }
 
+        .mdc-list-item__meta {
+            margin-left: auto;
+            margin-right: -18px;
+        }
+
         body,
         html {
             height: 100%;
             text-align: center;
             margin: 0;
-            background-color: #373a40;
+            background-color: #282b30;
             color: rgba(255, 255, 255, 0.72);
             /*background-color: rgb(14, 17, 31);*/
 
+        }
+
+        .dropdown-content li>a,
+        .dropdown-content li>span {
+
+            color: rgba(255, 255, 255, 0.85);
+            background-color: #424549;
+
+        }
+
+        .indigo-text {
+            color: #cccc !important;
         }
 
         .amber.darken-3 {
@@ -157,7 +174,7 @@
         }
 
         #modal1 .modal-container {
-            background-color: rgb(12, 11, 11);
+            background-color: #424549;
             color: #fff;
             padding: 20px;
             width: 600px;
@@ -223,6 +240,7 @@
 
         .mdc-chip {
             padding: 0 10px;
+            background-color: #424549;
         }
 
         .mdc-list-divider {
@@ -262,7 +280,12 @@
         }
 
         .mdc-chip-set .mdc-chip {
-            margin: 5px;
+            margin: 4px;
+        }
+
+        .mdc-chip-set .mdc-chip {
+            margin-top: auto;
+            margin-block-end: auto;
         }
 
         .mdc-chip .mdc-chip__icon--leading:not(.mdc-chip__icon--leading-hidden) {
@@ -275,19 +298,27 @@
             height: 69px;
         }
 
-        .myContainer {
+        .mdc-icon-button {
+            padding-left: 17px;
+            margin-left: -15px;
+        }
+
+        /* .myContainer {
             width: 80%;
             margin-left: 10%;
             margin-right: 10%;
-        }
+        }*/
 
         :root {
 
             --mdc-theme-text-primary-on-background: rgba(255, 255, 255, 0.87);
             --mdc-theme-text-secondary-on-background: rgba(255, 255, 255, 0.397);
+            --mdc-theme-text-hint-on-background: rgba(255, 255, 255, 0.38);
 
 
         }
+
+
 
         .mdc-list-item__secondary-text {
             margin-top: 6px;
@@ -494,8 +525,8 @@
 
                         <!-- <div class="form-footer"><a class="waves-effect waves-light btn">Create</a></div> -->
                         <div class="form-footer ">
-                            <input class="waves-effect waves-light btn" id="submit" name="submit" type="submit"
-                                value="create">
+                            <input class="waves-effect waves-light btn amber darken-3" id="submit" name="submit"
+                                type="submit" value="create">
                         </div>
                     </form>
                 </div>
