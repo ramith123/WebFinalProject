@@ -129,8 +129,7 @@
         }
 
         .user-profile a {
-            width: 70px;
-
+            width: 100px;
         }
 
         .play-list {
@@ -699,7 +698,7 @@
         let userProfileHTML = `
         <a class="user-logged-in" href="#!">{{current_user.username}}<i class="material-icons nav-icons" style="display:inline;">arrow_drop_down</i></a>
         <li style="height: 0px;">
-             <a href="/logout" class="waves-effect waves-light" style="height: 0px;">logout</a>
+             <a href="/logout" class="waves-effect waves-light" style="height: 0px;"><i class="material-icons nav-icons" style="display:inline;">launch</i>Logout</a>
         </li>`;
             console.log(userProfileHTML);
             userProfile.innerHTML = userProfileHTML;
