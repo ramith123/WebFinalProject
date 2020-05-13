@@ -16,6 +16,12 @@
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 
     <style>
+        nav ul a {
+
+            color: rgba(255, 255, 255, 0.85);
+
+        }
+
         body,
         html {
             height: 100%;
@@ -51,6 +57,17 @@
         .black-text {
             color: rgba(255, 255, 255, 0.72) !important;
 
+        }
+
+        .sidenav li>a {
+            color: rgba(255, 255, 255, 0.83);
+
+        }
+
+        .sidenav {
+            background-color: #424549;
+            color: white !important;
+            ;
         }
 
         .input-field input {
@@ -195,17 +212,21 @@
 
         button:focus {
             outline: none;
-            background-color: rgba(0, 0, 0, 0);
+            background-color: #424549);
         }
 
         .mdc-chip {
             padding: 0 10px;
         }
 
+        .mdc-list-divider {
+            border-bottom-color: #424549;
+        }
+
         .mdc-list {
             max-width: 800px;
-            border: 1px solid rgba(0, 0, 0, .1);
-
+            border: 1px solid #424549;
+            background-color: #282b30;
             display: block;
             margin-left: auto;
             margin-right: auto;
@@ -246,6 +267,24 @@
         .mdc-list--two-line.mdc-list--dense .mdc-list-item,
         .mdc-list--avatar-list.mdc-list--dense .mdc-list-item {
             height: 69px;
+        }
+
+        :root {
+
+            --mdc-theme-text-primary-on-background: rgba(255, 255, 255, 0.87);
+            --mdc-theme-text-secondary-on-background: rgba(255, 255, 255, 0.397);
+
+
+        }
+
+        .mdc-list-item__secondary-text {
+            margin-top: 6px;
+        }
+
+        .mdc-list--dense {
+            padding-top: 0px;
+            padding-bottom: 0px;
+            font-size: 12px;
         }
 
         /* Home Page CSS */

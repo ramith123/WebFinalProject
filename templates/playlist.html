@@ -12,12 +12,11 @@
 <div class="carousel">
     {% for playlist in playlists %}
     <a id="{{playlist.id}}" class="carousel-item valign-wrapper"
-        style="background: linear-gradient(184deg, rgba(35, 29, 138,1) 0%, rgba(9,9,121,1) 53%, rgba(0,212,255,1) 100%);"
-        href="#">
-        <h3 class="truncate " style="color: #ffffff; white-space: pre-line;margin: 1.9466666667rem 0 4.168rem 0;">
+        style="background: linear-gradient(rgb(60, 89, 187) 20%, rgba(30, 33, 36, 0) 95%);" href="#">
+        <h3 class="truncate "
+            style="width:100%; color: #ffffff; white-space: pre-line;margin: 1.9466666667rem 0 4.168rem 0;">
             {{playlist.name}}</h3>
     </a>
-
     {% else %}
     <h4>Create some playlists</h4>
     {%endfor%}
@@ -119,7 +118,7 @@
                   <li><a href="#" tabindex="-1" onclick="testFunc(${song.id},${pid})">delete</a></li>
                 </ul>
               </div>
-
+            
             <li class="mdc-list-item mdc-ripple-upgraded" tabindex="-1">
                 <img class="mdc-list-item__graphic" aria-hidden="true" src="${song.albumImgUrl}" />
                 <span class="mdc-list-item__text"><span class="mdc-list-item__primary-text">${song.title}</span>
@@ -166,6 +165,7 @@
     
     
             </li>
+            <li class="mdc-list-divider" role="separator"></li>
             `
         }
         console.log(songs)
