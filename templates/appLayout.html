@@ -16,6 +16,18 @@
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 
     <style>
+        nav .brand-logo {
+
+            color: #318ed4;
+
+        }
+
+        nav ul a {
+
+            color: rgba(255, 255, 255, 0.85);
+
+        }
+
         body,
         html {
             height: 100%;
@@ -53,6 +65,17 @@
 
         }
 
+        .sidenav li>a {
+            color: rgba(255, 255, 255, 0.83);
+
+        }
+
+        .sidenav {
+            background-color: #424549;
+            color: white !important;
+            ;
+        }
+
         .input-field input {
             color: white;
         }
@@ -82,7 +105,7 @@
         .user-profile li {
 
             height: 0px;
-            background-color: #3f51b5;
+            background-color: #1e212487;
             transition: height 0.2s ease;
             position: absolute;
             /* in Absolute, it breaks the non-mobile. in static it breaks the mobile. fixed it by modifying the carousal style*/
@@ -195,17 +218,21 @@
 
         button:focus {
             outline: none;
-            background-color: rgba(0, 0, 0, 0);
+            background-color: #424549);
         }
 
         .mdc-chip {
             padding: 0 10px;
         }
 
+        .mdc-list-divider {
+            border-bottom-color: #424549;
+        }
+
         .mdc-list {
             max-width: 800px;
-            border: 1px solid rgba(0, 0, 0, .1);
-
+            border: 1px solid #424549;
+            background-color: #282b30;
             display: block;
             margin-left: auto;
             margin-right: auto;
@@ -248,10 +275,28 @@
             height: 69px;
         }
 
-        .myContainer{
-            width:80%;
-            margin-left:10%;
-            margin-right:10%;
+        .myContainer {
+            width: 80%;
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+
+        :root {
+
+            --mdc-theme-text-primary-on-background: rgba(255, 255, 255, 0.87);
+            --mdc-theme-text-secondary-on-background: rgba(255, 255, 255, 0.397);
+
+
+        }
+
+        .mdc-list-item__secondary-text {
+            margin-top: 6px;
+        }
+
+        .mdc-list--dense {
+            padding-top: 0px;
+            padding-bottom: 0px;
+            font-size: 12px;
         }
 
         /* Home Page CSS */
@@ -290,10 +335,11 @@
         }
 
         @media only screen and (max-device-width: 764px) {
-            .myContainer{ /*if i put with only in here for some reason its keeping the old css for margin-left and margin-right*/
-                width:100%;
-                margin-left:0%;
-                margin-right:0%;
+            .myContainer {
+                /*if i put with only in here for some reason its keeping the old css for margin-left and margin-right*/
+                width: 100%;
+                margin-left: 0%;
+                margin-right: 0%;
             }
 
             .home-carousel,
@@ -339,46 +385,48 @@
     <div class="navbar-fixed">
         <nav class="nav-wrapper indigo darken-3">
             <div class="myContainer center">
-            <div>
-                <!-- <img width="63" height="63" src="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif">   Messes up stuff-->
-                <a href="/" class="brand-logo center">RCDJ Music</a>
-            </div>
-
-            <a href="#" class="sidenav-trigger right" data-target="mobile-links">
-                <i class="material-icons">menu</i>
-            </a>
-
-            <div class="left">
-                <ul class="hide-on-med-and-down">
-                    <li><a href="/" class="waves-effect waves-light">Home</a></li>
-                    <li><a href="/playlist" class="waves-effect waves-light">Your Playlists</a></li>
-                    <!--Ensure Loggin is neccessary for access, change route to /playlists-->
-                    <li><a href="#" class="waves-effect waves-light" onclick="launchModal()">Create Playlist</a></li>
-
-                </ul>
-            </div>
-
-            <div class="right" id="right-nav">
-                <ul>
-                    <li class="hide-on-med-and-down" id="desktop-register-button"><a href="/register"
-                            class="waves-effect waves-light">Register</a>
-                    </li>
-                    <li class="hide-on-med-and-down" id="desktop-login-button"><a href="/login"
-                            class="waves-effect waves-light">Login</a></li>
-                    <li class="hide-on-small-only">
-                        <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
-                    </li>
-                </ul>
-            </div>
-            <div>
-            <form class="left" method="POST" action="/search">
-                <div class="input-field">
-                    <input class="nav-search" id="search" type="search" name="queryBox" autocomplete="off" style="width:17rem; height:64px;" required>
-                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                    <i class="material-icons">close</i>
+                <div>
+                    <!-- <img width="63" height="63" src="https://miro.medium.com/max/1600/1*i1yv42RrOYhvw7U2MM4qCg.gif">   Messes up stuff-->
+                    <a href="/" class="brand-logo center">RCDJ Music</a>
                 </div>
-            </form>
-            </div>
+
+                <a href="#" class="sidenav-trigger right" data-target="mobile-links">
+                    <i class="material-icons">menu</i>
+                </a>
+
+                <div class="left">
+                    <ul class="hide-on-med-and-down">
+                        <li><a href="/" class="waves-effect waves-light">Home</a></li>
+                        <li><a href="/playlist" class="waves-effect waves-light">Your Playlists</a></li>
+                        <!--Ensure Loggin is neccessary for access, change route to /playlists-->
+                        <li><a href="#" class="waves-effect waves-light" onclick="launchModal()">Create Playlist</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="right" id="right-nav">
+                    <ul>
+                        <li class="hide-on-med-and-down" id="desktop-register-button"><a href="/register"
+                                class="waves-effect waves-light">Register</a>
+                        </li>
+                        <li class="hide-on-med-and-down" id="desktop-login-button"><a href="/login"
+                                class="waves-effect waves-light">Login</a></li>
+                        <li class="hide-on-small-only">
+                            <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <form class="left" method="POST" action="/search">
+                        <div class="input-field">
+                            <input class="nav-search" id="search" type="search" name="queryBox" autocomplete="off"
+                                style="width:17rem; height:64px;" required>
+                            <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                            <i class="material-icons">close</i>
+                        </div>
+                    </form>
+                </div>
         </nav>
     </div>
     </div>
