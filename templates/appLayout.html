@@ -50,9 +50,9 @@
             background-color: #424549;
         }
 
-        iframe {
+        /* iframe {
             border: 0px;
-        }
+        } */
 
         .modal .modal-footer {
 
@@ -182,7 +182,7 @@
         }
 
         .user-profile a {
-            width: 100px;
+            width: 125px;
         }
 
         .play-list {
@@ -420,7 +420,7 @@
             width: 500px;
         }
 
-        .nav2 .frame {
+        .nav2 {
             width: 420;
             height: 315;
         }
@@ -440,16 +440,36 @@
             height: 64px;
         }
 
-        /* .truncate {
-            width: 250px;
+        .username-truncate {
+            width: 80px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
             text-align: center;
-        } */
+        }
 
         .modal2 {
-            height: 400px;
+            height: auto;
+        }
+
+        .iframe-container {
+            position: relative !important;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0px;
+        }
+
+        .iframe-container iframe {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .deezer-frame {
+            width: 420px;
+            height: 420px;
         }
 
         .nav-icons {
@@ -459,14 +479,28 @@
             font-size: 17px !important;
         }
 
+
         @media only screen and (max-device-width: 764px) {
             .nav2 {
                 width: 300px;
             }
 
-            .nav2 .frame {
+            .nav2 {
                 width: 336px;
-                height: 252px;
+            }
+
+            .modal2 {
+                width: 320px;
+                height: 450px;
+            }
+
+            .deezer-frame {
+                width: 290px;
+                height: 325px;
+            }
+
+            .sidenav-deezer-frame {
+                height: 420px;
             }
 
             .home-carousel,
@@ -677,7 +711,7 @@
         </li>
         <li>
             <div class="divider"></div>
-            <div class="mdc-list-item__meta mdc-chip-set view-buttons">
+            <div class="center view-buttons">
 
             </div>
         </li>
@@ -806,8 +840,8 @@
             let title = document.querySelector(".view-title");
             let buttons = document.querySelector(".view-buttons")
             view.innerHTML = `
-            <iframe scrolling="no" frameborder="0" allowTransparency="true" 
-            src="https://www.deezer.com/plugins/player?format=square&autoplay=false&playlist=false&width=300&height=300&color=007FEB&layout=dark&size=medium&type=tracks&id=${songId}&app_id=1" width="300" height="300"></iframe>`
+            <iframe class="deezer-frame sidenav-deezer-frame" scrolling="no" frameborder="0" allowTransparency="true" 
+            src="https://www.deezer.com/plugins/player?format=square&autoplay=false&playlist=false&width=420&height=420&color=007FEB&layout=dark&size=medium&type=tracks&id=${songId}&app_id=1"></iframe>`
 
             // <div class="tooltipped view-title" data-position="top" data-tooltip="${songArtist} - ${songTitle}">
             // <div class="tooltipped view-title" data-position="top" data-tooltip="Album: ${songAlbum}">
@@ -817,11 +851,16 @@
 
 
             buttons.innerHTML = `
-            
+            <a href="${songUrl}" target="_blank" class="mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17">
+                <img class=" mdc-chip__icon mdc-chip__icon--leading"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAABgElEQVQ4jdXSQU4UQRjF8f9XzUQhDE3NZBg2YlhwChcQlRt4Bj2AiS5xTTiA8QLu3RITiHgJXaiERMeZrupmMLCYrsdmkM7ESdwZv6Q2X1796i0K/vUYgKQsxvhM0iNgw8zWgPb0AIyBsaSfwKmZvffevzaztAAQY3xuZk8kHUj6ZmbfnXPjPM/HAFVVtVNKbUnrZnZf0osQwhJwAEAI4STGuPO3tcuyfBhC+ADgprvNuq4/N0MhhKMY4/afgLquPwGbTWB1MpmUM7ltSUchhJPRaPR4BiiBvAnc6ff7V3MaP3DOHRZF8epm0ev1LoHFJnA1GAzuzgE+ppR2u93ub2A4HC4ClwAL013VarU88Ktx8djM9rz3x7NilmWrQNUEvjjntoCzm1Cn09mZ0wjn3Jakr03gXUppvyiKfUmnWZb9MLPzPM8vAKqqWpa0Utf1upltSHop6S3c/kQXY3wqadc5d0/SGrACLE8fuADOzWyQUjozs0Pv/RszS/Na/kdzDT4vso9AYqa8AAAAAElFTkSuQmCC">
+                <span role="button" tabindex="0" class="mdc-chip__text orange-text" style="padding:6px;">Play on Deezer</span>
             </a>
           
-            
-               
+            <a href="${youtubeUrl}" target="_blank" class="mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17">
+                <img class="mdc-chip__icon mdc-chip__icon--leading"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAAD9klEQVR4nO2coW8cRxTG39tbYGCwIMAgUq/M0KebOxlEao4VBgSU1ZX6BxgYhMVmAQX5Ayz1wgICDMt8lQIi767uoEGkXqQCg4ADBgaz+0J2o9VVVe67rpXZ5vuhe9J89630gZk3szsihBBCCCGEEEIIIYR0A/3aD9Al0jQ9BSWz0Wg0QwQxaPBNo6rPkfFmJiIyQzQRMpjcPwwkMBhIYDCQwOCkDqCqf4Ljl/f0KIR8o3SqMby8vNxJkmQP0axWq5vJZHLXhv98Pu+DktVgMFghgk7NIbu7u4dFUVyCmomAzdm/URTFX8h4MzsTkVNEw1VWYDCQwGAggcFAAoOBBEanVlm3t7fvkiT5HtGsVqubtvx7vR7kLSLQkpcQ8iU61alfXV0d9Hq9l4imKIrj8Xi8aMM/z/MZKJkOh8MpIujUHKKqiZn9gGra8ke9zWyGenCVFRgMJDAYSGAwkMDo1KQex/HSe3+Gatryr7bTEWZteRNCRLrXGO71er0fEU1RFH+Mx+NW9rPyPD8CvRdoU9qpOURV983sd1AzEZFWAtnC+0xEoEC4ygoMBhIYDCQwGEhgdGpSj6Lozsw+oJoWHwH15okhIeT/DNypp2l6in786JxrZUcgTdPHqgq922tmk/pL2CzLpiLyMyD/4Jzr10WWZQZ6n41Go1NEw1VWYDCQwGAggcFAAoOBBAbcqcdxPPXez+7hWTbxXnjvJ6imUb4ws+mm2vUu38xQ7yUynhDyJeCGLcuyJyLyBNE4544a+t9E5AEgf+ucO6+0+yLyDPEWkRfOuetK/6uIPAK0H51zJ3VRNZYIF865C0QAzyFmdqCqSLcrInLU+P1URL4D9eeV9x7qXc0Z11X5SMBOXUROGjXqvRQRKBCusgKDgQQGAwkMBhIY8KSuqgsRefUfPN8IuMpqeN+g3pXmH/+1IR/XatS7lS+3CCE1cGM4n8/73vs+omneXZvn+WFZljubalX1pm7s5vN54r0/QLzjOF7UVyRlWbZvZhtf7xRF0d1wOHxX12maPga9l4PBYAlpkMEiIt77I/QIVxrBm9lrVUUaw1dSNZbe+wP0CLfajJxV5TOksaxeOerX9RbevJ6p6zCQwGAggcFAAoOBEEII2Ra4U8/z/NjMjhHN2vuxb0XkISB/Ux+j5nl+aGavEW9V/anutqvj46eA/G/n3Ocj3yzLlqD3y+FwCF0nBXfqZVkmYKe9zkPBjnA/7wyXZbmDeq9t0zwAvddBveGrobjKCgwGEhgMJDAYSGBs817WRRRFy20NzewkiqJdYPz7xu/rKIp+QfzKsrxulOeqOgO0t81aVVFvHuESQgghhBBCCCGEEEIIIV+fT76vVzm/aYCxAAAAAElFTkSuQmCC">
+                <span role="button" tabindex="0" class="mdc-chip__text red-text" style="padding:6px;">Play on Youtube</span>
             </a>`
         }
 
@@ -843,10 +882,12 @@
             //console.log(userProfile.innerHTML);
 
             let userProfileHTML = `
-        <a class="user-logged-in" href="#!">{{current_user.username}}<i class="material-icons nav-icons" style="display:inline;">arrow_drop_down</i></a>
-        <li style="height: 0px;">
-             <a href="/logout" class="waves-effect waves-light" style="height: 0px;"><i class="material-icons nav-icons" style="display:inline;">launch</i>Logout</a>
-        </li>`;
+            <div class="tooltipped" data-position="left" data-tooltip="{{current_user.username}}">
+                <a class="user-logged-in username-truncate" href="#!"><i class="material-icons nav-icons" style="display:inline;">arrow_drop_down</i>{{current_user.username}}</a>
+            </div>
+            <li style="height: 0px;">
+                <a href="/logout" class="waves-effect waves-light" style="height: 0px;"><i class="material-icons nav-icons" style="display:inline;">launch</i>Logout</a>
+            </li>`;
 
             userProfile.innerHTML = userProfileHTML;
             // userProfile2.innerHTML = userProfileHTML;

@@ -121,7 +121,8 @@
             
             <li class="mdc-list-item mdc-ripple-upgraded" tabindex="-1">
                 <img class="mdc-list-item__graphic" aria-hidden="true" src="${song.albumImgUrl}" />
-                <span class="mdc-list-item__text"><span class="mdc-list-item__primary-text">${song.title}</span>
+                <span class="sidenav-trigger mdc-list-item__text" data-target="slide-out" onclick="deezerView('${song.url}', '${song.youtubeUrl}', ${song.id}, '${song.title}', '${song.artist}', '${song.album}')">
+                    <span class="mdc-list-item__primary-text">${song.title}</span>
                     <span class="mdc-list-item__secondary-text">${song.artist} - ${song.album}</span>
                 </span>
     
