@@ -22,6 +22,36 @@
 
         }
 
+        .btn-flat {
+            color: rgba(255, 255, 255, 0.85);
+            width: inherit;
+        }
+
+        .modal {
+            background-color: #424549;
+        }
+
+        iframe {
+            border: 0px;
+        }
+
+        .modal .modal-footer {
+
+            background-color: #424549;
+        }
+
+        .input-field input[type=search]:focus:not(.browser-default)+label i {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .input-field input[type=search]:focus:not(.browser-default) {
+            background-color: #424549;
+            border: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
         nav ul a {
 
             color: rgba(255, 255, 255, 0.85);
@@ -345,7 +375,8 @@
             transform: translateY(-50%);
         }
 
-        .home-carousel,.home-carousel2{
+        .home-carousel,
+        .home-carousel2 {
             height: 500px;
         }
 
@@ -355,7 +386,8 @@
             width: 250px;
         }
 
-        .carousel-image, .carousel-image2{
+        .carousel-image,
+        .carousel-image2 {
             width: 350px;
             height: 262.5px;
         }
@@ -396,10 +428,11 @@
             height: 400px;
         }
 
-        .nav-icons{
-            position:relative;
-            padding:2px;
-            top:5px;
+        .nav-icons {
+            position: relative;
+            top: 4px;
+            margin-right: 10px;
+            font-size: 17px !important;
         }
 
         @media only screen and (max-device-width: 764px) {
@@ -412,7 +445,8 @@
                 height: 252px;
             }
 
-            .home-carousel, .home-carousel2{
+            .home-carousel,
+            .home-carousel2 {
                 height: 300px;
             }
 
@@ -427,10 +461,10 @@
 
             .carousel-image {
                 width: 250px;
-                height:187.5px;
+                height: 187.5px;
             }
 
-            .nav-icons{
+            .nav-icons {
                 line-height: 38px !important;
             }
         }
@@ -446,68 +480,80 @@
     <!--Change colours and add icons-->
     <div class="navbar-fixed">
         <nav class="nav-wrapper indigo darken-3">
-                <div>
-                    <a href="/" class="brand-logo center">RCDJ Music</a>
-                </div>
+            <div>
+                <a href="/" class="brand-logo center">RCDJ Music</a>
+            </div>
 
-                <a href="#" class="sidenav-trigger right" data-target="mobile-links">
-                    <i class="material-icons">menu</i>
-                </a>
+            <a href="#" class="sidenav-trigger right" data-target="mobile-links">
+                <i class="material-icons">menu</i>
+            </a>
 
-                <div class="left">
-                    <ul class="hide-on-med-and-down">
-                        <li><a href="/" class="waves-effect waves-light"><i class="material-icons nav-icons" style="display:inline;">home</i>Home</a></li>
-                        <li><a href="/playlist" class="waves-effect waves-light"><i class="material-icons nav-icons" style="display:inline;">library_music</i>Your Playlists</a></li>
-                        <!--Ensure Loggin is neccessary for access, change route to /playlists-->
-                        <li><a href="#" class="waves-effect waves-light" onclick="launchModal()"><i class="material-icons nav-icons" style="display:inline;">add_box</i>Create Playlist</a></li>
+            <div class="left">
+                <ul class="hide-on-med-and-down">
+                    <li><a href="/" class="waves-effect waves-light"><i class="material-icons nav-icons"
+                                style="display:inline;">home</i>Home</a></li>
+                    <li><a href="/playlist" class="waves-effect waves-light"><i class="material-icons nav-icons"
+                                style="display:inline;">library_music</i>Your Playlists</a></li>
+                    <!--Ensure Loggin is neccessary for access, change route to /playlists-->
+                    <li><a href="#" class="waves-effect waves-light" onclick="launchModal()"><i
+                                class="material-icons nav-icons" style="display:inline;">add_box</i>Create Playlist</a>
+                    </li>
 
-                    </ul>
-                </div>
+                </ul>
+            </div>
 
-                <div class="right" id="right-nav">
-                    <ul>
-                        <li class="hide-on-med-and-down" id="desktop-aboutus-button"><a href="#"
-                            class="waves-effect waves-light"><i class="material-icons nav-icons" style="display:inline;">info</i>About Us</a>
-                        </li>
-                        <li class="hide-on-med-and-down" id="desktop-register-button"><a href="/register"
-                                class="waves-effect waves-light"><i class="material-icons nav-icons" style="display:inline;">account_circle</i>Register</a>
-                        </li>
-                        <li class="hide-on-med-and-down" id="desktop-login-button"><a href="/login"
-                                class="waves-effect waves-light"><i class="material-icons nav-icons" style="display:inline;">exit_to_app</i>Login</a></li>
-                        <li class="hide-on-small-only">
-                            <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <form class="left" method="POST" action="/search">
-                        <div class="input-field">
-                            <input class="nav-search" id="search" type="search" name="queryBox" autocomplete="off"
-                                style="width:17rem; height:64px;" required>
-                            <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                            <i class="material-icons">close</i>
-                        </div>
-                    </form>
-                </div>
+            <div class="right" id="right-nav">
+                <ul>
+                    <li class="hide-on-med-and-down" id="desktop-aboutus-button"><a href="#"
+                            class="waves-effect waves-light"><i class="material-icons nav-icons"
+                                style="display:inline;">info</i>About Us</a>
+                    </li>
+                    <li class="hide-on-med-and-down" id="desktop-register-button"><a href="/register"
+                            class="waves-effect waves-light"><i class="material-icons nav-icons"
+                                style="display:inline;">account_circle</i>Register</a>
+                    </li>
+                    <li class="hide-on-med-and-down" id="desktop-login-button"><a href="/login"
+                            class="waves-effect waves-light"><i class="material-icons nav-icons"
+                                style="display:inline;">exit_to_app</i>Login</a></li>
+                    <li class="hide-on-small-only">
+                        <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <form class="left" method="POST" action="/search">
+                    <div class="input-field">
+                        <input class="nav-search" id="search" type="search" name="queryBox" autocomplete="off"
+                            style="width:17rem; height:64px;" required>
+                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                        <i class="material-icons">close</i>
+                    </div>
+                </form>
+            </div>
         </nav>
     </div>
 
     <!-- Mobile sidenav menu -->
     <ul class="sidenav left-align" id="mobile-links">
         <li><a href="/" class="waves-effect waves-dark"><i class="material-icons nav-icons">home</i>Home</a></li>
-        <div class="divider indigo darken-3"></div>
-        <li><a href="/playlist" class="waves-effect waves-dark"><i class="material-icons nav-icons">library_music</i>Your Playlists</a></li>
-        <div class="divider indigo darken-3"></div>
+
+        <li><a href="/playlist" class="waves-effect waves-dark"><i
+                    class="material-icons nav-icons">library_music</i>Your Playlists</a></li>
+
         <!--Ensure Loggin is neccessary for access, change route to /playlists-->
-        <li><a href="#" class="waves-effect waves-dark" onclick="launchModal()"><i class="material-icons nav-icons">add_box</i>Create Playlist</a></li>
-        <div class="divider indigo darken-3"></div>
+        <li><a href="#" class="waves-effect waves-dark" onclick="launchModal()"><i
+                    class="material-icons nav-icons">add_box</i>Create Playlist</a></li>
+
         <!--Ensure Loggin is neccessary for access-->
-        <li id="desktop-aboutus-button"><a href="#" class="waves-effect waves-light"><i class="material-icons nav-icons">info</i>About Us</a></li>
-        <div class="divider indigo darken-3"></div>
-        <li id="mobile-register-button"><a href="/register" class="waves-effect waves-dark"><i class="material-icons nav-icons">account_circle</i>Register</a></li>
-        <div class="divider indigo darken-3"></div>
-        <li id="mobile-login-button"><a href="/login" class="waves-effect waves-dark"><i class="material-icons nav-icons">exit_to_app</i>Login</a></li>
-        <div class="divider indigo darken-3"></div>
+        <li id="desktop-aboutus-button"><a href="#" class="waves-effect waves-light"><i
+                    class="material-icons nav-icons">info</i>About Us</a></li>
+
+        <li id="mobile-register-button"><a href="/register" class="waves-effect waves-dark"><i
+                    class="material-icons nav-icons">account_circle</i>Register</a></li>
+
+        <li id="mobile-login-button"><a href="/login" class="waves-effect waves-dark"><i
+                    class="material-icons nav-icons">exit_to_app</i>Login</a></li>
+
         <li>
             <div class="user-profile"><a href="#" class="user-logged-in"></a></div>
         </li>
@@ -697,12 +743,12 @@
             // let userProfile2 = document.querySelector(".user-profile2");
             //console.log(userProfile.innerHTML);
 
-        let userProfileHTML = `
+            let userProfileHTML = `
         <a class="user-logged-in" href="#!">{{current_user.username}}<i class="material-icons nav-icons" style="display:inline;">arrow_drop_down</i></a>
         <li style="height: 0px;">
              <a href="/logout" class="waves-effect waves-light" style="height: 0px;"><i class="material-icons nav-icons" style="display:inline;">launch</i>Logout</a>
         </li>`;
-            console.log(userProfileHTML);
+
             userProfile.innerHTML = userProfileHTML;
             // userProfile2.innerHTML = userProfileHTML;
 
