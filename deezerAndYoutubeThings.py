@@ -38,6 +38,7 @@ def getDeezerPlaylist():
             "albumImgUrl": song["album"]["cover_big"],
             "url": song["link"],
             "position": i + 1,
+            "playlistId": reply.json()["id"]
         }
         songList.append(track)
     return songList
