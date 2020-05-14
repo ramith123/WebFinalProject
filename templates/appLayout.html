@@ -315,12 +315,13 @@
 
         .mdc-chip-set .mdc-chip {
             margin: 4px;
-        }
-
-        .mdc-chip-set .mdc-chip {
+            width: 100%;
             margin-top: auto;
             margin-block-end: auto;
+
         }
+
+
 
         .mdc-chip .mdc-chip__icon--leading:not(.mdc-chip__icon--leading-hidden) {
             margin-left: -4px;
@@ -472,6 +473,32 @@
             .nav-icons {
                 line-height: 38px !important;
             }
+
+
+        }
+
+        html {
+            --scrollbarBG: #424549;
+            --thumbBG: 282b30;
+        }
+
+        ::-webkit-scrollbar {
+            width: 11px;
+        }
+
+        body {
+            scrollbar-width: thin;
+            scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+        }
+
+        :-webkit-scrollbar-track {
+            background: var(--scrollbarBG);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--thumbBG);
+            border-radius: 6px;
+            border: 3px solid var(--scrollbarBG);
         }
     </style>
 </head>
