@@ -6,17 +6,17 @@
 {% block content %}
 <h4 class="center-align">Hot 100 Music Videos</h4>
 <div class="carousel home-carousel">
-    <a href="#" class="prev left left-middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
+    <!-- <a href="#" class="prev left left-middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
             class="large material-icons">chevron_left</i></a>
     <a href="#" class="next right right-middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
-            class="large material-icons">chevron_right</i></a>
+            class="large material-icons">chevron_right</i></a> -->
     <div>
         {% for video in videos %}
         <div class="carousel-item center">
             <div class="vertical-center">
                 <a href="{{ video.url }}" data-target="modal2" class="modal-trigger"
                     onclick="modalView(`{{ video.videoId }}`, `{{ video.playlistId }}`)">
-                    <p class="indigo-text">#{{ video.position+1 }}</p>
+                    <h5 class="indigo-text">No. {{ video.position+1 }}</h5>
                     <img src="{{ video.thumbnail }}" class="carousel-image">
                     <div class="card-content tooltipped" data-position="top" data-tooltip="{{ video.title }}">
                         <!-- may remove tooltips now that titles are so wide-->
@@ -31,16 +31,17 @@
 
 <h4 class="center-align">New Releases</h4> <!-- Deezer Songs-->
 <div class="carousel home-carousel2">
-    <a href="#" class="prev2 left left-middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
+    <!-- <a href="#" class="prev2 left left-middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
             class="large material-icons">chevron_left</i></a>
     <a href="#" class="next2 right right-middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
-            class="large material-icons">chevron_right</i></a>
+            class="large material-icons">chevron_right</i></a> -->
     <div>
         {% for track in tracks %}
         <div class="carousel-item center">
             <div class="vertical-center">
-                <a href="{{ track.url }}" data-target="modal2" class="modal-trigger" onclick="modalDeezerView(`{{ track.id }}`, `{{ track.playlistId }}`)">
-                    <p class="indigo-text">#{{ track.position }}</p>
+                <a href="{{ track.url }}" data-target="modal2" class="modal-trigger"
+                    onclick="modalDeezerView(`{{ track.id }}`, `{{ track.playlistId }}`)">
+                    <h5 class="indigo-text">No. {{ track.position }}</h5>
                     <img src="{{ track.albumImgUrl }}" class="carousel-image">
                     <div class="card-content tooltipped" data-position="top" data-tooltip="{{ track.title }}">
                         <!-- may remove tooltips now that titles are so wide-->
@@ -56,7 +57,7 @@
 <div id="modal2" class="modal2 modal">
     <div class="modal-content">
         <div class="user-view" id="modal-view">
-            
+
         </div>
     </div>
     <div class="divider div1"></div>
@@ -119,19 +120,19 @@
         buttons.innerHTML = `<a href="#" class="waves-effect waves-green btn-flat" onclick="playlistPlayer(${playlistId})">Play Playlist</a>`;
     }
 
-    function playlistPlayer(playlistId){
+    function playlistPlayer(playlistId) {
         let view = document.querySelector(".user-view");
         let buttons = document.querySelector(".modal-footer");
         let divider = document.querySelector(".div1");
         buttons.style.visibility = "hidden";
         divider.style.visibility = "hidden";
-        if (typeof(playlistId) == "number"){
-        view.innerHTML = `
+        if (typeof (playlistId) == "number") {
+            view.innerHTML = `
         <iframe scrolling="no" frameborder="0" allowTransparency="true" 
         src="https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=500&height=500&color=ff0000&layout=dark&size=medium&type=playlist&id=${playlistId}&app_id=1" width="500" height="500"></iframe>`;
         }
-        else if (typeof(playlistId) == "string"){
-        view.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=${playlistId}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        else if (typeof (playlistId) == "string") {
+            view.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=${playlistId}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
         }
     }
 
