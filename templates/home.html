@@ -6,10 +6,10 @@
 {% block content %}
 <h4 class="center-align">Hot 100 Music Videos</h4>
 <div class="carousel home-carousel">
-    <a href="#" class="prev left left-middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
+    <!-- <a href="#" class="prev left left-middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
             class="large material-icons">chevron_left</i></a>
     <a href="#" class="next right right-middle-indicator waves-effect waves-dark hide-on-med-and-down"><i
-            class="large material-icons">chevron_right</i></a>
+            class="large material-icons">chevron_right</i></a> -->
     <div>
         {% for video in videos %}
         <div class="carousel-item center">
@@ -61,7 +61,7 @@
     </div>
     <div class="divider div1"></div>
     <div class="modal-footer">
-        <a href="#" class="waves-effect waves-green btn-flat" onclick="playlistPlayer()">Play Playlist</a>
+        
     </div>
 </div>
 
@@ -99,42 +99,53 @@
 
     function modalView(videoId, playlistId) { //, songTitle, songArtist, songAlbum
         let view = document.querySelector("#modal-view");
-        // let title = document.querySelector(".view-title");
-        let buttons = document.querySelector(".modal-footer");
-        // console.log(songId, songTitle, songArtist, songAlbum);
+        let button = document.querySelector(".modal-footer");
+        if (button.style.display === 'none') {
+            hideButton();
+        }
         view.innerHTML = `
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-        buttons.innerHTML = `<a href="#" class="waves-effect waves-green btn-flat" onclick="playlistPlayer('${playlistId}')">Play Playlist</a>`;
+        <div class="iframe-container">
+        <iframe width="448‬" height="252" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+        button.innerHTML = `<div class="center"><a href="#" class="btn waves-effect waves-dark indigo" onclick="playlistPlayer('${playlistId}')">Play Playlist</a></div>`;
     }
 
     function modalDeezerView(songId, playlistId) { //, songTitle, songArtist, songAlbum
         let view = document.querySelector(".user-view");
-        // let title = document.querySelector(".view-title");
-        let buttons = document.querySelector(".modal-footer");
-        // console.log(songId, songTitle, songArtist, songAlbum);
+        let button = document.querySelector(".modal-footer");
+        if (button.style.display === 'none') {
+            hideButton();
+        }
         view.innerHTML = `
-            <iframe scrolling="no" frameborder="0" allowTransparency="true" 
-            src="https://www.deezer.com/plugins/player?format=square&autoplay=false&playlist=false&width=420&height=420&color=ff0000&layout=dark&size=big&type=tracks&id=${songId}&app_id=1" width="420" height="420"></iframe>`;
+            <iframe class="deezer-frame" scrolling="yes" frameborder="0" allowTransparency="true"
+            src="https://www.deezer.com/plugins/player?format=square&autoplay=false&playlist=false&width=420&height=420&color=ff0000&layout=dark&size=big&type=tracks&id=${songId}&app_id=1"></iframe>`;
 
-        buttons.innerHTML = `<a href="#" class="waves-effect waves-green btn-flat" onclick="playlistPlayer(${playlistId})">Play Playlist</a>`;
+        button.innerHTML = `<div class="center"><a href="#" class="btn waves-effect waves-dark indigo" onclick="playlistPlayer(${playlistId})">Play Playlist</a></div>`;
     }
 
     function playlistPlayer(playlistId){
         let view = document.querySelector(".user-view");
-        let buttons = document.querySelector(".modal-footer");
-        let divider = document.querySelector(".div1");
-        buttons.style.visibility = "hidden";
-        divider.style.visibility = "hidden";
+        hideButton();
         if (typeof(playlistId) == "number"){
         view.innerHTML = `
-        <iframe scrolling="no" frameborder="0" allowTransparency="true" 
-        src="https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=500&height=500&color=ff0000&layout=dark&size=medium&type=playlist&id=${playlistId}&app_id=1" width="500" height="500"></iframe>`;
+        <iframe class="deezer-frame" scrolling="yes" frameborder="0" allowTransparency="true"
+        src="https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=420&height=420&color=ff0000&layout=dark&size=medium&type=playlist&id=${playlistId}&app_id=1" ></iframe>`;
         }
         else if (typeof(playlistId) == "string"){
-        view.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=${playlistId}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        view.innerHTML = ` <div class="iframe-container"><iframe width="448‬" height="252" src="https://www.youtube.com/embed/videoseries?list=${playlistId}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
         }
     }
 
+    function hideButton() {
+        let button = document.querySelector(".modal-footer");
+        let divider = document.querySelector(".div1");
+        if (button.style.display === 'none' && divider.style.display === "none") {
+            button.style.display = 'block';
+            divider.style.display = 'block';
+        } else {
+            button.style.display = 'none';
+            divider.style.display = 'none';
+        }
+    }
     // function closeModal() {
     //     let modal = document.getElementById("modal2");
     //     modal.style.display = "none";
