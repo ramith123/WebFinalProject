@@ -46,8 +46,9 @@ def create_app():
     app.config["SECRET_KEY"] = "c3a93f55-2015-4042-9ef7-77de85976f78"
     login_manager.init_app(app)
 
-    # app.config["YOUTUBE_API_KEY"] = "AIzaSyC0VqCv-KW7cRsmYBUUHHqTJeRBTVnP-h0"
-    app.config["YOUTUBE_API_KEY"] = "AIzaSyDIk63q5hnaaQTLlPqLRPSrUYIYmLgMMTA"
+    app.config["YOUTUBE_API_KEY"] = "AIzaSyARAWcmYiUcbzq6Nb2_KqemZ7UDoP7VuVY" #Ramith
+    # app.config["YOUTUBE_API_KEY"] = "AIzaSyC0VqCv-KW7cRsmYBUUHHqTJeRBTVnP-h0" #Chris Good
+    # app.config["YOUTUBE_API_KEY"] = "AIzaSyDIk63q5hnaaQTLlPqLRPSrUYIYmLgMMTA" #Chris 2
 
     # =======
     # """ Begin boilerplate code """
@@ -96,6 +97,7 @@ def hello():
             "thumbnail": result["snippet"]["thumbnails"]["high"]["url"],
             "title": result["snippet"]["title"],
             "position": result["snippet"]["position"],
+            "playlistId": playlist_params["playlistId"]
         }
         videos.append(video_data)
 
