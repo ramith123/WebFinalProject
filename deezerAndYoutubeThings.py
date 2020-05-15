@@ -22,7 +22,7 @@ searchUrl = "https://api.deezer.com/search?q="
 youtubeApiKey = "AIzaSyDIk63q5hnaaQTLlPqLRPSrUYIYmLgMMTA"
 search_url = "https://www.googleapis.com/youtube/v3/search"
 youtubeVideoLink = "https://www.youtube.com/watch?v="
-playlistUrl = "https://api.deezer.com/playlist/1282495565"
+playlistUrl = "https://api.deezer.com/playlist/6682665064" #1282495565
 
 
 def getDeezerPlaylist():
