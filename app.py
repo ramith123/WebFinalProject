@@ -86,7 +86,7 @@ def hello():
     print(r.json())
     results = r.json()["items"]
     try:
-        r = getPlaylistRequest()
+        r = getPlaylistRequest(r.json()["nextPageToken"])
         print(r.json())
         results.extend(r.json()["items"])
     except:
@@ -99,7 +99,7 @@ def hello():
             "thumbnail": result["snippet"]["thumbnails"]["high"]["url"],
             "title": result["snippet"]["title"],
             "position": result["snippet"]["position"],
-            "playlistId": playlist_params["playlistId"],
+            "playlistId": result["snippet"]["playlistId"],
         }
         videos.append(video_data)
 
