@@ -98,7 +98,7 @@
     });
 
 
-    function modalView(videoId, playlistId) { //, songTitle, songArtist, songAlbum
+    function modalView(videoId, playlistId) { //Youtube Modal function
         let view = document.querySelector("#modal-view");
         let button = document.querySelector(".modal-footer");
         if (button.style.display === 'none') {
@@ -110,7 +110,7 @@
         button.innerHTML = `<div class="center"><a href="#" class="btn waves-effect waves-dark indigo" onclick="playlistPlayer('${playlistId}')">Play Playlist</a></div>`;
     }
 
-    function modalDeezerView(songId, playlistId) { //, songTitle, songArtist, songAlbum
+    function modalDeezerView(songId, playlistId) { //Deezer Modal function
         let view = document.querySelector(".user-view");
         let button = document.querySelector(".modal-footer");
         if (button.style.display === 'none') {
