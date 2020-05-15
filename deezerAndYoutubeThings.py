@@ -19,7 +19,7 @@ colors = [
 ]
 trackUrl = "https://api.deezer.com/track/"
 searchUrl = "https://api.deezer.com/search?q="
-youtubeApiKey = "AIzaSyDIk63q5hnaaQTLlPqLRPSrUYIYmLgMMTA"
+youtubeApiKey = "AIzaSyBGBI_GQQx1qtwoa3KGa4ScLUCBcm1f9Xg"
 search_url = "https://www.googleapis.com/youtube/v3/search"
 youtubeVideoLink = "https://www.youtube.com/watch?v="
 playlistUrl = "https://api.deezer.com/playlist/6682665064"  # 1282495565
