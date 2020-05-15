@@ -92,7 +92,7 @@ def hello():
 
     try:
         r = getPlaylistRequest(r.json()["nextPageToken"])
-        print(r.json())
+
         results.extend(r.json()["items"])
     except:
         print("nextPageToken not found")

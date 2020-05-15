@@ -149,15 +149,17 @@ def getPlaylistRequest(pageToken=None):
     global youtubePLaylistRequest2
     if youtubePLaylistRequest is None:
         youtubePLaylistRequest = requests.get(playlistUrl, params=parameters,)
-        return youtubePLaylistRequest
-
-    if pageToken:
+    if youtubePLaylistRequest2 is None and pageToken:
         parameters["pageToken"] = pageToken
-
-    if youtubePLaylistRequest2 is None:
         youtubePLaylistRequest2 = requests.get(playlistUrl, params=parameters,)
         del parameters["pageToken"]
-    return youtubePLaylistRequest2
+
+    if pageToken:
+        print("R")
+        return youtubePLaylistRequest2
+    else:
+        print("R2")
+        return youtubePLaylistRequest
 
 
 if __name__ == "__main__":
