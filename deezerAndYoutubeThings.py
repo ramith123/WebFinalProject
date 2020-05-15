@@ -22,7 +22,7 @@ searchUrl = "https://api.deezer.com/search?q="
 youtubeApiKey = "AIzaSyDIk63q5hnaaQTLlPqLRPSrUYIYmLgMMTA"
 search_url = "https://www.googleapis.com/youtube/v3/search"
 youtubeVideoLink = "https://www.youtube.com/watch?v="
-playlistUrl = "https://api.deezer.com/playlist/6682665064" #1282495565
+playlistUrl = "https://api.deezer.com/playlist/6682665064"  # 1282495565
 
 
 def getDeezerPlaylist():
@@ -38,7 +38,7 @@ def getDeezerPlaylist():
             "albumImgUrl": song["album"]["cover_big"],
             "url": song["link"],
             "position": i + 1,
-            "playlistId": reply.json()["id"]
+            "playlistId": reply.json()["id"],
         }
         songList.append(track)
     return songList
@@ -115,9 +115,7 @@ def getYoutubeLink(song, artist, quota=False):
     defaultLink = "https://www.youtube.com/results?search_query=" + query.replace(
         " ", "+"
     )
-    defaultLink = defaultLink.replace(
-        "'", ""
-    )
+    defaultLink = defaultLink.replace("'", "")
     if quota:
         return defaultLink
     r = requests.get(search_url, params=search_params)
@@ -133,3 +131,34 @@ def getYoutubeLink(song, artist, quota=False):
 
 def getRandomColor():
     return choice(colors)
+
+
+youtubePLaylistRequest = None
+youtubePLaylistRequest2 = None
+
+
+def getPlaylistRequest(pageToken=None):
+    playlistUrl = "https://www.googleapis.com/youtube/v3/playlistItems"
+    parameters = {
+        "key": youtubeApiKey,
+        "playlistId": "PL4fGSI1pDJn69On1f-8NAvX_CYlx7QyZc",  # Top 100 Music Videos United States(Playlist) on YouTube Music Global Charts channel",
+        "part": "snippet,contentDetails",
+        "maxResults": 50,
+    }
+    global youtubePLaylistRequest
+    global youtubePLaylistRequest2
+    if youtubePLaylistRequest is None:
+        youtubePLaylistRequest = requests.get(playlistUrl, params=parameters,)
+        return youtubePLaylistRequest
+
+    if pageToken:
+        parameters["pageToken"] = pageToken
+
+    if youtubePLaylistRequest is None:
+        youtubePLaylistRequest2 = requests.get(playlistUrl, params=parameters,)
+    return youtubePLaylistRequest2
+
+
+if __name__ == "__main__":
+    print(getPlaylist())
+    print(youtubePLaylistRequest)

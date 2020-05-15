@@ -17,6 +17,7 @@ from deezerAndYoutubeThings import (
     getSongModelById,
     getDeezerPlaylist,
     getRandomColor,
+    getPlaylistRequest,
 )
 
 # from sqlalchemy.exc import IntegrityError
@@ -46,7 +47,7 @@ def create_app():
     app.config["SECRET_KEY"] = "c3a93f55-2015-4042-9ef7-77de85976f78"
     login_manager.init_app(app)
 
-    app.config["YOUTUBE_API_KEY"] = "AIzaSyARAWcmYiUcbzq6Nb2_KqemZ7UDoP7VuVY" #Ramith
+    app.config["YOUTUBE_API_KEY"] = "AIzaSyARAWcmYiUcbzq6Nb2_KqemZ7UDoP7VuVY"  # Ramith
     # app.config["YOUTUBE_API_KEY"] = "AIzaSyC0VqCv-KW7cRsmYBUUHHqTJeRBTVnP-h0" #Chris Good
     # app.config["YOUTUBE_API_KEY"] = "AIzaSyDIk63q5hnaaQTLlPqLRPSrUYIYmLgMMTA" #Chris 2
 
@@ -74,18 +75,19 @@ app.app_context().push()
 def hello():
     playlist_url = "https://www.googleapis.com/youtube/v3/playlistItems"
     videos = []
-    playlist_params = {
-        "key": app.config["YOUTUBE_API_KEY"],
-        "playlistId": "PL4fGSI1pDJn69On1f-8NAvX_CYlx7QyZc",  # Top 100 Music Videos United States(Playlist) on YouTube Music Global Charts channel",
-        "part": "snippet,contentDetails",
-        "maxResults": 50,
-    }
+    # playlist_params = {
+    #     "key": app.config["YOUTUBE_API_KEY"],
+    #     "playlistId": "PL4fGSI1pDJn69On1f-8NAvX_CYlx7QyZc",  # Top 100 Music Videos United States(Playlist) on YouTube Music Global Charts channel",
+    #     "part": "snippet,contentDetails",
+    #     "maxResults": 50,
+    # }
 
-    r = requests.get(playlist_url, params=playlist_params)
+    r = getPlaylistRequest()
+    print(r.json())
     results = r.json()["items"]
     try:
-        playlist_params["pageToken"] = r.json()["nextPageToken"]
-        r = requests.get(playlist_url, params=playlist_params)
+        r = getPlaylistRequest()
+        print(r.json())
         results.extend(r.json()["items"])
     except:
         print("nextPageToken not found")
@@ -97,7 +99,7 @@ def hello():
             "thumbnail": result["snippet"]["thumbnails"]["high"]["url"],
             "title": result["snippet"]["title"],
             "position": result["snippet"]["position"],
-            "playlistId": playlist_params["playlistId"]
+            "playlistId": playlist_params["playlistId"],
         }
         videos.append(video_data)
 
@@ -289,7 +291,7 @@ def Privacypolicy():
 if __name__ == "__main__":
     # Bind to PORT if defined, otherwise default to 5000.
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port, debug=False)  # Remember to remove Debug
+    app.run(host="0.0.0.0", port=port, debug=True)  # Remember to remove Debug
 # =======
 # if __name__ == "__main__":
 #     # Bind to PORT if defined, otherwise default to 5000.
