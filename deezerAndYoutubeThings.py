@@ -22,7 +22,7 @@ searchUrl = "https://api.deezer.com/search?q="
 youtubeApiKey = "AIzaSyDIk63q5hnaaQTLlPqLRPSrUYIYmLgMMTA"
 search_url = "https://www.googleapis.com/youtube/v3/search"
 youtubeVideoLink = "https://www.youtube.com/watch?v="
-playlistUrl = "https://api.deezer.com/playlist/1282495565"
+playlistUrl = "https://api.deezer.com/playlist/6682665064" #1282495565
 
 
 def getDeezerPlaylist():
@@ -38,6 +38,7 @@ def getDeezerPlaylist():
             "albumImgUrl": song["album"]["cover_big"],
             "url": song["link"],
             "position": i + 1,
+            "playlistId": reply.json()["id"]
         }
         songList.append(track)
     return songList
@@ -114,12 +115,17 @@ def getYoutubeLink(song, artist, quota=False):
     defaultLink = "https://www.youtube.com/results?search_query=" + query.replace(
         " ", "+"
     )
+    defaultLink = defaultLink.replace(
+        "'", ""
+    )
     if quota:
         return defaultLink
     r = requests.get(search_url, params=search_params)
     try:
-        videoId = r.json()["items"][0]["id"]["videoId"]
-        return youtubeVideoLink + videoId
+        if r.json()["items"]:
+            videoId = r.json()["items"][0]["id"]["videoId"]
+            return youtubeVideoLink + videoId
+        return defaultLink
     except:
         print("got an error from youtube API. Default serach link is stored")
         return defaultLink
