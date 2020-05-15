@@ -122,8 +122,10 @@ def getYoutubeLink(song, artist, quota=False):
         return defaultLink
     r = requests.get(search_url, params=search_params)
     try:
-        videoId = r.json()["items"][0]["id"]["videoId"]
-        return youtubeVideoLink + videoId
+        if r.json()["items"]:
+            videoId = r.json()["items"][0]["id"]["videoId"]
+            return youtubeVideoLink + videoId
+        return defaultLink
     except:
         print("got an error from youtube API. Default serach link is stored")
         return defaultLink
