@@ -235,7 +235,7 @@
             height: 420px;
         }
 
-        #about-us-modal .modal-container{
+        #about-us-modal .modal-container {
             padding: 0px;
         }
 
@@ -245,7 +245,7 @@
             height: 30px;
         }
 
-        #about-us-modal .modal-header{
+        #about-us-modal .modal-header {
             background-color: #1e2124;
             padding: 10px;
             height: 50px;
@@ -264,18 +264,18 @@
         .modal-body {
             display: flex;
             flex-direction: column;
-            justify-content: center;            
+            justify-content: center;
         }
 
-        #about-us-modal .modal-body{
+        #about-us-modal .modal-body {
             height: 70%;
             padding-left: 40px;
         }
 
-        #about-us-modal .modal-body div{
-           text-align: left;
-        }       
-        
+        #about-us-modal .modal-body div {
+            text-align: left;
+        }
+
 
 
         .modal-body .modal-title {
@@ -283,11 +283,11 @@
             margin-bottom: 20px;
         }
 
-        #about-us-modal .url{
+        #about-us-modal .url {
             margin-bottom: 30px;
         }
 
-        #about-us-modal .group-members{
+        #about-us-modal .group-members {
             margin: 20px 0;
         }
 
@@ -312,12 +312,12 @@
             width: 100%;
         }
 
-        #about-us-modal .form-footer{
+        #about-us-modal .form-footer {
             margin: 20px 20px 0px 0px;
             display: flex;
         }
 
-        #about-us-modal .form-footer i{
+        #about-us-modal .form-footer i {
             margin-left: auto;
         }
 
@@ -682,8 +682,8 @@
             <div class="right" id="right-nav">
                 <ul>
                     <li class="hide-on-med-and-down" id="desktop-aboutus-button"><a href="#"
-                            class="waves-effect waves-light" onclick="aboutUsModal()"><i class="material-icons nav-icons"
-                                style="display:inline;">info</i>About Us</a>
+                            class="waves-effect waves-light" onclick="aboutUsModal()"><i
+                                class="material-icons nav-icons" style="display:inline;">info</i>About Us</a>
                     </li>
                     <li class="hide-on-med-and-down" id="desktop-register-button"><a href="/register"
                             class="waves-effect waves-light"><i class="material-icons nav-icons"
@@ -785,7 +785,9 @@
     <!-- About Us Modal-->
     <div id="about-us-modal" class="modal">
         <div class="modal-container">
-            <div class="modal-header"><div>About Us</div><span onclick="closeAboutUsModal()">&#10005;</span></div>
+            <div class="modal-header">
+                <div>About Us</div><span onclick="closeAboutUsModal()">&#10005;</span>
+            </div>
             <div class="modal-body">
                 <div>RCDJ Music</div>
                 <div class="url">URL:</div>
@@ -795,14 +797,16 @@
                     <div>Ramith W Kulatunga-816016584</div>
                     <div>Jevon greenidge- 16010441</div>
                     <div>Christopher joseph- 816011233</div>
-                    <div>Dexter singh- 816009215</div> 
+                    <div>Dexter singh- 816009215</div>
                 </div>
-                   
-                <div>The University of the West Indies  </div>      
-                <div>Info 2602 Web Project Semseter 2 Final Project 2020  </div>      
+
+                <div>The University of the West Indies </div>
+                <div>Info 2602 Web Project Semseter 2 Final Project 2020 </div>
             </div>
-            <div class="form-footer ">
-                <input class="waves-effect waves-light btn amber darken-3" onclick="closeAboutUsModal()" type="submit" id="submit" name="submit" value="OK">
+            <div style="padding-top: 18px; ">
+
+                <button class="white-text waves-effect waves-light btn amber darken-3"
+                    onclick="closeAboutUsModal()">back</button>
             </div>
         </div>
     </div>
@@ -871,14 +875,14 @@
                 return false;
             });
         });
-        
+
 
         function youtubeView(songUrl, youtubeUrl, songId, songTitle, songArtist, songAlbum) {
             let view = document.querySelector(".music-view");
             let title = document.querySelector(".view-title");
             let buttons = document.querySelector(".view-buttons");
 
-            if(youtubeUrl.includes("watch")){
+            if (youtubeUrl.includes("watch")) {
                 let videoId = youtubeUrl.split("=").pop();
 
                 view.innerHTML = `
@@ -888,7 +892,7 @@
                 title.innerHTML = `<span class="center truncate" style="width:100%">${songArtist} - ${songTitle}</span>
                                     <span class="center truncate" style="width:100%">Album: ${songAlbum}</span>`
             }
-            else if(youtubeUrl.includes("query")){
+            else if (youtubeUrl.includes("query")) {
                 let query = youtubeUrl.split("=").pop();
                 view.innerHTML = `
                 <div class="iframe-container">
@@ -1008,15 +1012,15 @@
 
         function launchModal(modalType) {
             {% if current_user.is_anonymous %}
-             window.location.pathname = '/login';
+            window.location.pathname = '/login';
             {% else %}
             let modal = document.getElementById("modal1");
             modal.style.display = "flex";
             {% endif %}
-            
+
         }
 
-        function aboutUsModal(){
+        function aboutUsModal() {
             let modal = document.getElementById("about-us-modal");
             modal.style.display = "flex";
         }
@@ -1026,7 +1030,7 @@
             modal.style.display = "none";
         }
 
-        function closeAboutUsModal(){
+        function closeAboutUsModal() {
             let modal = document.getElementById("about-us-modal");
             modal.style.display = "none";
         }
