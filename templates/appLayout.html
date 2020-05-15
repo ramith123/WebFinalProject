@@ -215,7 +215,8 @@
             margin-left: 40px;
         }
 
-        #modal1.modal {
+        #modal1.modal,
+        #about-us-modal {
             background-color: rgba(0, 0, 0, 0.8);
             width: 100%;
             height: 100%;
@@ -225,7 +226,8 @@
             justify-content: center;
         }
 
-        #modal1 .modal-container {
+        #modal1 .modal-container,
+        #about-us-modal .modal-container {
             background-color: #424549;
             color: #fff;
             padding: 20px;
@@ -233,9 +235,20 @@
             height: 420px;
         }
 
-        #modal1 .modal-header {
+        #about-us-modal .modal-container{
+            padding: 0px;
+        }
+
+        #modal1 .modal-header,
+        #about-us-modal .modal-header {
             display: flex;
             height: 30px;
+        }
+
+        #about-us-modal .modal-header{
+            background-color: #1e2124;
+            padding: 10px;
+            height: 50px;
         }
 
         .modal-header span {
@@ -251,13 +264,31 @@
         .modal-body {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            justify-content: center;            
         }
+
+        #about-us-modal .modal-body{
+            height: 70%;
+            padding-left: 40px;
+        }
+
+        #about-us-modal .modal-body div{
+           text-align: left;
+        }       
+        
+
 
         .modal-body .modal-title {
             font-size: 24px;
             margin-bottom: 20px;
+        }
+
+        #about-us-modal .url{
+            margin-bottom: 30px;
+        }
+
+        #about-us-modal .group-members{
+            margin: 20px 0;
         }
 
         .modal-form {
@@ -279,6 +310,15 @@
         .modal-form .form-footer {
             display: flex;
             width: 100%;
+        }
+
+        #about-us-modal .form-footer{
+            margin: 20px 20px 0px 0px;
+            display: flex;
+        }
+
+        #about-us-modal .form-footer i{
+            margin-left: auto;
         }
 
         .form-footer a {
@@ -642,7 +682,7 @@
             <div class="right" id="right-nav">
                 <ul>
                     <li class="hide-on-med-and-down" id="desktop-aboutus-button"><a href="#"
-                            class="waves-effect waves-light"><i class="material-icons nav-icons"
+                            class="waves-effect waves-light" onclick="aboutUsModal()"><i class="material-icons nav-icons"
                                 style="display:inline;">info</i>About Us</a>
                     </li>
                     <li class="hide-on-med-and-down" id="desktop-register-button"><a href="/register"
@@ -668,6 +708,7 @@
                 </form>
             </div>
         </nav>
+    </div>
     </div>
 
     <!-- Mobile sidenav menu -->
@@ -717,7 +758,7 @@
         </li>
     </ul>
 
-    <!-- Modal Structure -->
+    <!-- Create Playlist Modal -->
     <div id="modal1" class="modal">
         <div class="modal-container">
             <div class="modal-header"><span onclick="closeModal()">&#10005;</span></div>
@@ -739,7 +780,31 @@
                 </div>
             </div>
         </div>
+    </div>
 
+    <!-- About Us Modal-->
+    <div id="about-us-modal" class="modal">
+        <div class="modal-container">
+            <div class="modal-header"><div>About Us</div><span onclick="closeAboutUsModal()">&#10005;</span></div>
+            <div class="modal-body">
+                <div>RCDJ Music</div>
+                <div class="url">URL:</div>
+                <div>This website was developed and designed by: RCDJ</div>
+                <div class="group-members">
+                    <div>Group members:</div>
+                    <div>Ramith W Kulatunga-816016584</div>
+                    <div>Jevon greenidge- 16010441</div>
+                    <div>Christopher joseph- 816011233</div>
+                    <div>Dexter singh- 816009215</div> 
+                </div>
+                   
+                <div>The University of the West Indies  </div>      
+                <div>Info 2602 Web Project Semseter 2 Final Project 2020  </div>      
+            </div>
+            <div class="form-footer ">
+                <input class="waves-effect waves-light btn amber darken-3" onclick="closeAboutUsModal()" type="submit" id="submit" name="submit" value="OK">
+            </div>
+        </div>
     </div>
 
     <a class="center">{% block page %}{% endblock %}</a>
@@ -941,17 +1006,28 @@
         /*need to put above in a function */
         {% endif %}
 
-        function launchModal() {
+        function launchModal(modalType) {
             {% if current_user.is_anonymous %}
-            window.location.pathname = '/login';
+             window.location.pathname = '/login';
             {% else %}
             let modal = document.getElementById("modal1");
             modal.style.display = "flex";
             {% endif %}
+            
+        }
+
+        function aboutUsModal(){
+            let modal = document.getElementById("about-us-modal");
+            modal.style.display = "flex";
         }
 
         function closeModal() {
             let modal = document.getElementById("modal1");
+            modal.style.display = "none";
+        }
+
+        function closeAboutUsModal(){
+            let modal = document.getElementById("about-us-modal");
             modal.style.display = "none";
         }
 
