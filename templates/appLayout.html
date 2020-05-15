@@ -726,9 +726,9 @@
                 <div class="modal-form">
                     <form method="POST" action="/createPlaylist">
                         <label for="title">Name</label>
-                        <input type="text" id="play-list-title" name="title" required>
+                        <input type="text" id="play-list-title" name="title" autocomplete="off" required>
                         <label for="description">Description</label>
-                        <input type="text" id="play-list-description" name="description">
+                        <input type="text" id="play-list-description" name="description" autocomplete="off">
 
                         <!-- <div class="form-footer"><a class="waves-effect waves-light btn">Create</a></div> -->
                         <div class="form-footer ">
@@ -829,21 +829,21 @@
                 <div class="iframe-container">
                 <iframe width="448‬" height="252" src="https://www.youtube.com/embed?listType=search&list=${query}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`
 
-                title.innerHTML = `<span class="center truncate" style="width:100%">Query Result for: ${songArtist} - ${songTitle}</span>
+                title.innerHTML = `<span class="center truncate" style="width:100%">${songArtist} - ${songTitle}</span>
                                     <span class="center truncate" style="width:100%">Album: ${songAlbum}</span>`
             }
 
             buttons.innerHTML = `
-            <a href='${songUrl}' data-target='slide-out' class='sidenav-trigger mdc-chip mdc-ripple-upgraded sideButtons' role='row' id='mdc-chip-17' onclick='deezerView("${songUrl}", "${youtubeUrl}", ${songId}, "${songTitle.replace("'", "")}", "${songArtist}", "${songAlbum}")'>
-                <img class=' mdc-chip__icon mdc-chip__icon--leading'
-                src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAABgElEQVQ4jdXSQU4UQRjF8f9XzUQhDE3NZBg2YlhwChcQlRt4Bj2AiS5xTTiA8QLu3RITiHgJXaiERMeZrupmMLCYrsdmkM7ESdwZv6Q2X1796i0K/vUYgKQsxvhM0iNgw8zWgPb0AIyBsaSfwKmZvffevzaztAAQY3xuZk8kHUj6ZmbfnXPjPM/HAFVVtVNKbUnrZnZf0osQwhJwAEAI4STGuPO3tcuyfBhC+ADgprvNuq4/N0MhhKMY4/afgLquPwGbTWB1MpmUM7ltSUchhJPRaPR4BiiBvAnc6ff7V3MaP3DOHRZF8epm0ev1LoHFJnA1GAzuzgE+ppR2u93ub2A4HC4ClwAL013VarU88Ktx8djM9rz3x7NilmWrQNUEvjjntoCzm1Cn09mZ0wjn3Jakr03gXUppvyiKfUmnWZb9MLPzPM8vAKqqWpa0Utf1upltSHop6S3c/kQXY3wqadc5d0/SGrACLE8fuADOzWyQUjozs0Pv/RszS/Na/kdzDT4vso9AYqa8AAAAAElFTkSuQmCC'>
-                <span role='button' tabindex='0' class='mdc-chip__text orange-text' style='padding:6px;'>Play on Deezer</span>
+            <a href="${songUrl}" data-target="slide-out" class="sidenav-trigger mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17" onclick="deezerView('${songUrl}', '${youtubeUrl}', ${songId}, '${songTitle}', '${song.artist}', '${songAlbum}')">
+                <img class=" mdc-chip__icon mdc-chip__icon--leading"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAABgElEQVQ4jdXSQU4UQRjF8f9XzUQhDE3NZBg2YlhwChcQlRt4Bj2AiS5xTTiA8QLu3RITiHgJXaiERMeZrupmMLCYrsdmkM7ESdwZv6Q2X1796i0K/vUYgKQsxvhM0iNgw8zWgPb0AIyBsaSfwKmZvffevzaztAAQY3xuZk8kHUj6ZmbfnXPjPM/HAFVVtVNKbUnrZnZf0osQwhJwAEAI4STGuPO3tcuyfBhC+ADgprvNuq4/N0MhhKMY4/afgLquPwGbTWB1MpmUM7ltSUchhJPRaPR4BiiBvAnc6ff7V3MaP3DOHRZF8epm0ev1LoHFJnA1GAzuzgE+ppR2u93ub2A4HC4ClwAL013VarU88Ktx8djM9rz3x7NilmWrQNUEvjjntoCzm1Cn09mZ0wjn3Jakr03gXUppvyiKfUmnWZb9MLPzPM8vAKqqWpa0Utf1upltSHop6S3c/kQXY3wqadc5d0/SGrACLE8fuADOzWyQUjozs0Pv/RszS/Na/kdzDT4vso9AYqa8AAAAAElFTkSuQmCC">
+                <span role="button" tabindex="0" class="mdc-chip__text orange-text" style="padding:6px;">Play on Deezer</span>
             </a>
           
-            <a href='${youtubeUrl}' data-target='slide-out' class='sidenav-trigger mdc-chip mdc-ripple-upgraded sideButtons' role='row' id='mdc-chip-17' onclick='youtubeView("${songUrl}", "${youtubeUrl}", ${songId}, "${songTitle.replace("'", "")}", "${songArtist}", "${songAlbum}")'>
-                <img class='mdc-chip__icon mdc-chip__icon--leading'
-                src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAAD9klEQVR4nO2coW8cRxTG39tbYGCwIMAgUq/M0KebOxlEao4VBgSU1ZX6BxgYhMVmAQX5Ayz1wgICDMt8lQIi767uoEGkXqQCg4ADBgaz+0J2o9VVVe67rpXZ5vuhe9J89630gZk3szsihBBCCCGEEEIIIYR0A/3aD9Al0jQ9BSWz0Wg0QwQxaPBNo6rPkfFmJiIyQzQRMpjcPwwkMBhIYDCQwOCkDqCqf4Ljl/f0KIR8o3SqMby8vNxJkmQP0axWq5vJZHLXhv98Pu+DktVgMFghgk7NIbu7u4dFUVyCmomAzdm/URTFX8h4MzsTkVNEw1VWYDCQwGAggcFAAoOBBEanVlm3t7fvkiT5HtGsVqubtvx7vR7kLSLQkpcQ8iU61alfXV0d9Hq9l4imKIrj8Xi8aMM/z/MZKJkOh8MpIujUHKKqiZn9gGra8ke9zWyGenCVFRgMJDAYSGAwkMDo1KQex/HSe3+Gatryr7bTEWZteRNCRLrXGO71er0fEU1RFH+Mx+NW9rPyPD8CvRdoU9qpOURV983sd1AzEZFWAtnC+0xEoEC4ygoMBhIYDCQwGEhgdGpSj6Lozsw+oJoWHwH15okhIeT/DNypp2l6in786JxrZUcgTdPHqgq922tmk/pL2CzLpiLyMyD/4Jzr10WWZQZ6n41Go1NEw1VWYDCQwGAggcFAAoOBBAbcqcdxPPXez+7hWTbxXnjvJ6imUb4ws+mm2vUu38xQ7yUynhDyJeCGLcuyJyLyBNE4544a+t9E5AEgf+ucO6+0+yLyDPEWkRfOuetK/6uIPAK0H51zJ3VRNZYIF865C0QAzyFmdqCqSLcrInLU+P1URL4D9eeV9x7qXc0Z11X5SMBOXUROGjXqvRQRKBCusgKDgQQGAwkMBhIY8KSuqgsRefUfPN8IuMpqeN+g3pXmH/+1IR/XatS7lS+3CCE1cGM4n8/73vs+omneXZvn+WFZljubalX1pm7s5vN54r0/QLzjOF7UVyRlWbZvZhtf7xRF0d1wOHxX12maPga9l4PBYAlpkMEiIt77I/QIVxrBm9lrVUUaw1dSNZbe+wP0CLfajJxV5TOksaxeOerX9RbevJ6p6zCQwGAggcFAAoOBEEII2Ra4U8/z/NjMjhHN2vuxb0XkISB/Ux+j5nl+aGavEW9V/anutqvj46eA/G/n3Ocj3yzLlqD3y+FwCF0nBXfqZVkmYKe9zkPBjnA/7wyXZbmDeq9t0zwAvddBveGrobjKCgwGEhgMJDAYSGBs817WRRRFy20NzewkiqJdYPz7xu/rKIp+QfzKsrxulOeqOgO0t81aVVFvHuESQgghhBBCCCGEEEIIIV+fT76vVzm/aYCxAAAAAElFTkSuQmCC'>
-                <span role='button' tabindex='0' class='mdc-chip__text red-text' style='padding:6px;'>Play on Youtube</span>
+            <a href="${youtubeUrl}" data-target="slide-out" class="sidenav-trigger mdc-chip mdc-ripple-upgraded sideButtons" role="row" id="mdc-chip-17" onclick="youtubeView('${songUrl}', '${youtubeUrl}', ${songId}, '${songTitle}', '${song.artist}', '${songAlbum}')">
+                <img class="mdc-chip__icon mdc-chip__icon--leading"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAAD9klEQVR4nO2coW8cRxTG39tbYGCwIMAgUq/M0KebOxlEao4VBgSU1ZX6BxgYhMVmAQX5Ayz1wgICDMt8lQIi767uoEGkXqQCg4ADBgaz+0J2o9VVVe67rpXZ5vuhe9J89630gZk3szsihBBCCCGEEEIIIYR0A/3aD9Al0jQ9BSWz0Wg0QwQxaPBNo6rPkfFmJiIyQzQRMpjcPwwkMBhIYDCQwOCkDqCqf4Ljl/f0KIR8o3SqMby8vNxJkmQP0axWq5vJZHLXhv98Pu+DktVgMFghgk7NIbu7u4dFUVyCmomAzdm/URTFX8h4MzsTkVNEw1VWYDCQwGAggcFAAoOBBEanVlm3t7fvkiT5HtGsVqubtvx7vR7kLSLQkpcQ8iU61alfXV0d9Hq9l4imKIrj8Xi8aMM/z/MZKJkOh8MpIujUHKKqiZn9gGra8ke9zWyGenCVFRgMJDAYSGAwkMDo1KQex/HSe3+Gatryr7bTEWZteRNCRLrXGO71er0fEU1RFH+Mx+NW9rPyPD8CvRdoU9qpOURV983sd1AzEZFWAtnC+0xEoEC4ygoMBhIYDCQwGEhgdGpSj6Lozsw+oJoWHwH15okhIeT/DNypp2l6in786JxrZUcgTdPHqgq922tmk/pL2CzLpiLyMyD/4Jzr10WWZQZ6n41Go1NEw1VWYDCQwGAggcFAAoOBBAbcqcdxPPXez+7hWTbxXnjvJ6imUb4ws+mm2vUu38xQ7yUynhDyJeCGLcuyJyLyBNE4544a+t9E5AEgf+ucO6+0+yLyDPEWkRfOuetK/6uIPAK0H51zJ3VRNZYIF865C0QAzyFmdqCqSLcrInLU+P1URL4D9eeV9x7qXc0Z11X5SMBOXUROGjXqvRQRKBCusgKDgQQGAwkMBhIY8KSuqgsRefUfPN8IuMpqeN+g3pXmH/+1IR/XatS7lS+3CCE1cGM4n8/73vs+omneXZvn+WFZljubalX1pm7s5vN54r0/QLzjOF7UVyRlWbZvZhtf7xRF0d1wOHxX12maPga9l4PBYAlpkMEiIt77I/QIVxrBm9lrVUUaw1dSNZbe+wP0CLfajJxV5TOksaxeOerX9RbevJ6p6zCQwGAggcFAAoOBEEII2Ra4U8/z/NjMjhHN2vuxb0XkISB/Ux+j5nl+aGavEW9V/anutqvj46eA/G/n3Ocj3yzLlqD3y+FwCF0nBXfqZVkmYKe9zkPBjnA/7wyXZbmDeq9t0zwAvddBveGrobjKCgwGEhgMJDAYSGBs817WRRRFy20NzewkiqJdYPz7xu/rKIp+QfzKsrxulOeqOgO0t81aVVFvHuESQgghhBBCCCGEEEIIIV+fT76vVzm/aYCxAAAAAElFTkSuQmCC">
+                <span role="button" tabindex="0" class="mdc-chip__text red-text" style="padding:6px;">Play on Youtube</span>
             </a>`;
         }
 
