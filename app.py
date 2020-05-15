@@ -47,7 +47,6 @@ def create_app():
     app.config["SECRET_KEY"] = "c3a93f55-2015-4042-9ef7-77de85976f78"
     login_manager.init_app(app)
 
-    app.config["YOUTUBE_API_KEY"] = "AIzaSyBGBI_GQQx1qtwoa3KGa4ScLUCBcm1f9Xg"
     # app.config["YOUTUBE_API_KEY"] = "AIzaSyC0VqCv-KW7cRsmYBUUHHqTJeRBTVnP-h0" #Chris Good
     # app.config["YOUTUBE_API_KEY"] = "AIzaSyDIk63q5hnaaQTLlPqLRPSrUYIYmLgMMTA" #Chris 2
 
@@ -83,8 +82,14 @@ def hello():
     # }
 
     r = getPlaylistRequest()
-    print(r.json())
-    results = r.json()["items"]
+    try:
+        results = r.json()["items"]
+    except:
+        return (
+            "<h2>YOUTUBE API KEY IS EXHAUSTED. PLEASE CONTACT RCDJ MUSIC DEVELOPERS</h2>",
+            429,
+        )
+
     try:
         r = getPlaylistRequest(r.json()["nextPageToken"])
         print(r.json())

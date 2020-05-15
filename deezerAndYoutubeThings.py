@@ -19,7 +19,7 @@ colors = [
 ]
 trackUrl = "https://api.deezer.com/track/"
 searchUrl = "https://api.deezer.com/search?q="
-youtubeApiKey = "AIzaSyBGBI_GQQx1qtwoa3KGa4ScLUCBcm1f9Xg"
+youtubeApiKey = "AIzaSyB-0Q-27kT5fOzDo4jjLF5RRXfKgNZI9tU"
 search_url = "https://www.googleapis.com/youtube/v3/search"
 youtubeVideoLink = "https://www.youtube.com/watch?v="
 playlistUrl = "https://api.deezer.com/playlist/6682665064"  # 1282495565
@@ -154,11 +154,12 @@ def getPlaylistRequest(pageToken=None):
     if pageToken:
         parameters["pageToken"] = pageToken
 
-    if youtubePLaylistRequest is None:
+    if youtubePLaylistRequest2 is None:
         youtubePLaylistRequest2 = requests.get(playlistUrl, params=parameters,)
+        del parameters["pageToken"]
     return youtubePLaylistRequest2
 
 
 if __name__ == "__main__":
-    print(getPlaylist())
-    print(youtubePLaylistRequest)
+    print(getPlaylistRequest())
+    print(youtubePLaylistRequest2)
