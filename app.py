@@ -41,19 +41,17 @@ def create_app():
     app = Flask(__name__, static_url_path="")
     app.config[
         "SQLALCHEMY_DATABASE_URI"
-    ] = "postgres://hxzhttja:6A7fF17bjLUaeditu817xyU7x0AOzZTh@drona.db.elephantsql.com:5432/hxzhttja"
+    ] = "database URL" # Need this to run
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
     app.config["SECRET_KEY"] = "c3a93f55-2015-4042-9ef7-77de85976f78"
     login_manager.init_app(app)
 
-    app.config["YOUTUBE_API_KEY"] = "AIzaSyARAWcmYiUcbzq6Nb2_KqemZ7UDoP7VuVY" #Ramith
-    # app.config["YOUTUBE_API_KEY"] = "AIzaSyC0VqCv-KW7cRsmYBUUHHqTJeRBTVnP-h0" #Chris Good
-    # app.config["YOUTUBE_API_KEY"] = "AIzaSyDIk63q5hnaaQTLlPqLRPSrUYIYmLgMMTA" #Chris 2
+    app.config["YOUTUBE_API_KEY"] = "youtube data API key" #Need this to run
+   
 
     # =======
     # """ Begin boilerplate code """
 
-    # persistenceUrl = "postgres://hxzhttja:6A7fF17bjLUaeditu817xyU7x0AOzZTh@drona.db.elephantsql.com:5432/hxzhttja"
     # def create_app():
     #     app = Flask(__name__, static_url_path="")
     #     app.config["SQLALCHEMY_DATABASE_URI"] = persistenceUrl
