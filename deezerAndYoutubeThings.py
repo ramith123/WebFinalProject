@@ -115,6 +115,9 @@ def getYoutubeLink(song, artist, quota=False):
     defaultLink = "https://www.youtube.com/results?search_query=" + query.replace(
         " ", "+"
     )
+    defaultLink = defaultLink.replace(
+        "'", ""
+    )
     if quota:
         return defaultLink
     r = requests.get(search_url, params=search_params)
