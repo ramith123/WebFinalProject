@@ -42,7 +42,7 @@ def create_app():
     app = Flask(__name__, static_url_path="")
     app.config[
         "SQLALCHEMY_DATABASE_URI"
-    ] = "postgres://hxzhttja:6A7fF17bjLUaeditu817xyU7x0AOzZTh@drona.db.elephantsql.com:5432/hxzhttja"
+    ] = "postgres://hxzhttja:BzyIyshND8DNSa96ScBKHvA8dyrOnIfy@drona.db.elephantsql.com:5432/hxzhttja"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
     app.config["SECRET_KEY"] = "c3a93f55-2015-4042-9ef7-77de85976f78"
     login_manager.init_app(app)
